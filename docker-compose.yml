@@ -10,10 +10,15 @@ services:
     expose:
       - "1026"
     ports:
-      - "80:1026" 
+      - "1026:1026" 
     command: -dbhost mongo-db -logLevel DEBUG
+    # command: -logLevel DEBUG
     healthcheck:
       test: curl --fail -s http://orion:1026/version || exit 1
+    # environment:
+    #   - ORIONLD_MONGO_URI=${MONGOURL}
+    networks:
+      - orion-ld-network
 
   # Databases
   mongo-db:
@@ -27,18 +32,24 @@ services:
     command: --nojournal
     volumes:
       - mongo-db:/data
+    networks:
+      - orion-ld-network
   
-  # orion-backend:
-  #   build:
-  #     context: ../
-  #     dockerfile: dockerfiles/Dockerfile.backend
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ../backend:/app  # Hot reload: map local 'backend' directory to '/app' in the container
-  #   environment:
-  #     - NODE_ENV=development
-  #   command: npm run dev 
+  proxy:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - orion
+    networks:
+      - orion-ld-network
 
 volumes:
   mongo-db: ~
+
+networks:
+  orion-ld-network:
+    driver: bridge
