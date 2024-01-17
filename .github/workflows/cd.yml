@@ -25,15 +25,15 @@ jobs:
             flags: 'g'
   
       - name: Generate Deployment Package
-        run: rm docker-compose.yml; mv docker-compose.prod.yml docker-compose.yml; zip -r app.zip *;
+        run: docker-compose.yml; zip -r app.zip *;
   
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v16
         with:
             aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            application_name: ngsi-ld-sndgo
-            environment_name: ngsi-ld-sndgo
+            application_name: ngsi-ld-backend
+            environment_name: ngsi-ld-backend
             version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
             region: ap-southeast-1
             deployment_package: app.zip 
