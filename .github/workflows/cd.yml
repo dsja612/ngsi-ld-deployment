@@ -32,8 +32,8 @@ jobs:
         with:
             aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
             aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            application_name: ngsi-ld-backend
-            environment_name: ngsi-ld-backend
+            application_name: orion-ld
+            environment_name: orion-ld
             version_label: "docker-app-${{ steps.format-time.outputs.replaced }}"
             region: ap-southeast-1
             deployment_package: app.zip 
