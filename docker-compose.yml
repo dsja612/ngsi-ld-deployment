@@ -1,6 +1,21 @@
 version: "3.5"
 services:
-  # Orion is the context broker
+  # API Gateway for various services
+  proxy:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - orion
+      - mintaka
+      - iotagent-json
+    networks:
+      - orion-ld-network
+
+  # Context Broker
   orion:
     image: fiware/orion-ld:1.4.0
     hostname: orion
@@ -25,8 +40,60 @@ services:
       test: curl --fail -s http://orion:1026/version || exit 1
       interval: 5s
 
+  # Enable Temporal Representation of Entities (TROE), which is basically historical data
+  mintaka:
+    image: fiware/mintaka:0.4.3
+    hostname: mintaka
+    restart: always
+    container_name: mintaka
+    environment:
+      - DATASOURCES_DEFAULT_HOST=timescale
+      - DATASOURCES_DEFAULT_USERNAME=orion
+      - DATASOURCES_DEFAULT_PASSWORD=orion
+      - DATASOURCES_DEFAULT_DATABSE=orion
+    expose:
+      - "8080"
+    ports:
+      - "8080:8080"
+    networks:
+      - orion-ld-network
 
-  # Databases
+  # IOT Agent for converting sensor data to NGSI-LD data.
+  # Ideally should split this up as IOT agents should be seperately configured
+  iotagent-json:
+      image: fiware/iotagent-json
+      hostname: iotagent-json
+      container_name: fiware-iot-agent
+      depends_on:
+          - mongo-db
+      expose:
+          - "4041"
+          - "7896"
+      ports:
+          - "4041:4041"
+          - "7896:7896"
+      environment:
+          - "IOTA_CB_HOST=orion"
+          - "IOTA_CB_PORT=1026"
+          - "IOTA_NORTH_PORT=4041"
+          - "IOTA_REGISTRY_TYPE=mongodb"
+          - "IOTA_MONGO_HOST=mongo-db"
+          - "IOTA_MONGO_PORT=27017"
+          - "IOTA_MONGO_DB=iotagent-json"
+          - "IOTA_HTTP_PORT=7896"
+          - "IOTA_PROVIDER_URL=http://iot-agent:4041"
+          # Configuring agent for LD
+          - "IOTA_CB_NGSI_VERSION=LD"
+          - "IOTA_TIMESTAMP=true"
+          - "IOTA_FALLBACK_TENANT=openiot"
+          - "IOTA_FALLBACK_PATH=/"
+          - "IOTA_JSON_LD_CONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld"
+      networks:
+        - orion-ld-network
+
+  #############
+  # Databases #
+  #############
   mongo-db:
     image: mongo:4.0
     hostname: mongo-db
@@ -64,35 +131,6 @@ services:
       - "5432"
     ports:
       - "5432:5432"
-    networks:
-      - orion-ld-network
-
-  mintaka:
-    image: fiware/mintaka:0.4.3
-    hostname: mintaka
-    restart: always
-    container_name: mintaka
-    environment:
-      - DATASOURCES_DEFAULT_HOST=timescale
-      - DATASOURCES_DEFAULT_USERNAME=orion
-      - DATASOURCES_DEFAULT_PASSWORD=orion
-      - DATASOURCES_DEFAULT_DATABSE=orion
-    expose:
-      - "8080"
-    ports:
-      - "8080:8080"
-    networks:
-      - orion-ld-network
-    
-  proxy:
-    build:
-      context: .
-      dockerfile: ./nginx/Dockerfile
-    restart: always
-    ports:
-      - "80:80"
-    depends_on:
-      - orion
     networks:
       - orion-ld-network
 
