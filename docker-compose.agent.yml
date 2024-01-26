@@ -1,0 +1,63 @@
+version: "3.5"
+services:
+
+  # IOT Agent for converting sensor data to NGSI-LD data.
+  # Ideally should split this up as IOT agents should be seperately configured
+  iotagent-json:
+      image: fiware/iotagent-json
+      hostname: iotagent-json
+      container_name: fiware-iot-agent
+      depends_on:
+          - mongo-db
+      expose:
+          - "4041"
+          - "7896"
+      ports:
+          - "4041:4041"
+          - "7896:7896"
+      environment:
+          - "IOTA_CB_URL=http://35.186.147.31/api/orion"
+          - "IOTA_NORTH_PORT=4041"
+          - "IOTA_REGISTRY_TYPE=mongodb"
+          - "IOTA_MONGO_HOST=mongo-db"
+          - "IOTA_MONGO_PORT=27017"
+          - "IOTA_MONGO_DB=iotagent-json"
+          - "IOTA_HTTP_PORT=7896"
+          - "IOTA_PROVIDER_URL=http://iot-agent:4041"
+          # Configuring agent for LD
+          - "IOTA_CB_NGSI_VERSION=LD"
+          - "IOTA_TIMESTAMP=true"
+          - "IOTA_FALLBACK_TENANT=openiot"
+          - "IOTA_FALLBACK_PATH=/"
+          - "IOTA_JSON_LD_CONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld"
+      networks:
+        - orion-ld-network
+
+  #############
+  # Databases #
+  #############
+  mongo-db:
+    image: mongo:4.0
+    hostname: mongo-db
+    container_name: db-mongo
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017" # localhost:27017
+    networks:
+      - orion-ld-network
+    command: --nojournal
+    volumes:
+      - mongo-db:/data
+    healthcheck:
+      test: |
+        host=`hostname --ip-address || echo '127.0.0.1'`;
+        mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
+      interval: 5s
+
+volumes:
+  mongo-db: ~
+
+networks:
+  orion-ld-network:
+    driver: bridge
