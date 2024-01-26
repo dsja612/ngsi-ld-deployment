@@ -4,7 +4,7 @@ services:
   proxy:
     build:
       context: .
-      dockerfile: ./nginx/Dockerfile
+      dockerfile: ./nginx/Dockerfile.orion
     restart: always
     ports:
       - "80:80"
