@@ -22,7 +22,7 @@ services:
           - "IOTA_MONGO_PORT=27017"
           - "IOTA_MONGO_DB=iotagent-json"
           - "IOTA_HTTP_PORT=7896"
-          - "IOTA_PROVIDER_URL=http://34.87.168.168:4041"
+          - "IOTA_PROVIDER_URL=http://34.142.139.221:4041"
           # Configuring agent for LD
           - "IOTA_CB_NGSI_VERSION=LD"
           - "IOTA_TIMESTAMP=true"
