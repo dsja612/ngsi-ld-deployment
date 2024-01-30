@@ -1,19 +1,12 @@
 version: "3.5"
+
+volumes:
+    mongodb: ~
+
 services:
-  # API Gateway for various services
-  proxy:
-    build:
-      context: .
-      dockerfile: ./nginx/Dockerfile.orion
-    restart: always
-    ports:
-      - "80:80"
-    depends_on:
-      - orion
-      - mintaka
-      - iotagent-json
-    networks:
-      - orion-ld-network
+  ################
+  # Applications #
+  ################
 
   # Context Broker
   orion:
@@ -27,12 +20,10 @@ services:
       - ORIONLD_TROE_USER=orion
       - ORIONLD_TROE_PWD=orion
       - ORIONLD_TROE_HOST=timescale
-      - ORIONLD_MONGO_HOST=mongo-db
+      - ORIONLD_MONGO_HOST=mongodb
     depends_on:
-      - mongo-db
+      - mongodb
       - timescale
-    networks:
-      - orion-ld-network
     ports:
       - "1026:1026"
     command: -logLevel DEBUG
@@ -40,7 +31,7 @@ services:
       test: curl --fail -s http://orion:1026/version || exit 1
       interval: 5s
 
-  # Enable Temporal Representation of Entities (TROE), which is basically historical data
+  # Open-Source component for Temporal Representation of Entities (TROE)
   mintaka:
     image: fiware/mintaka:0.4.3
     hostname: mintaka
@@ -55,17 +46,26 @@ services:
       - "8080"
     ports:
       - "8080:8080"
-    networks:
-      - orion-ld-network
 
-  # IOT Agent for converting sensor data to NGSI-LD data.
-  # Ideally should split this up as IOT agents should be seperately configured
-  iotagent-json:
+  # MQTT Broker for IOT Agent
+  mosquitto:
+      image: eclipse-mosquitto:latest
+      container_name: mosquitto
+      ports:
+        - "1883:1883"
+        - "9001:9001"  # Optional: for WebSocket support
+      restart: always
+      volumes:
+        - ./mosquitto:/mosquitto
+
+  #JSON IOT Agent that supports HTTP, MQTT and AMQP
+  iot-agent:
       image: fiware/iotagent-json
-      hostname: iotagent-json
+      hostname: iot-agent
       container_name: fiware-iot-agent
       depends_on:
-          - mongo-db
+          - mongodb
+          - mosquitto
       expose:
           - "4041"
           - "7896"
@@ -73,46 +73,39 @@ services:
           - "4041:4041"
           - "7896:7896"
       environment:
-          - "IOTA_CB_HOST=orion"
+          - "IOTA_CB_HOST=orion" # Locally hosted broker
           - "IOTA_CB_PORT=1026"
           - "IOTA_NORTH_PORT=4041"
           - "IOTA_REGISTRY_TYPE=mongodb"
-          - "IOTA_MONGO_HOST=mongo-db"
+          - "IOTA_MONGO_HOST=mongodb"
           - "IOTA_MONGO_PORT=27017"
           - "IOTA_MONGO_DB=iotagent-json"
           - "IOTA_HTTP_PORT=7896"
           - "IOTA_PROVIDER_URL=http://iot-agent:4041"
-          # Configuring agent for LD
-          - "IOTA_CB_NGSI_VERSION=LD"
+          - "IOTA_CB_NGSI_VERSION=LD"         # To work with NGSI-LD brokers
           - "IOTA_TIMESTAMP=true"
           - "IOTA_FALLBACK_TENANT=openiot"
           - "IOTA_FALLBACK_PATH=/"
+          - "IOTA_MQTT_HOST=mosquitto"        # MQTT broker service
+          - "IOTA_MQTT_PORT=1883"             # MQTT service port
           - "IOTA_JSON_LD_CONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld"
-      networks:
-        - orion-ld-network
 
   #############
   # Databases #
   #############
-  mongo-db:
-    image: mongo:4.0
-    hostname: mongo-db
-    container_name: db-mongo
-    expose:
-      - "27017"
-    ports:
-      - "27017:27017" # localhost:27017
-    networks:
-      - orion-ld-network
-    command: --nojournal
-    volumes:
-      - mongo-db:/data
-    healthcheck:
-      test: |
-        host=`hostname --ip-address || echo '127.0.0.1'`;
-        mongo --quiet $host/test --eval 'quit(db.runCommand({ ping: 1 }).ok ? 0 : 2)' && echo 0 || echo 1
-      interval: 5s
 
+  # Storage of context data from context brokers and IOT agent
+  mongodb:
+      image: mongo:4.2
+      hostname: mongodb
+      container_name: db-mongo
+      ports:
+          - "27017:27017"
+      command: --bind_ip_all
+      volumes:
+          - mongodb:/data
+
+  # Time series database for TROE (Temporal data)
   timescale:
     image: timescale/timescaledb-postgis:1.7.5-pg12
     hostname: timescale
@@ -131,12 +124,4 @@ services:
       - "5432"
     ports:
       - "5432:5432"
-    networks:
-      - orion-ld-network
 
-volumes:
-  mongo-db: ~
-
-networks:
-  orion-ld-network:
-    driver: bridge
