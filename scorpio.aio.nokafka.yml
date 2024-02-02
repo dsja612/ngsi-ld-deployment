@@ -15,7 +15,6 @@ services:
       - "1026:9090"
     environment:
       DBHOST: postgres
-      BUSHOST: kafka
     depends_on:
       - postgres
       - kafka
