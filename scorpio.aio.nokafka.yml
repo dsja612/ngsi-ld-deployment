@@ -17,7 +17,6 @@ services:
       DBHOST: postgres
     depends_on:
       - postgres
-      - kafka
 
   # MQTT Broker for IOT Agent
   mosquitto:
