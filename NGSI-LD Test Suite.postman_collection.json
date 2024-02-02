@@ -1,0 +1,989 @@
+{
+	"info": {
+		"_postman_id": "c6a3544a-27b0-45e6-be14-9049bd846af0",
+		"name": "NGSI-LD Test Suite",
+		"description": "Sample operations to help understand NGSI-LD context brokers. Based on the Orion-LD Context Broker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29655974"
+	},
+	"item": [
+		{
+			"name": "Context Operations",
+			"item": [
+				{
+					"name": "Adding a context, returns link to context file in header",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"names\": \"http://example.org/names\",\r\n    \"timestamp\": \"http://example.org/timestamp\",\r\n    \"fileName\": \"http://example.org/fileName\",\r\n    \"imagePath\": \"http://example.org/imagePath\",\r\n    \"confidence\": \"http://example.org/confidence\",\r\n    \"humidity\": \"http://example.org/humidity\",\r\n    \"pressure\": \"http://example.org/pressure\",\r\n    \"compass\": \"http://example.org/compass\",\r\n    \"gyroscope\": \"http://example.org/gyroscope\",\r\n    \"accelerometer\": \"http://example.org/accelerometer\",\r\n    \"temperatureAlert\": \"http://example.org/temperatureAlert\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{context-broker}}/ngsi-ld/v1/jsonldContexts"
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve contexts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "detail",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "{{context-broker}}/ngsi-ld/v1/jsonldContexts"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Context Broker Operations",
+			"item": [
+				{
+					"name": "Create PatrolRobot Entity with provided context file",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"@context\": \"http://orion:1026/ngsi-ld/v1/jsonldContexts/0d9f09fe-c18f-11ee-95f2-0242ac1b0006\",\r\n  \"id\": \"urn:ngsi-ld:PatrolRobot:001\",\r\n  \"type\": \"PatrolRobot\",\r\n  \"names\": {\r\n    \"type\": \"Property\",\r\n    \"value\": []\r\n  },\r\n  \"timestamp\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"\"\r\n  },\r\n  \"fileName\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"\"\r\n  },\r\n  \"imagePath\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"\"\r\n  },\r\n  \"confidence\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 0\r\n  },\r\n  \"humidity\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 0\r\n  },\r\n  \"pressure\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 0\r\n  },\r\n  \"compass\": {\r\n    \"type\": \"Property\",\r\n    \"value\": { \r\n      \"x\": 0,\r\n      \"y\": 0,\r\n      \"z\": 0\r\n    }\r\n  },\r\n  \"gyroscope\": {\r\n    \"type\": \"Property\",\r\n    \"value\": { \r\n      \"x\": 0,\r\n      \"y\": 0,\r\n      \"z\": 0\r\n    }\r\n  },\r\n  \"accelerometer\": {\r\n    \"type\": \"Property\",\r\n    \"value\": { \r\n      \"x\": 0,\r\n      \"y\": 0,\r\n      \"z\": 0\r\n    }\r\n  },\r\n  \"temperatureAlert\": {\r\n    \"type\": \"Property\",\r\n    \"value\": false\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{context-broker}}/ngsi-ld/v1/entities/"
+					},
+					"response": []
+				},
+				{
+					"name": "Create PatrolRobot Entity without context file",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"urn:ngsi-ld:PatrolRobot:002\",\r\n  \"type\": \"PatrolRobot\",\r\n  \"names\": {\r\n    \"type\": \"Property\",\r\n    \"value\": []\r\n  },\r\n  \"timestamp\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"\"\r\n  },\r\n  \"fileName\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"\"\r\n  },\r\n  \"imagePath\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"\"\r\n  },\r\n  \"confidence\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 0\r\n  },\r\n  \"humidity\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 0\r\n  },\r\n  \"pressure\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 0\r\n  },\r\n  \"compass\": {\r\n    \"type\": \"Property\",\r\n    \"value\": { \r\n      \"x\": 0,\r\n      \"y\": 0,\r\n      \"z\": 0\r\n    }\r\n  },\r\n  \"gyroscope\": {\r\n    \"type\": \"Property\",\r\n    \"value\": { \r\n      \"x\": 0,\r\n      \"y\": 0,\r\n      \"z\": 0\r\n    }\r\n  },\r\n  \"accelerometer\": {\r\n    \"type\": \"Property\",\r\n    \"value\": { \r\n      \"x\": 0,\r\n      \"y\": 0,\r\n      \"z\": 0\r\n    }\r\n  },\r\n  \"temperatureAlert\": {\r\n    \"type\": \"Property\",\r\n    \"value\": false\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{context-broker}}/ngsi-ld/v1/entities/"
+					},
+					"response": []
+				},
+				{
+					"name": "Remove PatrolRobot Entity",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{context-broker}}/ngsi-ld/v1/entities/urn:ngsi-ld:PatrolRobot:001"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Entities with type PatrolRobot (No context file)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "link",
+								"value": "<http://35.186.147.31/api/orion/ngsi-ld/v1/jsonldContexts/24615560-bbf0-11ee-a158-0242ac120006>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{context-broker}}/ngsi-ld/v1/entities?type=PatrolRobot",
+							"host": [
+								"{{context-broker}}"
+							],
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "PatrolRobot"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Entities with type PatrolRobot (Context file provided)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "link",
+								"value": "<http://34.124.243.51:1026/ngsi-ld/v1/jsonldContexts/e5a9f570-c18f-11ee-95f2-0242ac1b0006>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{context-broker}}/ngsi-ld/v1/entities?type=PatrolRobot",
+							"host": [
+								"{{context-broker}}"
+							],
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "PatrolRobot"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Displays some sample CRUD operations for the context broker"
+		},
+		{
+			"name": "IOT Agent",
+			"item": [
+				{
+					"name": "PatrolRobot example",
+					"item": [
+						{
+							"name": "Check if the IOT Agent is running",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{iot-agent}}/iot/about"
+							},
+							"response": []
+						},
+						{
+							"name": "Provisioning the PatrolRobot to the IOT agent",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "fiware-service",
+										"value": "openiot",
+										"type": "text"
+									},
+									{
+										"key": "fiware-servicepath",
+										"value": "/",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"PatrolRobot:010\",\r\n      \"entity_name\": \"urn:ngsi-ld:PatrolRobot:010\",\r\n      \"entity_type\": \"PatrolRobot\",\r\n      \"transport\":   \"MQTT\",\r\n      \"attributes\": [\r\n        {\r\n          \"object_id\": \"n\",\r\n          \"name\": \"names\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"t\",\r\n          \"name\": \"timestamp\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"f\",\r\n          \"name\": \"fileName\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"ip\",\r\n          \"name\": \"imagePath\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"c\",\r\n          \"name\": \"confidence\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"h\",\r\n          \"name\": \"humidity\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"p\",\r\n          \"name\": \"pressure\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"cp\",\r\n          \"name\": \"compass\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"g\",\r\n          \"name\": \"gyroscope\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"a\",\r\n          \"name\": \"accelerometer\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"ta\",\r\n          \"name\": \"temperatureAlert\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"commands\": []\r\n    }\r\n  ]\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{iot-agent}}/iot/devices"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all Entities with type PatrolRobot (Context file provided) Copy",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "fiware-service",
+										"value": "openiot",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "fiware-servicepath",
+										"value": "/",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "link",
+										"value": "<http://34.124.243.51:1026/ngsi-ld/v1/jsonldContexts/e5a9f570-c18f-11ee-95f2-0242ac1b0006>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{context-broker}}/ngsi-ld/v1/entities?type=PatrolRobot",
+									"host": [
+										"{{context-broker}}"
+									],
+									"path": [
+										"ngsi-ld",
+										"v1",
+										"entities"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "PatrolRobot"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post Update (HTTP) (Try running this twice)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "fiware-service",
+										"value": "openiot",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "fiware-servicepath",
+										"value": "/",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "link",
+										"value": "<http://localhost:1026/ngsi-ld/v1/jsonldContexts/b813cc1a-ac92-11ee-8358-0242ac120004>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \"n\": [\"Dylan\"],\r\n   \"c\": 100\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://{{iot-agent-json}}/iot/json/?i=PatrolRobot:010&k=1234",
+									"protocol": "http",
+									"host": [
+										"{{iot-agent-json}}"
+									],
+									"path": [
+										"iot",
+										"json",
+										""
+									],
+									"query": [
+										{
+											"key": "i",
+											"value": "PatrolRobot:010"
+										},
+										{
+											"key": "k",
+											"value": "1234"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete PatrolRobot Entity from IOT agent",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "fiware-service",
+										"value": "openiot",
+										"type": "text"
+									},
+									{
+										"key": "fiware-servicepath",
+										"value": "/",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{iot-agent}}/iot/devices/PatrolRobot:010"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Actuator example (In-Progress)",
+					"item": [
+						{
+							"name": "Provisioning an actuator",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "fiware-service",
+										"value": "openiot",
+										"type": "text"
+									},
+									{
+										"key": "fiware-servicepath",
+										"value": "/",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"water001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Device:water001\",\r\n      \"entity_type\": \"Device\",\r\n      \"transport\": \"MQTT\",\r\n      \"properties\": {\r\n        \"temperature\": {\r\n            \"type\": \"property\"\r\n        }\r\n      },\r\n      \"commands\": [\r\n        {\r\n          \"name\": \"on\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"off\",\r\n          \"type\": \"Property\"\r\n        }\r\n       ]\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{iot-agent}}/iot/devices"
+							},
+							"response": []
+						},
+						{
+							"name": "List all Provisioned Devices",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "fiware-service",
+										"value": "openiot"
+									},
+									{
+										"key": "fiware-servicepath",
+										"value": "/"
+									}
+								],
+								"url": "http://{{iot-agent}}/iot/devices",
+								"description": "This example lists all provisioned devices by making a GET request to the `/iot/devices` endpoint.\n\nThe response includes all the commands and attributes mappings associated with all devices"
+							},
+							"response": []
+						},
+						{
+							"name": "IoT Agent - Invoke a Command",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "fiware-service",
+										"value": "openiot"
+									},
+									{
+										"key": "fiware-servicepath",
+										"value": "/"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Link",
+										"value": "<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \n\n\t\t\"type\": \"Property\", \n\t\t\"value\": \" \" \n\n}"
+								},
+								"url": "{{iot-agent}}/ngsi-ld/v1/entities/urn:ngsi-ld:Device:water001/attrs/on",
+								"description": "Before we wire-up the context broker, we can test that a command can be send to a device by making a PATCH request\ndirectly to the IoT Agent's North Port using the `/ngsi-ld/v1/entities/` endpoint. It is this endpoint that will\neventually be invoked by the context broker once we have connected it up. To test the configuration you can run the\ncommand directly as shown:\n\nIf you are viewing the device monitor page, you can also see the state of the water sprinkler change.\n\n![](https://fiware.github.io/tutorials.IoT-Agent/img/water-on.gif)\n"
+							},
+							"response": []
+						},
+						{
+							"name": "Sending command to context broker",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "link",
+										"value": "<http://localhost:1026/ngsi-ld/v1/jsonldContexts/b813cc1a-ac92-11ee-8358-0242ac120004>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "NGSILD-Tenant",
+										"value": "openiot",
+										"type": "text"
+									},
+									{
+										"key": "fiware-servicepath",
+										"value": "/",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n        \"type\": \"Property\",\r\n        \"value\": \" \"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{context-broker}}/ngsi-ld/v1/entities/urn:ngsi-ld:Device:water001/attrs/on"
+							},
+							"response": []
+						},
+						{
+							"name": "Get all Entities with type Device",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "fiware-service",
+										"value": "openiot",
+										"type": "text"
+									},
+									{
+										"key": "fiware-servicepath",
+										"value": "/",
+										"type": "text"
+									},
+									{
+										"key": "link",
+										"value": "<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{context-broker}}/ngsi-ld/v1/entities?type=Device",
+									"host": [
+										"{{context-broker}}"
+									],
+									"path": [
+										"ngsi-ld",
+										"v1",
+										"entities"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "Device"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Sample operations for IOT agents. Note that for IOT agent provisioning, you will need to specify extra headers (`fiware-service` and `fiware-servicepath`) in your request.\n\nThen, to perform CRUD requests on entity data belonging to these service and servicepaths, you must also include the same headers in your requests."
+		},
+		{
+			"name": "Misc/not working",
+			"item": [
+				{
+					"name": "Create actuator",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"urn:ngsi-ld:Device:water005\",\r\n    \"type\": \"Device\",\r\n    \"on\": {\r\n        \"type\": \"Property\",\r\n        \"value\": \"\"\r\n    },\r\n    \"off\": {\r\n        \"type\": \"Property\",\r\n        \"value\": \"\"\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{context-broker}}/ngsi-ld/v1/entities/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mintaka (In Progress)",
+			"item": [
+				{
+					"name": "Check if Mintaka is running",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "NGSILD-Tenant",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "service-path",
+								"value": "/",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{mintaka}}/info",
+							"host": [
+								"{{mintaka}}"
+							],
+							"path": [
+								"info"
+							],
+							"query": [
+								{
+									"key": "timeproperty",
+									"value": "modifiedAt",
+									"disabled": true
+								},
+								{
+									"key": "attrs",
+									"value": "humidity",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Room",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "link",
+								"value": "<http://localhost:1026/ngsi-ld/v1/jsonldContexts/b813cc1a-ac92-11ee-8358-0242ac120004>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"urn:ngsi-ld:Room:001\",\r\n  \"type\": \"Room\",\r\n  \"name\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"Conference Room A\"\r\n  },\r\n  \"location\": {\r\n    \"type\": \"GeoProperty\",\r\n    \"value\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [-3.7037902, 40.4167754]\r\n    }\r\n  },\r\n  \"@context\": [\r\n    \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{context-broker}}/ngsi-ld/v1/entities/"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Robot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "link",
+								"value": "<http://localhost:1026/ngsi-ld/v1/jsonldContexts/b813cc1a-ac92-11ee-8358-0242ac120004>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"urn:ngsi-ld:Robot:101\",\r\n  \"type\": \"Robot\",\r\n  \"name\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"Robot Cleaner 1\"\r\n  },\r\n  \"model\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"Model X\"\r\n  },\r\n  \"isInRoom\": {\r\n    \"type\": \"Relationship\",\r\n    \"object\": \"urn:ngsi-ld:Room:001\"\r\n  },\r\n  \"@context\": [\r\n    \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{context-broker}}/ngsi-ld/v1/entities/"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Sensor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "link",
+								"value": "<http://localhost:1026/ngsi-ld/v1/jsonldContexts/b813cc1a-ac92-11ee-8358-0242ac120004>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"urn:ngsi-ld:Sensor:201\",\r\n  \"type\": \"Sensor\",\r\n  \"sensorType\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"Temperature Sensor\"\r\n  },\r\n  \"measurement\": {\r\n    \"type\": \"Property\",\r\n    \"value\": {\r\n      \"value\": 22.5,\r\n      \"unitCode\": \"CEL\"\r\n    }\r\n  },\r\n  \"isInRobot\": {\r\n    \"type\": \"Relationship\",\r\n    \"object\": \"urn:ngsi-ld:Robot:101\"\r\n  },\r\n  \"@context\": [\r\n    \"https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld\"\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{context-broker}}/ngsi-ld/v1/entities/"
+					},
+					"response": []
+				},
+				{
+					"name": "Updating Entity",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "link",
+								"value": "<http://localhost:1026/ngsi-ld/v1/jsonldContexts/b813cc1a-ac92-11ee-8358-0242ac120004>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"measurement\": \"0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{context-broker}}/ngsi-ld/v1/entities/urn:ngsi-ld:Sensor:201/attrs"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all entities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "link",
+								"value": "<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{context-broker}}/ngsi-ld/v1/entities/?type=Sensor",
+							"host": [
+								"{{context-broker}}"
+							],
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								""
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Sensor"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Last 5 status updates of an Entity",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "NGSILD-Tenant",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "NGSILD-Tenantpath",
+								"value": "/",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{mintaka}}/temporal/entities/urn:ngsi-ld:Sensor:201?timeproperty=modifiedAt&lastN=5&attrs=measurement",
+							"host": [
+								"{{mintaka}}"
+							],
+							"path": [
+								"temporal",
+								"entities",
+								"urn:ngsi-ld:Sensor:201"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Sensor",
+									"disabled": true
+								},
+								{
+									"key": "timeproperty",
+									"value": "modifiedAt"
+								},
+								{
+									"key": "attrs",
+									"value": "measurement",
+									"disabled": true
+								},
+								{
+									"key": "lastN",
+									"value": "5"
+								},
+								{
+									"key": "attrs",
+									"value": "measurement"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "context-broker",
+			"value": "localhost:1026",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "iot-agent",
+			"value": "localhost:4041",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "mintaka",
+			"value": "localhost:8080",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "iot-agent-json",
+			"value": "localhost:7896",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "context-broker",
+			"value": "34.124.243.51:1026",
+			"type": "string"
+		},
+		{
+			"key": "iot-agent",
+			"value": "34.124.243.51:4041",
+			"type": "string"
+		},
+		{
+			"key": "mintaka",
+			"value": "34.124.243.51:8080",
+			"type": "string"
+		},
+		{
+			"key": "iot-agent-json",
+			"value": "34.124.243.51:7896",
+			"type": "string"
+		}
+	]
+}
