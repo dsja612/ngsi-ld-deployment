@@ -336,59 +336,6 @@
 					"response": []
 				},
 				{
-					"name": "(6) View all Device entities after sending measure",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"content-type": true
-						}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/ld+json",
-								"type": "text"
-							},
-							{
-								"key": "fiware-service",
-								"value": "openiot",
-								"type": "text"
-							},
-							{
-								"key": "fiware-servicepath",
-								"value": "/",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/?type=Robot",
-							"host": [
-								"{{application-source}}"
-							],
-							"port": "{{context-broker-port}}",
-							"path": [
-								"ngsi-ld",
-								"v1",
-								"entities",
-								""
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "type",
-									"value": "Robot"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Delete provisioned EnvironmentalSensor",
 					"request": {
 						"method": "DELETE",
@@ -1250,12 +1197,12 @@
 			"type": "string"
 		},
 		{
-			"key": "mintaka-port",
+			"key": "temporal-port",
 			"value": "8080",
 			"type": "string"
 		},
 		{
-			"key": "mintaka-port",
+			"key": "temporal-port",
 			"value": "9090",
 			"type": "string",
 			"disabled": true
