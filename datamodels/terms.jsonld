@@ -1,4 +1,5 @@
 {
     "locatedIn": "The entity, typically a physical space such as a Building or Room, within which this entity is contained or housed. It indicates a hierarchical geographic or spatial containment relationship.",
-    "attachedTo": "An entity, often a physical object or system component, to which this entity is physically connected or functionally dependent. This property denotes a relationship where the entity is a part of, relies on, or is an accessory to the referenced entity."
+    "attachedTo": "An entity, often a physical object or system component, to which this entity is physically connected or functionally dependent. This property denotes a relationship where the entity is a part of, relies on, or is an accessory to the referenced entity.",
+    "roomName": "The name of the room corresponding to this observation."
 }
