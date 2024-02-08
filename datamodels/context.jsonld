@@ -1,5 +1,6 @@
 {
     "@context": {
+        "Terms": "https://github.com/dsja612/ngsi-ld-deployment/blob/master/datamodels/terms.jsonld",
         "CommandMessage": "https://smartdatamodels.org/dataModel.AutonomousMobileRobot/CommandMessage",
         "CommandReturnMessage": "https://smartdatamodels.org/dataModel.AutonomousMobileRobot/CommandReturnMessage",
         "StateMessage": "https://smartdatamodels.org/dataModel.AutonomousMobileRobot/StateMessage",
@@ -176,6 +177,8 @@
         "accelerometer": "https://placeholder.org/gyroscope",
         "length": "https://qudt.org/vocab/quantitykind/Length",
         "width": "https://qudt.org/vocab/quantitykind/Width",
-        "roomName": "https://placeholder.org/roomName"
+        "roomName": "Terms:roomName",
+        "locatedIn": "Terms:locatedIn",
+        "attachedTo": "Terms:attachedTo"
     }
 }
