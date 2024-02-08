@@ -1026,6 +1026,196 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Querying Context Broker",
+			"item": [
+				{
+					"name": "Find all entities in Room001",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22",
+							"host": [
+								"{{application-source}}"
+							],
+							"port": "{{context-broker-port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "locatedIn==%22urn:ngsi-ld:Room:Room001%22"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all entities in Room002",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room002%22",
+							"host": [
+								"{{application-source}}"
+							],
+							"port": "{{context-broker-port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "locatedIn==%22urn:ngsi-ld:Room:Room002%22"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all entities of type Device",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?type=Device",
+							"host": [
+								"{{application-source}}"
+							],
+							"port": "{{context-broker-port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all entities of type Camera",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?type=Camera",
+							"host": [
+								"{{application-source}}"
+							],
+							"port": "{{context-broker-port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Camera"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find all entities of type Robot",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?type=Robot",
+							"host": [
+								"{{application-source}}"
+							],
+							"port": "{{context-broker-port}}",
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Robot"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
