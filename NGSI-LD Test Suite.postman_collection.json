@@ -11,7 +11,7 @@
 			"name": "Setting up context (do this first)",
 			"item": [
 				{
-					"name": "Adding a context, returns link to context file in header",
+					"name": "(1a) Adding a context, returns link to context file in header",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -29,7 +29,25 @@
 					"response": []
 				},
 				{
-					"name": "Retrieve contexts",
+					"name": "(1b) Adding link to a context",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    \"https://raw.githubusercontent.com/dsja612/ngsi-ld-deployment/master/datamodels/context.jsonld\"\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/jsonldContexts"
+					},
+					"response": []
+				},
+				{
+					"name": "(2) Retrieve contexts",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1221,6 +1239,12 @@
 		{
 			"key": "application-source",
 			"value": "34.124.243.51",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "application-source",
+			"value": "34.143.212.3",
 			"type": "string"
 		}
 	]
