@@ -88,7 +88,7 @@ services:
           - "IOTA_FALLBACK_PATH=/"
           - "IOTA_MQTT_HOST=mosquitto"        # MQTT broker service
           - "IOTA_MQTT_PORT=1883"             # MQTT service port
-          - "IOTA_JSON_LD_CONTEXT=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.6.jsonld"
+          - "IOTA_JSON_LD_CONTEXT=${CONTEXT_FILE}"
 
   #############
   # Databases #
