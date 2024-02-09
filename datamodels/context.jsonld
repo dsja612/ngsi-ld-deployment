@@ -170,6 +170,7 @@
         "unit": "https://smartdatamodels.org/dataModel.Device/unit",
         "user": "https://smartdatamodels.org/dataModel.Device/user",
         "value": "ngsi-ld:hasValue",
+        "temperature": "https://smartdatamodels.org/temperature",
         "humidity": "https://smartdatamodels.org/humidity",
         "bearing": "https://smartdatamodels.org/bearing",
         "pressure": "https://smartdatamodels.org/pressure",
