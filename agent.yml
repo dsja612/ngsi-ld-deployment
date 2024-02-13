@@ -35,7 +35,6 @@ services:
           - "7896:7896"
       environment:
           - "IOTA_CB_URL=${CONTEXT_BROKER_URL}"
-          - "IOTA_CB_PORT=1026"
           - "IOTA_NORTH_PORT=4041"
           - "IOTA_REGISTRY_TYPE=mongodb"
           - "IOTA_MONGO_HOST=mongodb"
