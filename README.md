@@ -19,5 +19,6 @@ This repository contains docker-compose files for various deployment setups of N
 
 # How to install
 1. Clone this repository
-2. `cd ngsi-ld-deployment`
-3. Run `docker-compose -f <filename> up --build`
+2. Run `cd ngsi-ld-deployment`
+3. Create a copy of the `.env.sample` file and rename it to `.env`. Edit the variables as needed.
+4. Run `docker-compose -f <filename> up --build`

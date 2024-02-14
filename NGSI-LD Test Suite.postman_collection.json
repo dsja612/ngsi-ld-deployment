@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "Setting up context (do this first)",
+			"name": "Setting up context internally (Optional)",
 			"item": [
 				{
 					"name": "(1a) Adding a context, returns link to context file in header",
@@ -104,7 +104,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@context\": \"[replace this with the context file you created]\",\r\n  \"id\": \"urn:ngsi-ld:Room:Room001\",\r\n  \"type\": \"Room\",\r\n  \"roomName\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"Pantry\"\r\n  },\r\n  \"location\": {\r\n    \"type\": \"GeoProperty\",\r\n    \"value\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [91.28076, 23.831796]\r\n    }\r\n  },\r\n  \"length\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 30\r\n  },\r\n  \"width\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 30\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"@context\": \"{{context-ld}}\",\r\n  \"id\": \"urn:ngsi-ld:Room:Room001\",\r\n  \"type\": \"Room\",\r\n  \"roomName\": {\r\n    \"type\": \"Property\",\r\n    \"value\": \"Pantry\"\r\n  },\r\n  \"location\": {\r\n    \"type\": \"GeoProperty\",\r\n    \"value\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [91.28076, 23.831796]\r\n    }\r\n  },\r\n  \"length\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 30\r\n  },\r\n  \"width\": {\r\n    \"type\": \"Property\",\r\n    \"value\": 30\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -143,7 +143,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@context\": \"[replace this with the context file you created]\",\r\n  \"id\": \"urn:ngsi-ld:Room:Room002\",\r\n  \"type\": \"Room\",\r\n  \"roomName\": \"SNDGO Storeroom\",\r\n  \"location\": {\r\n    \"type\": \"Point\",\r\n    \"coordinates\": [91.28076, 23.831796]\r\n  },\r\n  \"length\": 20,\r\n  \"width\": 15\r\n}\r\n",
+							"raw": "{\r\n  \"@context\": \"{{context-ld}}\",\r\n  \"id\": \"urn:ngsi-ld:Room:Room002\",\r\n  \"type\": \"Room\",\r\n  \"roomName\": \"SNDGO Storeroom\",\r\n  \"location\": {\r\n    \"type\": \"Point\",\r\n    \"coordinates\": [91.28076, 23.831796]\r\n  },\r\n  \"length\": 20,\r\n  \"width\": 15\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -177,6 +177,11 @@
 							{
 								"key": "fiware-servicepath",
 								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -243,7 +248,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{application-source}}:{{iot-agent-port}}/iot/about"
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/about"
 					},
 					"response": []
 				},
@@ -272,7 +277,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{iot-agent-port}}/iot/devices"
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices"
 					},
 					"response": []
 				},
@@ -301,7 +306,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{iot-agent-port}}/iot/devices"
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices"
 					},
 					"response": []
 				},
@@ -330,7 +335,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{iot-agent-port}}/iot/devices"
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices"
 					},
 					"response": []
 				},
@@ -378,7 +383,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
 					},
 					"response": []
 				},
@@ -407,7 +412,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
 					},
 					"response": []
 				},
@@ -436,7 +441,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
 					},
 					"response": []
 				}
@@ -477,9 +482,10 @@
 							}
 						},
 						"url": {
-							"raw": "{{application-source}}:{{iot-agent-json-port}}/iot/json?i=EnvironmentalSensor001&k=1234",
+							"raw": "http://{{iot-agent-json-source}}:{{iot-agent-json-port}}/iot/json?i=EnvironmentalSensor002&k=1234",
+							"protocol": "http",
 							"host": [
-								"{{application-source}}"
+								"{{iot-agent-json-source}}"
 							],
 							"port": "{{iot-agent-json-port}}",
 							"path": [
@@ -489,7 +495,7 @@
 							"query": [
 								{
 									"key": "i",
-									"value": "EnvironmentalSensor001"
+									"value": "EnvironmentalSensor002"
 								},
 								{
 									"key": "k",
@@ -532,9 +538,10 @@
 							}
 						},
 						"url": {
-							"raw": "{{application-source}}:{{iot-agent-json-port}}/iot/json?i=Camera001&k=1234",
+							"raw": "http://{{iot-agent-json-source}}:{{iot-agent-json-port}}/iot/json?i=Camera001&k=1234",
+							"protocol": "http",
 							"host": [
-								"{{application-source}}"
+								"{{iot-agent-json-source}}"
 							],
 							"port": "{{iot-agent-json-port}}",
 							"path": [
@@ -587,9 +594,10 @@
 							}
 						},
 						"url": {
-							"raw": "{{application-source}}:{{iot-agent-json-port}}/iot/json?i=Robot001&k=1234",
+							"raw": "http://{{iot-agent-json-source}}:{{iot-agent-json-port}}/iot/json?i=Robot001&k=1234",
+							"protocol": "http",
 							"host": [
-								"{{application-source}}"
+								"{{iot-agent-json-source}}"
 							],
 							"port": "{{iot-agent-json-port}}",
 							"path": [
@@ -643,7 +651,7 @@
 					"response": []
 				},
 				{
-					"name": "(6) View EnvironmentalSensor updates",
+					"name": "(5) View EnvironmentalSensor updates",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"content-type": true
@@ -653,11 +661,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/ld+json",
-								"type": "text"
-							},
-							{
 								"key": "fiware-service",
 								"value": "openiot",
 								"type": "text"
@@ -665,6 +668,11 @@
 							{
 								"key": "fiware-servicepath",
 								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -696,7 +704,7 @@
 					"response": []
 				},
 				{
-					"name": "(6) View Camera updates",
+					"name": "(5) View Camera updates",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"content-type": true
@@ -718,6 +726,11 @@
 							{
 								"key": "fiware-servicepath",
 								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -749,7 +762,7 @@
 					"response": []
 				},
 				{
-					"name": "(6) View Robot updates",
+					"name": "(5) View Robot updates",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"content-type": true
@@ -771,6 +784,11 @@
 							{
 								"key": "fiware-servicepath",
 								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -1181,6 +1199,56 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "Subscribe to changes in Temperature",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"description\": \"Subscribe to changes in Temperature\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"endpoint\": {\r\n      \"uri\": \"http://testurl.com/v1/save\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": {{context-ld}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/subscriptions"
+					},
+					"response": []
+				},
+				{
+					"name": "Subscribe to temperature in Room001 falling below 15",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"description\": \"Subscribe to temperature falling below 15\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"q\": \"temperature<15;locatedIn==%22urn:ngsi-ld:Room:Room001%22\",\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"endpoint\": {\r\n      \"uri\": \"http://testurl.com/v1/save\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": {{context-ld}}\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/subscriptions"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all subscriptions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/subscriptions"
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -1238,13 +1306,23 @@
 		},
 		{
 			"key": "application-source",
-			"value": "34.124.243.51",
+			"value": "34.143.212.3",
+			"type": "string"
+		},
+		{
+			"key": "iot-agent-json-source",
+			"value": "34.143.212.3",
 			"type": "string",
 			"disabled": true
 		},
 		{
-			"key": "application-source",
-			"value": "34.143.212.3",
+			"key": "iot-agent-json-source",
+			"value": "35.198.213.246",
+			"type": "string"
+		},
+		{
+			"key": "context-ld",
+			"value": "https://raw.githubusercontent.com/dsja612/ngsi-ld-deployment/master/datamodels/context.jsonld",
 			"type": "string"
 		}
 	]
