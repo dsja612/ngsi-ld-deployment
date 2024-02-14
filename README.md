@@ -3,10 +3,13 @@ This repository contains docker-compose files for various deployment setups of N
 
 ## Orion-LD
 - `orion.aio.yml`: Contains services for the Orion-LD context broker, Mintaka, JSON IOT agent and the Mosquitto MQTT broker
+- `orion.yml`: Contains services for the Orion-LD context broker and Mintaka.
 
 ## Scorpio
 - `scorpio.aio.yml`: Contains services for the Scorpio context broker, JSON IOT agent and the Mosquitto MQTT broker
 - `scorpio.aio.nokafka.yml`: Similar to `scorpio.aio.yml`, but without Kafka integration
+- `scorpio.yml`: Contains services for the Scorpio context broker.
+- `scorpio.nokafka.yml`: Similar to `scorpio.yml`, but without Kafka integration
 
 ## IOT Agent only
 - `agent.yml`: Contains the JSON IOT agent and the Mosquitto MQTT broker
