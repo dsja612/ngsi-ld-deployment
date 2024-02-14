@@ -143,7 +143,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"@context\": \"{{context-ld}}\",\r\n  \"id\": \"urn:ngsi-ld:Room:Room002\",\r\n  \"type\": \"Room\",\r\n  \"roomName\": \"SNDGO Storeroom\",\r\n  \"location\": {\r\n    \"type\": \"Point\",\r\n    \"coordinates\": [91.28076, 23.831796]\r\n  },\r\n  \"length\": 20,\r\n  \"width\": 15\r\n}\r\n",
+							"raw": "{\r\n  \"@context\": \"{{context-ld}}\",\r\n  \"id\": \"urn:ngsi-ld:Room:Room002\",\r\n  \"type\": \"Room\",\r\n  \"roomName\": \"SNDGO Storeroom\",\r\n  \"location\": {\r\n    \"type\": \"Point\",\r\n    \"coordinates\": [90, 25]\r\n  },\r\n  \"length\": 20,\r\n  \"width\": 15\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -167,7 +167,8 @@
 							{
 								"key": "Content-Type",
 								"value": "application/ld+json",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							},
 							{
 								"key": "fiware-service",
@@ -353,7 +354,7 @@
 								"value": "/"
 							}
 						],
-						"url": "{{application-source}}:{{iot-agent-port}}/iot/devices/",
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/",
 						"description": "This example lists all provisioned devices by making a GET request to the `/iot/devices` endpoint.\n\nThe response includes all the commands and attributes mappings associated with all devices"
 					},
 					"response": []
@@ -412,7 +413,7 @@
 								}
 							}
 						},
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/Camera001"
 					},
 					"response": []
 				},
@@ -441,7 +442,7 @@
 								}
 							}
 						},
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/Robot001"
 					},
 					"response": []
 				}
@@ -451,7 +452,39 @@
 			"name": "Updating values to IOT agents using POST requests",
 			"item": [
 				{
-					"name": "(1) Updating EnvironmentalSensor through HTTP Copy",
+					"name": "(1) Patching Camera data in IOT Agent",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"static_attributes\": [\n    {\n        \"name\": \"cameraName\",\n        \"type\": \"Text\",\n        \"value\": \"Camera001\"\n    },\n    {\n        \"name\": \"cameraOrientation\",\n        \"type\": \"Text\",\n        \"value\": \"Wall-mounted\"\n    },\n    {\n        \"name\": \"cameraType\",\n        \"type\": \"Text\",\n        \"value\": \"Fixed\"\n    },\n    {\n        \"name\": \"cameraUsage\",\n        \"type\": \"Text\",\n        \"value\": \"Human Traffic Monitoring\"\n    },\n    {\n        \"name\": \"locatedIn\",\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Room:Room001\"\n    },\n    {\n        \"name\": \"attachedTo\",\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Robot:Robot001\"\n    }\n    ]\n}\n"
+						},
+						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/Camera001",
+						"description": "Before we wire-up the context broker, we can test that a command can be send to a device by making a PATCH request\ndirectly to the IoT Agent's North Port using the `/ngsi-ld/v1/entities/` endpoint. It is this endpoint that will\neventually be invoked by the context broker once we have connected it up. To test the configuration you can run the\ncommand directly as shown:\n\nIf you are viewing the device monitor page, you can also see the state of the water sprinkler change.\n\n![](https://fiware.github.io/tutorials.IoT-Agent/img/water-on.gif)\n"
+					},
+					"response": []
+				},
+				{
+					"name": "(2) Updating EnvironmentalSensor through HTTP",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -482,7 +515,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{iot-agent-json-source}}:{{iot-agent-json-port}}/iot/json?i=EnvironmentalSensor002&k=1234",
+							"raw": "http://{{iot-agent-json-source}}:{{iot-agent-json-port}}/iot/json?i=EnvironmentalSensor001&k=1234",
 							"protocol": "http",
 							"host": [
 								"{{iot-agent-json-source}}"
@@ -495,7 +528,7 @@
 							"query": [
 								{
 									"key": "i",
-									"value": "EnvironmentalSensor002"
+									"value": "EnvironmentalSensor001"
 								},
 								{
 									"key": "k",
@@ -507,7 +540,7 @@
 					"response": []
 				},
 				{
-					"name": "(2) Updating Camera through HTTP",
+					"name": "(3) Updating Camera through HTTP",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -563,7 +596,7 @@
 					"response": []
 				},
 				{
-					"name": "(3) Updating Robot through HTTP",
+					"name": "(4) Updating Robot through HTTP",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -615,38 +648,6 @@
 								}
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "(4) Patching Camera Name",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {
-							"content-type": true
-						}
-					},
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "fiware-service",
-								"value": "openiot"
-							},
-							{
-								"key": "fiware-servicepath",
-								"value": "/"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{ \n    \"cameraUsage\": \"Traffic Monitoring\" \n}"
-						},
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/urn:ngsi-ld:Camera:Camera001",
-						"description": "Before we wire-up the context broker, we can test that a command can be send to a device by making a PATCH request\ndirectly to the IoT Agent's North Port using the `/ngsi-ld/v1/entities/` endpoint. It is this endpoint that will\neventually be invoked by the context broker once we have connected it up. To test the configuration you can run the\ncommand directly as shown:\n\nIf you are viewing the device monitor page, you can also see the state of the water sprinkler change.\n\n![](https://fiware.github.io/tutorials.IoT-Agent/img/water-on.gif)\n"
 					},
 					"response": []
 				},
@@ -716,7 +717,8 @@
 							{
 								"key": "Content-Type",
 								"value": "application/ld+json",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							},
 							{
 								"key": "fiware-service",
@@ -774,7 +776,8 @@
 							{
 								"key": "Content-Type",
 								"value": "application/ld+json",
-								"type": "text"
+								"type": "text",
+								"disabled": true
 							},
 							{
 								"key": "fiware-service",
@@ -1027,6 +1030,11 @@
 								"key": "fiware-servicepath",
 								"value": "/",
 								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -1063,6 +1071,11 @@
 							{
 								"key": "fiware-servicepath",
 								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -1101,6 +1114,11 @@
 								"key": "fiware-servicepath",
 								"value": "/",
 								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -1137,6 +1155,11 @@
 							{
 								"key": "fiware-servicepath",
 								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -1175,6 +1198,11 @@
 								"key": "fiware-servicepath",
 								"value": "/",
 								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
 							}
 						],
 						"url": {
@@ -1204,7 +1232,7 @@
 			"name": "Subscriptions",
 			"item": [
 				{
-					"name": "Subscribe to changes in Temperature",
+					"name": "Subscribe to changes in Temperature from any Device",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -1222,13 +1250,13 @@
 					"response": []
 				},
 				{
-					"name": "Subscribe to temperature in Room001 falling below 15",
+					"name": "Subscribe to temperature in Room001 falling below 15, retrieve humidity data",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"description\": \"Subscribe to temperature falling below 15\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"q\": \"temperature<15;locatedIn==%22urn:ngsi-ld:Room:Room001%22\",\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"endpoint\": {\r\n      \"uri\": \"http://testurl.com/v1/save\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": {{context-ld}}\r\n}\r\n",
+							"raw": "{\r\n  \"description\": \"Subscribe to temperature falling below 15\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"q\": \"temperature<15;locatedIn==%22urn:ngsi-ld:Room:Room001%22\",\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"attributes\": [\"humidity\"],\r\n    \"endpoint\": {\r\n      \"uri\": \"http://testurl.com/v1/save\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": {{context-ld}}\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1245,6 +1273,172 @@
 						"method": "GET",
 						"header": [],
 						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/subscriptions"
+					},
+					"response": []
+				},
+				{
+					"name": "Deleting a subscription",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{orion-ld}}/ngsi-ld/v1/subscriptions/urn:ngsi-ld:Subscription:25b07128-cae4-11ee-8df1-0242ac120005"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mintaka",
+			"item": [
+				{
+					"name": "Check that Mintaka is running",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://{{application-source}}:{{temporal-port}}/info",
+						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
+					},
+					"response": []
+				},
+				{
+					"name": "Get last 5 updates to EnvironmentalSensor001",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "NGSILD-Tenant",
+								"value": "openiot",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{application-source}}:{{temporal-port}}/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5",
+							"host": [
+								"{{application-source}}"
+							],
+							"port": "{{temporal-port}}",
+							"path": [
+								"temporal",
+								"entities",
+								"urn:ngsi-ld:Device:EnvironmentalSensor001"
+							],
+							"query": [
+								{
+									"key": "lastN",
+									"value": "5"
+								}
+							]
+						},
+						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
+					},
+					"response": []
+				},
+				{
+					"name": "Get last 5 updates to temperature from EnvironmentalSensor001",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "NGSILD-Tenant",
+								"value": "openiot",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{application-source}}:{{temporal-port}}/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5&attrs=temperature",
+							"host": [
+								"{{application-source}}"
+							],
+							"port": "{{temporal-port}}",
+							"path": [
+								"temporal",
+								"entities",
+								"urn:ngsi-ld:Device:EnvironmentalSensor001"
+							],
+							"query": [
+								{
+									"key": "lastN",
+									"value": "5"
+								},
+								{
+									"key": "attrs",
+									"value": "temperature"
+								}
+							]
+						},
+						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
+					},
+					"response": []
+				},
+				{
+					"name": "Get names of persons spotted in Room001",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "NGSILD-Tenant",
+								"value": "openiot",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{application-source}}:{{temporal-port}}/temporal/entities/?type=Camera&attrs=names&timeproperty=modifiedAt&q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&timerel=before&timeAt=2024-02-14T09:36:30.184Z&options=temporalValues",
+							"host": [
+								"{{application-source}}"
+							],
+							"port": "{{temporal-port}}",
+							"path": [
+								"temporal",
+								"entities",
+								""
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Camera"
+								},
+								{
+									"key": "attrs",
+									"value": "names"
+								},
+								{
+									"key": "timeproperty",
+									"value": "modifiedAt"
+								},
+								{
+									"key": "q",
+									"value": "locatedIn==%22urn:ngsi-ld:Room:Room001%22"
+								},
+								{
+									"key": "timerel",
+									"value": "before"
+								},
+								{
+									"key": "timeAt",
+									"value": "2024-02-14T09:36:30.184Z"
+								},
+								{
+									"key": "options",
+									"value": "temporalValues"
+								}
+							]
+						},
+						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
 					},
 					"response": []
 				}
