@@ -21,6 +21,7 @@ services:
       - ORIONLD_TROE_PWD=orion
       - ORIONLD_TROE_HOST=timescale
       - ORIONLD_MONGO_HOST=mongodb
+      - ORIONLD_CORS_ALLOWED_ORIGIN=__ALL
     depends_on:
       - mongodb
       - timescale
