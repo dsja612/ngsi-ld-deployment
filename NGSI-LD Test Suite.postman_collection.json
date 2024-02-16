@@ -1285,12 +1285,23 @@
 			"item": [
 				{
 					"name": "Subscribe to changes in Temperature from any Device",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"description\": \"Subscribe to changes in Temperature\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"endpoint\": {\r\n      \"uri\": \"http://testurl.com/v1/save\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": {{context-ld}}\r\n}\r\n",
+							"raw": "{\r\n  \"description\": \"Subscribe to changes in Temperature\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"endpoint\": {\r\n      \"uri\": \"http://testurl.com/v1/save\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": \"{{context-ld}}\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1302,13 +1313,34 @@
 					"response": []
 				},
 				{
-					"name": "Subscribe to temperature in Room001 falling below 15, retrieve humidity data",
+					"name": "Subscribe to temperature in Room001 falling below 15, retrieve temperature data",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							},
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"description\": \"Subscribe to temperature falling below 15\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"q\": \"temperature<15;locatedIn==%22urn:ngsi-ld:Room:Room001%22\",\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"attributes\": [\"humidity\"],\r\n    \"endpoint\": {\r\n      \"uri\": \"http://testurl.com/v1/save\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": {{context-ld}}\r\n}\r\n",
+							"raw": "{\r\n  \"description\": \"Subscribe to temperature falling below 15\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"q\": \"temperature<15;locatedIn==%22urn:ngsi-ld:Room:Room001%22\",\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"attributes\": [\"temperature\"],\r\n    \"endpoint\": {\r\n      \"uri\": \"https://asia-southeast1-composite-silo-413107.cloudfunctions.net/temperature_update\"\r\n    }\r\n  },\r\n  \"@context\": \"{{context-ld}}\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1323,8 +1355,24 @@
 					"name": "Get all subscriptions",
 					"request": {
 						"method": "GET",
-						"header": [],
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/subscriptions"
+						"header": [
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							},
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/subscriptions"
 					},
 					"response": []
 				},
@@ -1333,7 +1381,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{orion-ld}}/ngsi-ld/v1/subscriptions/urn:ngsi-ld:Subscription:25b07128-cae4-11ee-8df1-0242ac120005"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/subscriptions/urn:ngsi-ld:Subscription:78613984-ccab-11ee-b6f3-0242ac130005"
 					},
 					"response": []
 				}
@@ -1354,6 +1402,9 @@
 				},
 				{
 					"name": "Get last 5 updates to EnvironmentalSensor001",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1365,6 +1416,11 @@
 							{
 								"key": "NGSILD-Tenant",
 								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "Origin",
+								"value": "http://postman.com/",
 								"type": "text"
 							}
 						],
