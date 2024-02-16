@@ -24,7 +24,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/jsonldContexts"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/jsonldContexts"
 					},
 					"response": []
 				},
@@ -42,7 +42,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/jsonldContexts"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/jsonldContexts"
 					},
 					"response": []
 				},
@@ -57,7 +57,7 @@
 								"type": "text"
 							}
 						],
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/jsonldContexts"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/jsonldContexts"
 					},
 					"response": []
 				},
@@ -66,7 +66,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/jsonldContexts/8bfe9ab6-c569-11ee-b590-0242ac1b0007"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/jsonldContexts/8bfe9ab6-c569-11ee-b590-0242ac1b0007"
 					},
 					"response": []
 				}
@@ -111,7 +111,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/entities/"
 					},
 					"response": []
 				},
@@ -150,7 +150,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/entities/"
 					},
 					"response": []
 				},
@@ -187,12 +187,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/?type=Room",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities/?type=Room",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities",
@@ -234,7 +235,7 @@
 								"type": "text"
 							}
 						],
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/urn:ngsi-ld:Room:Room001"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/entities/urn:ngsi-ld:Room:Room001"
 					},
 					"response": []
 				}
@@ -249,7 +250,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/about"
+						"url": "{{gateway}}/api/iot/provision/about"
 					},
 					"response": []
 				},
@@ -278,7 +279,7 @@
 								}
 							}
 						},
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices"
+						"url": "{{gateway}}/api/iot/provision/devices"
 					},
 					"response": []
 				},
@@ -307,7 +308,7 @@
 								}
 							}
 						},
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices"
+						"url": "{{gateway}}/api/iot/provision/devices"
 					},
 					"response": []
 				},
@@ -336,7 +337,7 @@
 								}
 							}
 						},
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices"
+						"url": "{{gateway}}/api/iot/provision/devices"
 					},
 					"response": []
 				},
@@ -354,7 +355,7 @@
 								"value": "/"
 							}
 						],
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/",
+						"url": "{{gateway}}/api/iot/provision/devices",
 						"description": "This example lists all provisioned devices by making a GET request to the `/iot/devices` endpoint.\n\nThe response includes all the commands and attributes mappings associated with all devices"
 					},
 					"response": []
@@ -384,7 +385,7 @@
 								}
 							}
 						},
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
+						"url": "{{gateway}}/api/iot/provision/devices/EnvironmentalSensor001"
 					},
 					"response": []
 				},
@@ -413,7 +414,7 @@
 								}
 							}
 						},
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/Camera001"
+						"url": "{{gateway}}/api/iot/provision/devices/Camera001"
 					},
 					"response": []
 				},
@@ -442,7 +443,7 @@
 								}
 							}
 						},
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/Robot001"
+						"url": "{{gateway}}/api/iot/provision/devices/Robot001"
 					},
 					"response": []
 				}
@@ -478,7 +479,7 @@
 							"mode": "raw",
 							"raw": "{\n    \"static_attributes\": [\n    {\n        \"name\": \"cameraName\",\n        \"type\": \"Text\",\n        \"value\": \"Camera001\"\n    },\n    {\n        \"name\": \"cameraOrientation\",\n        \"type\": \"Text\",\n        \"value\": \"Wall-mounted\"\n    },\n    {\n        \"name\": \"cameraType\",\n        \"type\": \"Text\",\n        \"value\": \"Fixed\"\n    },\n    {\n        \"name\": \"cameraUsage\",\n        \"type\": \"Text\",\n        \"value\": \"Human Traffic Monitoring\"\n    },\n    {\n        \"name\": \"locatedIn\",\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Room:Room001\"\n    },\n    {\n        \"name\": \"attachedTo\",\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Robot:Robot001\"\n    }\n    ]\n}\n"
 						},
-						"url": "{{iot-agent-json-source}}:{{iot-agent-port}}/iot/devices/Camera001",
+						"url": "{{gateway}}/api/iot/provision/devices/Camera001",
 						"description": "Before we wire-up the context broker, we can test that a command can be send to a device by making a PATCH request\ndirectly to the IoT Agent's North Port using the `/ngsi-ld/v1/entities/` endpoint. It is this endpoint that will\neventually be invoked by the context broker once we have connected it up. To test the configuration you can run the\ncommand directly as shown:\n\nIf you are viewing the device monitor page, you can also see the state of the water sprinkler change.\n\n![](https://fiware.github.io/tutorials.IoT-Agent/img/water-on.gif)\n"
 					},
 					"response": []
@@ -515,15 +516,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{iot-agent-json-source}}:{{iot-agent-json-port}}/iot/json?i=EnvironmentalSensor001&k=1234",
-							"protocol": "http",
+							"raw": "{{gateway}}/api/iot/update/?i=EnvironmentalSensor001&k=1234",
 							"host": [
-								"{{iot-agent-json-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{iot-agent-json-port}}",
 							"path": [
+								"api",
 								"iot",
-								"json"
+								"update",
+								""
 							],
 							"query": [
 								{
@@ -571,15 +572,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{iot-agent-json-source}}:{{iot-agent-json-port}}/iot/json?i=Camera001&k=1234",
-							"protocol": "http",
+							"raw": "{{gateway}}/api/iot/update/?i=Camera001&k=1234",
 							"host": [
-								"{{iot-agent-json-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{iot-agent-json-port}}",
 							"path": [
+								"api",
 								"iot",
-								"json"
+								"update",
+								""
 							],
 							"query": [
 								{
@@ -627,15 +628,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://{{iot-agent-json-source}}:{{iot-agent-json-port}}/iot/json?i=Robot001&k=1234",
-							"protocol": "http",
+							"raw": "{{gateway}}/api/iot/update/?i=Robot001&k=1234",
 							"host": [
-								"{{iot-agent-json-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{iot-agent-json-port}}",
 							"path": [
+								"api",
 								"iot",
-								"json"
+								"update",
+								""
 							],
 							"query": [
 								{
@@ -678,12 +679,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/?type=Device",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities/?type=Device",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities",
@@ -737,12 +739,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/?type=Camera",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities/?type=Camera",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities",
@@ -796,12 +799,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/?type=Camera",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities/?type=Camera",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities",
@@ -855,7 +859,7 @@
 										}
 									}
 								},
-								"url": "{{application-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
+								"url": "{{gateway}}/api/iot/provision/EnvironmentalSensor001"
 							},
 							"response": []
 						},
@@ -884,7 +888,7 @@
 										}
 									}
 								},
-								"url": "{{application-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
+								"url": "{{gateway}}/api/iot/provision/Camera001"
 							},
 							"response": []
 						},
@@ -913,7 +917,7 @@
 										}
 									}
 								},
-								"url": "{{application-source}}:{{iot-agent-port}}/iot/devices/EnvironmentalSensor001"
+								"url": "{{gateway}}/api/iot/provision/Robot001"
 							},
 							"response": []
 						}
@@ -947,7 +951,7 @@
 										}
 									}
 								},
-								"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/urn:ngsi-ld:Device:EnvironmentalSensor001"
+								"url": "{{gateway}}/api/orion/ngsi-ld/v1/entities/urn:ngsi-ld:Device:EnvironmentalSensor001"
 							},
 							"response": []
 						},
@@ -976,7 +980,7 @@
 										}
 									}
 								},
-								"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/urn:ngsi-ld:Camera:Camera001"
+								"url": "{{gateway}}/api/orion/ngsi-ld/v1/entities/urn:ngsi-ld:Camera:Camera001"
 							},
 							"response": []
 						},
@@ -1005,7 +1009,7 @@
 										}
 									}
 								},
-								"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities/urn:ngsi-ld:Robot:Robot001"
+								"url": "{{gateway}}/api/orion/ngsi-ld/v1/entities/urn:ngsi-ld:Robot:Robot001"
 							},
 							"response": []
 						}
@@ -1038,12 +1042,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?type=Room",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?type=Room",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1080,12 +1085,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?type=Device",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?type=Device",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1122,12 +1128,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?type=Camera",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?type=Camera",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1164,12 +1171,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?type=Robot",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?type=Robot",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1206,12 +1214,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1248,12 +1257,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room002%22",
+							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room002%22",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{context-broker-port}}",
 							"path": [
+								"api",
+								"orion",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1287,7 +1297,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/subscriptions"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/subscriptions"
 					},
 					"response": []
 				},
@@ -1305,7 +1315,7 @@
 								}
 							}
 						},
-						"url": "{{application-source}}:{{context-broker-port}}/ngsi-ld/v1/subscriptions"
+						"url": "{{gateway}}/api/orion/ngsi-ld/v1/subscriptions"
 					},
 					"response": []
 				},
@@ -1337,7 +1347,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://{{application-source}}:{{temporal-port}}/info",
+						"url": "{{gateway}}/api/mintaka/info",
 						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
 					},
 					"response": []
@@ -1359,12 +1369,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{temporal-port}}/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5",
+							"raw": "{{gateway}}/api/mintaka/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{temporal-port}}",
 							"path": [
+								"api",
+								"mintaka",
 								"temporal",
 								"entities",
 								"urn:ngsi-ld:Device:EnvironmentalSensor001"
@@ -1381,7 +1392,7 @@
 					"response": []
 				},
 				{
-					"name": "Get last 5 updates to temperature from EnvironmentalSensor001",
+					"name": "Get last 5 updates to temperature & bearing from EnvironmentalSensor001",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1397,12 +1408,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{temporal-port}}/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5&attrs=temperature",
+							"raw": "{{gateway}}/api/mintaka/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5&attrs=temperature,bearing",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{temporal-port}}",
 							"path": [
+								"api",
+								"mintaka",
 								"temporal",
 								"entities",
 								"urn:ngsi-ld:Device:EnvironmentalSensor001"
@@ -1414,7 +1426,7 @@
 								},
 								{
 									"key": "attrs",
-									"value": "temperature"
+									"value": "temperature,bearing"
 								}
 							]
 						},
@@ -1439,12 +1451,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{application-source}}:{{temporal-port}}/temporal/entities/?type=Camera&attrs=names&timeproperty=modifiedAt&q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&timerel=before&timeAt=2024-02-14T09:36:30.184Z&options=temporalValues",
+							"raw": "{{gateway}}/api/mintaka/temporal/entities/?type=Camera&attrs=names&timeproperty=modifiedAt&q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&timerel=before&timeAt=2024-02-16T09:36:30.184Z&options=temporalValues",
 							"host": [
-								"{{application-source}}"
+								"{{gateway}}"
 							],
-							"port": "{{temporal-port}}",
 							"path": [
+								"api",
+								"mintaka",
 								"temporal",
 								"entities",
 								""
@@ -1472,7 +1485,7 @@
 								},
 								{
 									"key": "timeAt",
-									"value": "2024-02-14T09:36:30.184Z"
+									"value": "2024-02-16T09:36:30.184Z"
 								},
 								{
 									"key": "options",
@@ -1559,6 +1572,11 @@
 		{
 			"key": "context-ld",
 			"value": "https://raw.githubusercontent.com/dsja612/ngsi-ld-deployment/master/datamodels/context.jsonld",
+			"type": "string"
+		},
+		{
+			"key": "gateway",
+			"value": "http://34.87.161.144",
 			"type": "string"
 		}
 	]
