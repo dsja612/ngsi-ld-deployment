@@ -175,7 +175,7 @@
         "bearing": "https://smartdatamodels.org/bearing",
         "pressure": "https://smartdatamodels.org/pressure",
         "gyroscope": "https://placeholder.org/gyroscope",
-        "accelerometer": "https://placeholder.org/gyroscope",
+        "accelerometer": "https://placeholder.org/accelerometer",
         "length": "https://qudt.org/vocab/quantitykind/Length",
         "width": "https://qudt.org/vocab/quantitykind/Width",
         "roomName": "Terms:roomName",
