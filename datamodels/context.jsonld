@@ -180,6 +180,7 @@
         "width": "https://qudt.org/vocab/quantitykind/Width",
         "roomName": "Terms:roomName",
         "locatedIn": "Terms:locatedIn",
-        "attachedTo": "Terms:attachedTo"
+        "attachedTo": "Terms:attachedTo",
+        "providedBy": "Terms:providedBy"
     }
 }
