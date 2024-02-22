@@ -14,6 +14,10 @@ This repository contains docker-compose files for various deployment setups of N
 ## IOT Agent only
 - `agent.yml`: Contains the JSON IOT agent and the Mosquitto MQTT broker
 
+## API Gateway
+As different context brokers have different endpoints or ports for services (i.e., temporal API), there will be multiple dockerfiles and `nginx.conf` files for each broker. Edit the `.conf` files in [`/nginx`](/nginx) to modify the URLs.
+- `orion.gateway.yml`: Contain setup for an NGINX reverse proxy serving as an API gateway for the Orion-LD context broker with Mintaka and IOTAgent-JSON support. 
+
 # Requirements
 1. Docker
 
@@ -22,3 +26,4 @@ This repository contains docker-compose files for various deployment setups of N
 2. Run `cd ngsi-ld-deployment`
 3. Create a copy of the `.env.sample` file and rename it to `.env`. Edit the variables as needed.
 4. Run `docker-compose -f <filename> up --build`
+5. To stop the services, run `docker-compose -f <filename> down`
