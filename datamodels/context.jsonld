@@ -181,6 +181,7 @@
         "roomName": "Terms:roomName",
         "locatedIn": "Terms:locatedIn",
         "attachedTo": "Terms:attachedTo",
-        "providedBy": "Terms:providedBy"
+        "providedBy": "Terms:providedBy",
+        "unitSymbol": "https://smartdatamodels.org/unitSymbol"
     }
 }
