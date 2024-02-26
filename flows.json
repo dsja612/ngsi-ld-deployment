@@ -47,6 +47,30 @@
         "env": []
     },
     {
+        "id": "0b788fd7625d38f2",
+        "type": "tab",
+        "label": "Querying the context broker",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c302ed04271e935c",
+        "type": "tab",
+        "label": "Subscriptions",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b8655dc5d91acba7",
+        "type": "tab",
+        "label": "Temporal Queries (Mintaka)",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "a87a43be9c8230f5",
         "type": "global-config",
         "name": "global-config",
@@ -62,7 +86,7 @@
         "id": "f420f52b3e173249",
         "type": "inject",
         "z": "a1a7ac05d1a4ebd9",
-        "name": "",
+        "name": "Start",
         "props": [
             {
                 "p": "payload"
@@ -79,7 +103,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 120,
+        "x": 110,
         "y": 160,
         "wires": [
             [
@@ -396,7 +420,7 @@
         "type": "function",
         "z": "4f080d384710a3a0",
         "name": "Creating Room001 entity using normalized JSON",
-        "func": "msg.payload = {\n    \"@context\": msg.context_ld,\n    \"id\": \"urn:ngsi-ld:Room:Room001\",\n    \"type\": \"Room\",\n    \"roomName\": {\n        \"type\": \"Property\",\n        \"value\": \"Pantry\"\n    },\n    \"location\": {\n        \"type\": \"GeoProperty\",\n        \"value\": {\n            \"type\": \"Point\",\n            \"coordinates\": [91.28076, 23.831796]\n        }\n    },\n    \"length\": {\n        \"type\": \"Property\",\n        \"value\": 30\n    },\n    \"width\": {\n        \"type\": \"Property\",\n        \"value\": 30\n    }\n}\nmsg.payload = JSON.stringify(msg.payload);\nmsg.headers[\"Content-Type\"] = \"application/ld+json\"\n\nreturn msg;",
+        "func": "msg.payload = {\n  \"@context\": `${msg.context_ld}`,\n  \"id\": \"urn:ngsi-ld:Room:Room001\",\n  \"type\": \"Room\",\n  \"roomName\": {\n    \"type\": \"Property\",\n    \"value\": \"Pantry\"\n  },\n  \"location\": {\n    \"type\": \"GeoProperty\",\n    \"value\": {\n      \"type\": \"Point\",\n      \"coordinates\": [103.85004829669677, 1.2915542764390127]\n    }\n  },\n  \"length\": {\n    \"type\": \"Property\",\n    \"value\": 30,\n    \"unitCode\": \"MTR\",\n    \"unitSymbol\": {\n        \"type\": \"Property\",\n        \"value\": \"m\"\n    }\n  },\n  \"width\": {\n    \"type\": \"Property\",\n    \"value\": 30,\n    \"unitCode\": \"MTR\",\n    \"unitSymbol\": {\n        \"type\": \"Property\",\n        \"value\": \"m\"\n    }\n  }\n}\n\nmsg.payload = JSON.stringify(msg.payload);\nmsg.headers[\"Content-Type\"] = \"application/ld+json\"\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -416,7 +440,7 @@
         "type": "function",
         "z": "4f080d384710a3a0",
         "name": "Creating Room002 using standard JSON",
-        "func": "msg.payload = {\n  \"id\": \"urn:ngsi-ld:Room:Room002\",\n  \"type\": \"Room\",\n  \"roomName\": \"SNDGO Storeroom\",\n  \"location\": {\n    \"type\": \"Point\",\n    \"coordinates\": [90, 25]\n  },\n  \"length\": 20,\n  \"width\": 15\n}\nmsg.payload = JSON.stringify(msg.payload);\n\nmsg.headers[\"Link\"] = `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\nmsg.headers[\"Content-Type\"] = \"application/json\"\n\nreturn msg;",
+        "func": "msg.payload = {\n  \"id\": \"urn:ngsi-ld:Room:Room002\",\n  \"type\": \"Room\",\n  \"roomName\": \"SNDGO Storeroom\",\n  \"location\": {\n    \"type\": \"Point\",\n    \"coordinates\": [103.85013613903543, 1.2913310392625017]\n  },\n  \"length\": {\n    \"value\": 20,\n    \"unitCode\": \"MTR\",\n    \"unitSymbol\": \"m\"\n  },\n  \"width\": {\n    \"value\": 20,\n    \"unitCode\": \"MTR\",\n    \"unitSymbol\": \"m\"\n  }\n}\nmsg.payload = JSON.stringify(msg.payload);\n\nmsg.headers[\"Link\"] = `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\nmsg.headers[\"Content-Type\"] = \"application/json\"\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -627,7 +651,7 @@
         "type": "function",
         "z": "e4d5ea884d513ceb",
         "name": "Provisioning an EnvironmentalSensor of type Device",
-        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"EnvironmentalSensor001\",\n      \"entity_name\": \"urn:ngsi-ld:Device:EnvironmentalSensor001\",\n      \"entity_type\": \"Device\",\n      \"attributes\": [\n        {\n          \"object_id\": \"t\",\n          \"name\": \"temperature\",\n          \"type\": \"Number\"\n        },\n        {\n          \"object_id\": \"h\",\n          \"name\": \"humidity\",\n          \"type\": \"Number\"\n        },\n        {\n          \"object_id\": \"b\",\n          \"name\": \"bearing\",\n          \"type\": \"Number\"\n        },\n        {\n          \"object_id\": \"p\",\n          \"name\": \"pressure\",\n          \"type\": \"Number\"\n        },\n        {\n          \"object_id\": \"g\",\n          \"name\": \"gyroscope\",\n          \"type\": \"Text\"\n        },\n        {\n          \"object_id\": \"a\",\n          \"name\": \"accelerometer\",\n          \"type\": \"Text\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        },\n        {\n          \"name\": \"deviceType\",\n          \"type\": \"Text\",\n          \"value\": \"EnvironmentalSensor\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
+        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"EnvironmentalSensor001\",\n      \"entity_name\": \"urn:ngsi-ld:Device:EnvironmentalSensor001\",\n      \"entity_type\": \"Device\",\n      \"attributes\": [\n        {\n          \"object_id\": \"t\",\n          \"name\": \"temperature\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"CEL\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"°C\"\n            }\n          }\n        },\n        {\n          \"object_id\": \"h\",\n          \"name\": \"humidity\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"P1\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"%RH\"\n            }\n          }\n        },\n        {\n          \"object_id\": \"b\",\n          \"name\": \"bearing\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"D76\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"Gs\"\n            }\n          }\n        },\n        {\n          \"object_id\": \"p\",\n          \"name\": \"pressure\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"P82\"\n            }\n          }\n        },\n        {\n          \"object_id\": \"g\",\n          \"name\": \"gyroscope\",\n          \"type\": \"Property\"\n        },\n        {\n          \"object_id\": \"a\",\n          \"name\": \"accelerometer\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        },\n        {\n          \"name\": \"attachedTo\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Camera:Camera001\"\n        },\n        {\n          \"name\": \"deviceType\",\n          \"type\": \"Property\",\n          \"value\": \"EnvironmentalSensor\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -647,7 +671,7 @@
         "type": "function",
         "z": "e4d5ea884d513ceb",
         "name": "Provisioning a Camera",
-        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"Camera001\",\n      \"entity_name\": \"urn:ngsi-ld:Camera:Camera001\",\n      \"entity_type\": \"Camera\",\n      \"attributes\": [\n        {\n          \"object_id\": \"on\",\n          \"name\": \"on\",\n          \"type\": \"Boolean\"\n        },\n        {\n          \"name\": \"mediaURL\",\n          \"type\": \"Text\"\n        },\n        {\n          \"name\": \"startDateTime\",\n          \"type\": \"DateTime\"\n        },\n        {\n          \"name\": \"confidence\",\n          \"type\": \"Number\"\n        },\n        {\n          \"name\": \"names\",\n          \"type\": \"Text\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"cameraName\",\n          \"type\": \"Text\",\n          \"value\": \"Camera001\"\n        },\n        {\n          \"name\": \"cameraOrientation\",\n          \"type\": \"Text\",\n          \"value\": \"top-down\"\n        },\n        {\n          \"name\": \"cameraType\",\n          \"type\": \"Text\",\n          \"value\": \"Fixed\"\n        },\n        {\n          \"name\": \"cameraUsage\",\n          \"type\": \"Text\",\n          \"value\": \"Surveillance\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        },\n        {\n          \"name\": \"attachedTo\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Robot:Robot001\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"HTTP\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
+        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"Camera001\",\n      \"entity_name\": \"urn:ngsi-ld:Camera:Camera001\",\n      \"entity_type\": \"Camera\",\n      \"attributes\": [\n        {\n          \"object_id\": \"on\",\n          \"name\": \"on\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"mediaURL\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"startDateTime\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"confidence\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"P1\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"%\"\n            }\n          }\n        },\n        {\n          \"name\": \"names\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"cameraName\",\n          \"type\": \"Text\",\n          \"value\": \"Camera001\"\n        },\n        {\n          \"name\": \"cameraOrientation\",\n          \"type\": \"Text\",\n          \"value\": \"top-down\"\n        },\n        {\n          \"name\": \"cameraType\",\n          \"type\": \"Text\",\n          \"value\": \"Fixed\"\n        },\n        {\n          \"name\": \"cameraUsage\",\n          \"type\": \"Text\",\n          \"value\": \"Surveillance\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -667,7 +691,7 @@
         "type": "function",
         "z": "e4d5ea884d513ceb",
         "name": "Provisioning a Robot",
-        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"Robot001\",\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\n      \"entity_type\": \"Robot\",\n      \"attributes\": [\n        {\n          \"object_id\": \"x\",\n          \"name\": \"x\",\n          \"type\": \"Number\"\n        },\n        {\n          \"object_id\": \"y\",\n          \"name\": \"y\",\n          \"type\": \"Number\"\n        },\n        {\n          \"object_id\": \"heading\",\n          \"name\": \"heading\",\n          \"type\": \"Number\"\n        },\n        {\n          \"object_id\": \"command\",\n          \"name\": \"command\",\n          \"type\": \"Text\"\n        },\n        {\n          \"object_id\": \"status\",\n          \"name\": \"status\",\n          \"type\": \"Text\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"robotName\",\n          \"type\": \"Text\",\n          \"value\": \"Robot001\"\n        },\n        {\n          \"name\": \"robotType\",\n          \"type\": \"Text\",\n          \"value\": \"PatrolRobot\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room002\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
+        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"Robot001\",\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\n      \"entity_type\": \"Robot\",\n      \"attributes\": [\n        {\n          \"name\": \"x\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"y\",\n          \"type\": \"Property\"\n        },\n        {\n          \"object_id\": \"h\",\n          \"name\": \"heading\",\n          \"type\": \"Property\",\n          \"metadata\": {\n              \"unitCode\": {\n                \"type\": \"Text\",\n                \"value\": \"DD\" \n              },\n              \"unitSymbol\": {\n                \"type\": \"Text\",\n                \"value\": \"°\"\n              }\n          }\n        },\n        {\n          \"object_id\": \"c\",\n          \"name\": \"command\",\n          \"type\": \"Property\"\n        },\n        {\n          \"object_id\": \"s\",\n          \"name\": \"status\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"robotName\",\n          \"type\": \"Text\",\n          \"value\": \"Robot001\"\n        },\n        {\n          \"name\": \"robotType\",\n          \"type\": \"Text\",\n          \"value\": \"PatrolRobot\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room002\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -901,7 +925,7 @@
         "type": "function",
         "z": "07cf874bd901019c",
         "name": "Patching camera properties in IOT agent",
-        "func": "msg.payload = {\n    \"static_attributes\": [\n    {\n        \"name\": \"cameraName\",\n        \"type\": \"Text\",\n        \"value\": \"Camera001\"\n    },\n    {\n        \"name\": \"cameraOrientation\",\n        \"type\": \"Text\",\n        \"value\": \"Wall-mounted\"\n    },\n    {\n        \"name\": \"cameraType\",\n        \"type\": \"Text\",\n        \"value\": \"Fixed\"\n    },\n    {\n        \"name\": \"cameraUsage\",\n        \"type\": \"Text\",\n        \"value\": \"Human Traffic Monitoring\"\n    },\n    {\n        \"name\": \"locatedIn\",\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Room:Room001\"\n    },\n    {\n        \"name\": \"attachedTo\",\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Robot:Robot001\"\n    }\n    ]\n}\n\nmsg.url = `${msg.gateway}/api/iot/provision/devices/Camera001`\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
+        "func": "msg.payload = {\n    \"static_attributes\": [\n    {\n        \"name\": \"cameraName\",\n        \"type\": \"Text\",\n        \"value\": \"Camera001\"\n    },\n    {\n        \"name\": \"cameraOrientation\",\n        \"type\": \"Text\",\n        \"value\": \"Wall-mounted\"\n    },\n    {\n        \"name\": \"cameraType\",\n        \"type\": \"Text\",\n        \"value\": \"Fixed\"\n    },\n    {\n        \"name\": \"cameraUsage\",\n        \"type\": \"Text\",\n        \"value\": \"Human Traffic Monitoring\"\n    },\n    {\n        \"name\": \"locatedIn\",\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Room:Room001\"\n    }\n    ]\n}\n\nmsg.url = `${msg.gateway}/api/iot/provision/devices/Camera001`\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1421,7 +1445,7 @@
         "type": "function",
         "z": "4b9e2a8b72fd2f13",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n};\n\nmsg.url = `${msg.gateway}/api/iot/provision/`\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n};\n\nmsg.url = `${msg.gateway}/api/iot/provision/devices/`\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1432,8 +1456,8 @@
         "y": 120,
         "wires": [
             [
-                "d52752ab2d26c7c6",
                 "a4c3540df6f6d901",
+                "d52752ab2d26c7c6",
                 "07f13f3e02840c2e"
             ]
         ]
@@ -1901,6 +1925,1105 @@
         "wires": [
             [
                 "9ed13cfaae1dde2f"
+            ]
+        ]
+    },
+    {
+        "id": "b8c3ea01818f0b88",
+        "type": "function",
+        "z": "4b9e2a8b72fd2f13",
+        "name": "DELETE Room001",
+        "func": "msg.url += \"urn:ngsi-ld:Room:Room001\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 640,
+        "wires": [
+            [
+                "1dd80a6b4816b129"
+            ]
+        ]
+    },
+    {
+        "id": "79da76e4b8909172",
+        "type": "debug",
+        "z": "4b9e2a8b72fd2f13",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "1dd80a6b4816b129",
+        "type": "http request",
+        "z": "4b9e2a8b72fd2f13",
+        "name": "DELETE request",
+        "method": "DELETE",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 910,
+        "y": 640,
+        "wires": [
+            [
+                "79da76e4b8909172"
+            ]
+        ]
+    },
+    {
+        "id": "328ed1f3dea5a6c5",
+        "type": "function",
+        "z": "4b9e2a8b72fd2f13",
+        "name": "DELETE Room002",
+        "func": "msg.url += \"urn:ngsi-ld:Room:Room002\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 700,
+        "wires": [
+            [
+                "d9da73f3164e8a99"
+            ]
+        ]
+    },
+    {
+        "id": "d547a36eee8214b0",
+        "type": "debug",
+        "z": "4b9e2a8b72fd2f13",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "d9da73f3164e8a99",
+        "type": "http request",
+        "z": "4b9e2a8b72fd2f13",
+        "name": "DELETE request",
+        "method": "DELETE",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 910,
+        "y": 700,
+        "wires": [
+            [
+                "d547a36eee8214b0"
+            ]
+        ]
+    },
+    {
+        "id": "629dae13e55eee3f",
+        "type": "function",
+        "z": "0b788fd7625d38f2",
+        "name": "set environmental variables",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "ac01d9c295490c62",
+                "96f989bcdace17b6",
+                "40c7ddf2d27a0a24",
+                "83120c2c75c03402"
+            ]
+        ]
+    },
+    {
+        "id": "4065be8455e89f8e",
+        "type": "inject",
+        "z": "0b788fd7625d38f2",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "629dae13e55eee3f"
+            ]
+        ]
+    },
+    {
+        "id": "ac01d9c295490c62",
+        "type": "function",
+        "z": "0b788fd7625d38f2",
+        "name": "Find all entities of type Room",
+        "func": "msg.url += \"?type=Room\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 140,
+        "wires": [
+            [
+                "752efb51325fafcb"
+            ]
+        ]
+    },
+    {
+        "id": "96f989bcdace17b6",
+        "type": "function",
+        "z": "0b788fd7625d38f2",
+        "name": "Find all entities of type Device",
+        "func": "msg.url += \"?type=Device\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 200,
+        "wires": [
+            [
+                "5c316cc1229c91f0"
+            ]
+        ]
+    },
+    {
+        "id": "83120c2c75c03402",
+        "type": "function",
+        "z": "0b788fd7625d38f2",
+        "name": "Find all entities of type Robot",
+        "func": "msg.url += \"?type=Robot\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 320,
+        "wires": [
+            [
+                "34025ea9f9e7ac9d"
+            ]
+        ]
+    },
+    {
+        "id": "40c7ddf2d27a0a24",
+        "type": "function",
+        "z": "0b788fd7625d38f2",
+        "name": "Find all entities of type Camera",
+        "func": "msg.url += \"?type=Camera\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 260,
+        "wires": [
+            [
+                "01c8ed2b9f9bca72"
+            ]
+        ]
+    },
+    {
+        "id": "752efb51325fafcb",
+        "type": "http request",
+        "z": "0b788fd7625d38f2",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 890,
+        "y": 140,
+        "wires": [
+            [
+                "0795c237d35ddd01"
+            ]
+        ]
+    },
+    {
+        "id": "5c316cc1229c91f0",
+        "type": "http request",
+        "z": "0b788fd7625d38f2",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 890,
+        "y": 200,
+        "wires": [
+            [
+                "6eed2ce8c948bdb2"
+            ]
+        ]
+    },
+    {
+        "id": "01c8ed2b9f9bca72",
+        "type": "http request",
+        "z": "0b788fd7625d38f2",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 890,
+        "y": 260,
+        "wires": [
+            [
+                "8b1deee3072ff1d4"
+            ]
+        ]
+    },
+    {
+        "id": "0795c237d35ddd01",
+        "type": "debug",
+        "z": "0b788fd7625d38f2",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6eed2ce8c948bdb2",
+        "type": "debug",
+        "z": "0b788fd7625d38f2",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8b1deee3072ff1d4",
+        "type": "debug",
+        "z": "0b788fd7625d38f2",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "34025ea9f9e7ac9d",
+        "type": "http request",
+        "z": "0b788fd7625d38f2",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 890,
+        "y": 320,
+        "wires": [
+            [
+                "71dce530e854865f"
+            ]
+        ]
+    },
+    {
+        "id": "71dce530e854865f",
+        "type": "debug",
+        "z": "0b788fd7625d38f2",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c29127157fa5b0f4",
+        "type": "function",
+        "z": "0b788fd7625d38f2",
+        "name": "set environmental variables",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 440,
+        "wires": [
+            [
+                "6e912d3bb7845b3e",
+                "95c55b21299b7c43"
+            ]
+        ]
+    },
+    {
+        "id": "7d6eb0e52e5fc135",
+        "type": "inject",
+        "z": "0b788fd7625d38f2",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 440,
+        "wires": [
+            [
+                "c29127157fa5b0f4"
+            ]
+        ]
+    },
+    {
+        "id": "6e912d3bb7845b3e",
+        "type": "function",
+        "z": "0b788fd7625d38f2",
+        "name": "Find all entities in Room001",
+        "func": "msg.url += \"?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 440,
+        "wires": [
+            [
+                "81453e022eaa9a05"
+            ]
+        ]
+    },
+    {
+        "id": "95c55b21299b7c43",
+        "type": "function",
+        "z": "0b788fd7625d38f2",
+        "name": "Find all entities in Room002",
+        "func": "msg.url += \"?q=locatedIn==%22urn:ngsi-ld:Room:Room002%22\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 500,
+        "wires": [
+            [
+                "84d72f0da2ccb5bd"
+            ]
+        ]
+    },
+    {
+        "id": "81453e022eaa9a05",
+        "type": "http request",
+        "z": "0b788fd7625d38f2",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 870,
+        "y": 440,
+        "wires": [
+            [
+                "633cb63ceb61cafa"
+            ]
+        ]
+    },
+    {
+        "id": "84d72f0da2ccb5bd",
+        "type": "http request",
+        "z": "0b788fd7625d38f2",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 870,
+        "y": 500,
+        "wires": [
+            [
+                "532c0214c90929bf"
+            ]
+        ]
+    },
+    {
+        "id": "633cb63ceb61cafa",
+        "type": "debug",
+        "z": "0b788fd7625d38f2",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "532c0214c90929bf",
+        "type": "debug",
+        "z": "0b788fd7625d38f2",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1f044e3a8061e66e",
+        "type": "comment",
+        "z": "0b788fd7625d38f2",
+        "name": "Query based on Entity Type",
+        "info": "",
+        "x": 160,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "4b3d50fee7dbe3ae",
+        "type": "comment",
+        "z": "0b788fd7625d38f2",
+        "name": "Query based on Relationship",
+        "info": "",
+        "x": 160,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "dee2034360da5607",
+        "type": "function",
+        "z": "c302ed04271e935c",
+        "name": "set environmental variables",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 140,
+        "wires": [
+            [
+                "d17f0452aac02eb8"
+            ]
+        ]
+    },
+    {
+        "id": "9407b4cdcbe1b1ff",
+        "type": "inject",
+        "z": "c302ed04271e935c",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "dee2034360da5607"
+            ]
+        ]
+    },
+    {
+        "id": "d17f0452aac02eb8",
+        "type": "http request",
+        "z": "c302ed04271e935c",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 530,
+        "y": 140,
+        "wires": [
+            [
+                "8ddf35972ab5d1f4"
+            ]
+        ]
+    },
+    {
+        "id": "8ddf35972ab5d1f4",
+        "type": "debug",
+        "z": "c302ed04271e935c",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "5aa9a5eb536415fc",
+        "type": "comment",
+        "z": "c302ed04271e935c",
+        "name": "Get all subscriptions",
+        "info": "",
+        "x": 150,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "613e265fced9e759",
+        "type": "comment",
+        "z": "c302ed04271e935c",
+        "name": "Create subscriptions",
+        "info": "",
+        "x": 150,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5f94f789e86a790f",
+        "type": "inject",
+        "z": "c302ed04271e935c",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "471d7a701b8442ad"
+            ]
+        ]
+    },
+    {
+        "id": "471d7a701b8442ad",
+        "type": "function",
+        "z": "c302ed04271e935c",
+        "name": "set environmental variables",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Content-Type\": \"application/ld+json\"\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 280,
+        "wires": [
+            [
+                "e1bb0519a9df3ca4",
+                "0bbc78dfe99ea490"
+            ]
+        ]
+    },
+    {
+        "id": "a5b0a62c2b8dbf27",
+        "type": "function",
+        "z": "c302ed04271e935c",
+        "name": "Subscribe to changes in Temperature from any Device",
+        "func": "msg.payload = {\n  \"description\": \"Subscribe to changes in Temperature\",\n  \"type\": \"Subscription\",\n  \"entities\": [{\"type\": \"Device\"}],\n  \"watchedAttributes\": [\"temperature\"],\n  \"notification\": {\n    \"format\": \"keyValues\",\n    \"endpoint\": {\n      \"uri\": `${msg.endpointURL}`,\n      \"accept\": \"application/json\"\n    }\n  },\n  \"@context\": `${msg.context_ld}`\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 280,
+        "wires": [
+            [
+                "0e8bcd49443bd3c1"
+            ]
+        ]
+    },
+    {
+        "id": "0e8bcd49443bd3c1",
+        "type": "http request",
+        "z": "c302ed04271e935c",
+        "name": "POST request",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1380,
+        "y": 280,
+        "wires": [
+            [
+                "d35ccf2ac637101f"
+            ]
+        ]
+    },
+    {
+        "id": "d35ccf2ac637101f",
+        "type": "debug",
+        "z": "c302ed04271e935c",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e2667dd55b2bb6ec",
+        "type": "function",
+        "z": "c302ed04271e935c",
+        "name": "Subscribe to temperature in Room001 falling below 15, retrieve temperature data",
+        "func": "msg.payload = {\n  \"description\": \"Subscribe to temperature falling below 15\",\n  \"type\": \"Subscription\",\n  \"entities\": [{\"type\": \"Device\"}],\n  \"watchedAttributes\": [\"temperature\"],\n  \"q\": \"temperature<15;locatedIn==%22urn:ngsi-ld:Room:Room001%22\",\n  \"notification\": {\n    \"format\": \"keyValues\",\n    \"attributes\": [\"temperature\"],\n    \"endpoint\": {\n      \"uri\": `${msg.endpointURL}`,\n      \"accept\": \"application/json\"\n    }\n  },\n  \"@context\": `${msg.context_ld}`\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 360,
+        "wires": [
+            [
+                "cc533344ae2ab898"
+            ]
+        ]
+    },
+    {
+        "id": "cc533344ae2ab898",
+        "type": "http request",
+        "z": "c302ed04271e935c",
+        "name": "POST request",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1380,
+        "y": 360,
+        "wires": [
+            [
+                "4208977069630c61"
+            ]
+        ]
+    },
+    {
+        "id": "4208977069630c61",
+        "type": "debug",
+        "z": "c302ed04271e935c",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "5d5f356e98214e6b",
+        "type": "comment",
+        "z": "c302ed04271e935c",
+        "name": "Delete subscription",
+        "info": "",
+        "x": 150,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "530c9ba709099402",
+        "type": "inject",
+        "z": "c302ed04271e935c",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "442558c9b4e0cea5"
+            ]
+        ]
+    },
+    {
+        "id": "442558c9b4e0cea5",
+        "type": "function",
+        "z": "c302ed04271e935c",
+        "name": "set environmental variables",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Content-Type\": \"application/ld+json\"\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 480,
+        "wires": [
+            [
+                "2e28ac799c41db9b"
+            ]
+        ]
+    },
+    {
+        "id": "2e28ac799c41db9b",
+        "type": "function",
+        "z": "c302ed04271e935c",
+        "name": "Enter subscriptionID to delete",
+        "func": "var subscriptionID = \"enter ID here\";\n\nmsg.url += subscriptionID;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 480,
+        "wires": [
+            [
+                "ef8cd13c198296a5"
+            ]
+        ]
+    },
+    {
+        "id": "ef8cd13c198296a5",
+        "type": "http request",
+        "z": "c302ed04271e935c",
+        "name": "DELETE request",
+        "method": "DELETE",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 830,
+        "y": 480,
+        "wires": [
+            [
+                "7318f601e15b79e9"
+            ]
+        ]
+    },
+    {
+        "id": "7318f601e15b79e9",
+        "type": "debug",
+        "z": "c302ed04271e935c",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "e1bb0519a9df3ca4",
+        "type": "function",
+        "z": "c302ed04271e935c",
+        "name": "Set URL endpoint for receiving notifications",
+        "func": "msg.endpointURL = \"enter url\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 280,
+        "wires": [
+            [
+                "a5b0a62c2b8dbf27"
+            ]
+        ]
+    },
+    {
+        "id": "0bbc78dfe99ea490",
+        "type": "function",
+        "z": "c302ed04271e935c",
+        "name": "Set URL endpoint for receiving notifications",
+        "func": "msg.endpointURL = \"https://asia-southeast1-composite-silo-413107.cloudfunctions.net/temperature_update\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 360,
+        "wires": [
+            [
+                "e2667dd55b2bb6ec"
+            ]
+        ]
+    },
+    {
+        "id": "4cc9571df96b554b",
+        "type": "function",
+        "z": "b8655dc5d91acba7",
+        "name": "set environmental variables",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"NGSILD-Tenant\": \"openiot\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3f4b836b0c101c9e",
+        "type": "inject",
+        "z": "b8655dc5d91acba7",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "4cc9571df96b554b"
             ]
         ]
     }
