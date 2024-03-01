@@ -8,6 +8,15 @@ services:
   # Applications #
   ################
 
+  # API Gateway for various services
+  proxy:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile.orion
+    restart: always
+    ports:
+      - "80:80"
+
   # Context Broker
   orion:
     image: fiware/orion-ld:1.4.0

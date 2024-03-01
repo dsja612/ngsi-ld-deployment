@@ -8,6 +8,15 @@ services:
   # Applications #
   ################
 
+  # API Gateway for various services
+  proxy:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile.scorpio
+    restart: always
+    ports:
+      - "80:80"
+
   # Context Broker
   scorpio:
     image: scorpiobroker/all-in-one-runner:java-kafka-latest
