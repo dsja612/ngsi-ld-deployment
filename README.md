@@ -17,6 +17,7 @@ This repository contains docker-compose files for various deployment setups of N
 ## API Gateway
 As different context brokers have different endpoints or ports for services (i.e., temporal API), there will be multiple dockerfiles and `nginx.conf` files for each broker. Edit the `.conf` files in [`/nginx`](/nginx) to modify the URLs.
 - `orion.gateway.yml`: Contain setup for an NGINX reverse proxy serving as an API gateway for the Orion-LD context broker with Mintaka and IOTAgent-JSON support. 
+- `scorpio.gateway.yml`: Contain setup for an NGINX reverse proxy serving as an API gateway for the Scorpio context broker with IOTAgent-JSON support. 
 
 # Requirements
 1. Docker
