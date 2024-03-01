@@ -264,7 +264,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"EnvironmentalSensor001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Device:EnvironmentalSensor001\",\r\n      \"entity_type\": \"Device\",\r\n      \"attributes\": [\r\n        {\r\n          \"object_id\": \"t\",\r\n          \"name\": \"temperature\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"CEL\"\r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"°C\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"object_id\": \"h\",\r\n          \"name\": \"humidity\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P1\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"%RH\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"object_id\": \"b\",\r\n          \"name\": \"bearing\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"D76\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Gs\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"object_id\": \"p\",\r\n          \"name\": \"pressure\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P82\" \r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"object_id\": \"g\",\r\n          \"name\": \"gyroscope\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"a\",\r\n          \"name\": \"accelerometer\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\r\n        },\r\n        {\r\n          \"name\": \"attachedTo\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Camera:Camera001\"\r\n        },\r\n        {\r\n          \"name\": \"deviceType\",\r\n          \"type\": \"Property\",\r\n          \"value\": \"EnvironmentalSensor\"\r\n        }\r\n      ],\r\n      \"protocol\": \"JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
+							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"EnvironmentalSensor001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Device:EnvironmentalSensor001\",\r\n      \"entity_type\": \"Device\",\r\n      \"attributes\": [\r\n        {\r\n          \"name\": \"temperature\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"CEL\"\r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"°C\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"humidity\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P1\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"%RH\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"bearing\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"D76\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Gs\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"pressure\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P82\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"hPA\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"gyroscope\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"accelerometer\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\r\n        },\r\n        {\r\n          \"name\": \"attachedTo\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Camera:Camera001\"\r\n        },\r\n        {\r\n          \"name\": \"deviceType\",\r\n          \"type\": \"Property\",\r\n          \"value\": \"EnvironmentalSensor\"\r\n        }\r\n      ],\r\n      \"protocol\": \"JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -293,7 +293,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"Camera001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Camera:Camera001\",\r\n      \"entity_type\": \"Camera\",\r\n      \"attributes\": [\r\n        {\r\n          \"object_id\": \"on\",\r\n          \"name\": \"on\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"mediaURL\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"startDateTime\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"confidence\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P1\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"%\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"names\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"cameraName\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Camera001\"\r\n        },\r\n        {\r\n          \"name\": \"cameraOrientation\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"top-down\"\r\n        },\r\n        {\r\n          \"name\": \"cameraType\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Fixed\"\r\n        },\r\n        {\r\n          \"name\": \"cameraUsage\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Surveillance\"\r\n        },\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\r\n        }\r\n      ],\r\n      \"protocol\": \"JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
+							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"Camera001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Camera:Camera001\",\r\n      \"entity_type\": \"Camera\",\r\n      \"attributes\": [\r\n        {\r\n          \"name\": \"on\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"mediaURL\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"startDateTime\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"confidence\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P1\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"%\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"names\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"cameraName\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Camera001\"\r\n        },\r\n        {\r\n          \"name\": \"cameraOrientation\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"top-down\"\r\n        },\r\n        {\r\n          \"name\": \"cameraType\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Fixed\"\r\n        },\r\n        {\r\n          \"name\": \"cameraUsage\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Surveillance\"\r\n        },\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\r\n        }\r\n      ],\r\n      \"protocol\": \"JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -322,7 +322,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"Robot001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\r\n      \"entity_type\": \"Robot\",\r\n      \"attributes\": [\r\n        {\r\n          \"name\": \"x\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"y\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"h\",\r\n          \"name\": \"heading\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"DD\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"°\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"object_id\": \"c\",\r\n          \"name\": \"command\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"s\",\r\n          \"name\": \"status\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"robotName\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Robot001\"\r\n        },\r\n        {\r\n          \"name\": \"robotType\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"PatrolRobot\"\r\n        },\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room002\"\r\n        }\r\n      ],\r\n      \"protocol\": \"JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
+							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"Robot001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\r\n      \"entity_type\": \"Robot\",\r\n      \"attributes\": [\r\n        {\r\n          \"name\": \"x\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"y\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"object_id\": \"h\",\r\n          \"name\": \"heading\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"DD\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"°\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"command\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"status\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"robotName\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Robot001\"\r\n        },\r\n        {\r\n          \"name\": \"robotType\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"PatrolRobot\"\r\n        },\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room002\"\r\n        }\r\n      ],\r\n      \"protocol\": \"JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -838,7 +838,7 @@
 										}
 									}
 								},
-								"url": "{{gateway}}/api/iot/provision/EnvironmentalSensor001"
+								"url": "{{gateway}}/api/iot/provision/devices/EnvironmentalSensor001"
 							},
 							"response": []
 						},
@@ -867,7 +867,7 @@
 										}
 									}
 								},
-								"url": "{{gateway}}/api/iot/provision/Camera001"
+								"url": "{{gateway}}/api/iot/provision/devices/Camera001"
 							},
 							"response": []
 						},
@@ -896,7 +896,7 @@
 										}
 									}
 								},
-								"url": "{{gateway}}/api/iot/provision/Robot001"
+								"url": "{{gateway}}/api/iot/provision/devices/Robot001"
 							},
 							"response": []
 						}
@@ -1472,7 +1472,7 @@
 					"response": []
 				},
 				{
-					"name": "Get last 5 updates to temperature & bearing from EnvironmentalSensor001",
+					"name": "Get last 5 updates to temperature from EnvironmentalSensor001",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1488,7 +1488,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/mintaka/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5&attrs=temperature,bearing",
+							"raw": "{{gateway}}/api/mintaka/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5&attrs=temperature",
 							"host": [
 								"{{gateway}}"
 							],
@@ -1506,7 +1506,7 @@
 								},
 								{
 									"key": "attrs",
-									"value": "temperature,bearing"
+									"value": "temperature"
 								}
 							]
 						},
