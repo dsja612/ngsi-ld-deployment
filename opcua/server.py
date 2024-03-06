@@ -21,8 +21,8 @@ async def main():
     idx = await server.register_namespace(uri)
 
     # populating our address space
+    # create 
     myobj = await server.nodes.objects.add_object(idx, "TemperatureSensor001")
-    # Change variable name here to "temperature"
     myvar = await myobj.add_variable(idx, "temperature", 6.7)
 
     # Set MyVariable (now "temperature") to be writable by clients
