@@ -214,7 +214,7 @@
         "type": "function",
         "z": "f6f2187d.f17ca8",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/jsonldContexts/`\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/jsonldContexts/`\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -369,7 +369,7 @@
         "type": "function",
         "z": "4f080d384710a3a0",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/entities/`\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n};\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/entities/`\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n};\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -651,7 +651,7 @@
         "type": "function",
         "z": "e4d5ea884d513ceb",
         "name": "Provisioning an EnvironmentalSensor of type Device",
-        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"EnvironmentalSensor001\",\n      \"entity_name\": \"urn:ngsi-ld:Device:EnvironmentalSensor001\",\n      \"entity_type\": \"Device\",\n      \"attributes\": [\n        {\n          \"object_id\": \"t\",\n          \"name\": \"temperature\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"CEL\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"°C\"\n            }\n          }\n        },\n        {\n          \"object_id\": \"h\",\n          \"name\": \"humidity\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"P1\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"%RH\"\n            }\n          }\n        },\n        {\n          \"object_id\": \"b\",\n          \"name\": \"bearing\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"D76\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"Gs\"\n            }\n          }\n        },\n        {\n          \"object_id\": \"p\",\n          \"name\": \"pressure\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"P82\"\n            }\n          }\n        },\n        {\n          \"object_id\": \"g\",\n          \"name\": \"gyroscope\",\n          \"type\": \"Property\"\n        },\n        {\n          \"object_id\": \"a\",\n          \"name\": \"accelerometer\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        },\n        {\n          \"name\": \"attachedTo\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Camera:Camera001\"\n        },\n        {\n          \"name\": \"deviceType\",\n          \"type\": \"Property\",\n          \"value\": \"EnvironmentalSensor\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
+        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"EnvironmentalSensor001\",\n      \"entity_name\": \"urn:ngsi-ld:Device:EnvironmentalSensor001\",\n      \"entity_type\": \"Device\",\n      \"attributes\": [\n        {\n          \"name\": \"temperature\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"CEL\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"°C\"\n            }\n          }\n        },\n        {\n          \"name\": \"humidity\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"P1\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"%RH\"\n            }\n          }\n        },\n        {\n          \"name\": \"bearing\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"D76\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"Gs\"\n            }\n          }\n        },\n        {\n          \"name\": \"pressure\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"P82\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"hPA\"\n            }\n          }\n        },\n        {\n          \"name\": \"gyroscope\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"accelerometer\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        },\n        {\n          \"name\": \"attachedTo\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Camera:Camera001\"\n        },\n        {\n          \"name\": \"deviceType\",\n          \"type\": \"Property\",\n          \"value\": \"EnvironmentalSensor\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n\n\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -671,7 +671,7 @@
         "type": "function",
         "z": "e4d5ea884d513ceb",
         "name": "Provisioning a Camera",
-        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"Camera001\",\n      \"entity_name\": \"urn:ngsi-ld:Camera:Camera001\",\n      \"entity_type\": \"Camera\",\n      \"attributes\": [\n        {\n          \"object_id\": \"on\",\n          \"name\": \"on\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"mediaURL\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"startDateTime\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"confidence\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"P1\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"%\"\n            }\n          }\n        },\n        {\n          \"name\": \"names\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"cameraName\",\n          \"type\": \"Text\",\n          \"value\": \"Camera001\"\n        },\n        {\n          \"name\": \"cameraOrientation\",\n          \"type\": \"Text\",\n          \"value\": \"top-down\"\n        },\n        {\n          \"name\": \"cameraType\",\n          \"type\": \"Text\",\n          \"value\": \"Fixed\"\n        },\n        {\n          \"name\": \"cameraUsage\",\n          \"type\": \"Text\",\n          \"value\": \"Surveillance\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
+        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"Camera001\",\n      \"entity_name\": \"urn:ngsi-ld:Camera:Camera001\",\n      \"entity_type\": \"Camera\",\n      \"attributes\": [\n        {\n          \"name\": \"on\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"mediaURL\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"startDateTime\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"confidence\",\n          \"type\": \"Property\",\n          \"metadata\": {\n            \"unitCode\": {\n              \"type\": \"Text\",\n              \"value\": \"P1\"\n            },\n            \"unitSymbol\": {\n              \"type\": \"Text\",\n              \"value\": \"%\"\n            }\n          }\n        },\n        {\n          \"name\": \"names\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"cameraName\",\n          \"type\": \"Text\",\n          \"value\": \"Camera001\"\n        },\n        {\n          \"name\": \"cameraOrientation\",\n          \"type\": \"Text\",\n          \"value\": \"top-down\"\n        },\n        {\n          \"name\": \"cameraType\",\n          \"type\": \"Text\",\n          \"value\": \"Fixed\"\n        },\n        {\n          \"name\": \"cameraUsage\",\n          \"type\": \"Text\",\n          \"value\": \"Surveillance\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -691,7 +691,7 @@
         "type": "function",
         "z": "e4d5ea884d513ceb",
         "name": "Provisioning a Robot",
-        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"Robot001\",\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\n      \"entity_type\": \"Robot\",\n      \"attributes\": [\n        {\n          \"name\": \"x\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"y\",\n          \"type\": \"Property\"\n        },\n        {\n          \"object_id\": \"h\",\n          \"name\": \"heading\",\n          \"type\": \"Property\",\n          \"metadata\": {\n              \"unitCode\": {\n                \"type\": \"Text\",\n                \"value\": \"DD\" \n              },\n              \"unitSymbol\": {\n                \"type\": \"Text\",\n                \"value\": \"°\"\n              }\n          }\n        },\n        {\n          \"object_id\": \"c\",\n          \"name\": \"command\",\n          \"type\": \"Property\"\n        },\n        {\n          \"object_id\": \"s\",\n          \"name\": \"status\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"robotName\",\n          \"type\": \"Text\",\n          \"value\": \"Robot001\"\n        },\n        {\n          \"name\": \"robotType\",\n          \"type\": \"Text\",\n          \"value\": \"PatrolRobot\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room002\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
+        "func": "msg.payload = {\n  \"devices\": [\n    {\n      \"device_id\": \"Robot001\",\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\n      \"entity_type\": \"Robot\",\n      \"attributes\": [\n        {\n          \"name\": \"x\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"y\",\n          \"type\": \"Property\"\n        },\n        {\n          \"object_id\": \"h\",\n          \"name\": \"heading\",\n          \"type\": \"Property\",\n          \"metadata\": {\n              \"unitCode\": {\n                \"type\": \"Text\",\n                \"value\": \"DD\" \n              },\n              \"unitSymbol\": {\n                \"type\": \"Text\",\n                \"value\": \"°\"\n              }\n          }\n        },\n        {\n          \"name\": \"command\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"status\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"robotName\",\n          \"type\": \"Text\",\n          \"value\": \"Robot001\"\n        },\n        {\n          \"name\": \"robotType\",\n          \"type\": \"Text\",\n          \"value\": \"PatrolRobot\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room002\"\n        }\n      ],\n      \"protocol\": \"JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n\n\nmsg.payload = JSON.stringify(msg.payload);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1211,7 +1211,7 @@
         "type": "function",
         "z": "07cf874bd901019c",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1651,7 +1651,7 @@
         "type": "function",
         "z": "4b9e2a8b72fd2f13",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\"\n};\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\"\n};\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2055,7 +2055,7 @@
         "type": "function",
         "z": "0b788fd7625d38f2",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2351,7 +2351,7 @@
         "type": "function",
         "z": "0b788fd7625d38f2",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2543,7 +2543,7 @@
         "type": "function",
         "z": "c302ed04271e935c",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2682,7 +2682,7 @@
         "type": "function",
         "z": "c302ed04271e935c",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Content-Type\": \"application/ld+json\"\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Content-Type\": \"application/ld+json\"\n};\n\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2864,7 +2864,7 @@
         "type": "function",
         "z": "c302ed04271e935c",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Content-Type\": \"application/ld+json\"\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Content-Type\": \"application/ld+json\"\n};\n\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2985,7 +2985,7 @@
         "type": "function",
         "z": "b8655dc5d91acba7",
         "name": "set environmental variables",
-        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"NGSILD-Tenant\": \"openiot\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/orion/ngsi-ld/v1/subscriptions/`\n\nreturn msg;\n",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"NGSILD-Tenant\": \"openiot\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/temporal/entities/`\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2995,7 +2995,11 @@
         "x": 320,
         "y": 200,
         "wires": [
-            []
+            [
+                "07ec49d909f94a1a",
+                "1ef24dcc17a1ebc5",
+                "8332675e5d8ea8c3"
+            ]
         ]
     },
     {
@@ -3026,5 +3030,188 @@
                 "4cc9571df96b554b"
             ]
         ]
+    },
+    {
+        "id": "07ec49d909f94a1a",
+        "type": "function",
+        "z": "b8655dc5d91acba7",
+        "name": "Get last 5 updates to EnvironmentalSensor001",
+        "func": "msg.url += \"urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 200,
+        "wires": [
+            [
+                "40cec420798a8ce2"
+            ]
+        ]
+    },
+    {
+        "id": "40cec420798a8ce2",
+        "type": "http request",
+        "z": "b8655dc5d91acba7",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1110,
+        "y": 200,
+        "wires": [
+            [
+                "0ab33c8e57402247"
+            ]
+        ]
+    },
+    {
+        "id": "0ab33c8e57402247",
+        "type": "debug",
+        "z": "b8655dc5d91acba7",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "1ef24dcc17a1ebc5",
+        "type": "function",
+        "z": "b8655dc5d91acba7",
+        "name": "Get last 5 updates to temperature from EnvironmentalSensor001",
+        "func": "msg.url += \"urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5&attrs=temperature\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 280,
+        "wires": [
+            [
+                "9af6a27e5e5ade79"
+            ]
+        ]
+    },
+    {
+        "id": "9af6a27e5e5ade79",
+        "type": "http request",
+        "z": "b8655dc5d91acba7",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1110,
+        "y": 280,
+        "wires": [
+            [
+                "5b7d0f232d979801"
+            ]
+        ]
+    },
+    {
+        "id": "5b7d0f232d979801",
+        "type": "debug",
+        "z": "b8655dc5d91acba7",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "8332675e5d8ea8c3",
+        "type": "function",
+        "z": "b8655dc5d91acba7",
+        "name": "Get names of persons spotted in Room001",
+        "func": "msg.currentTime = new Date().toISOString();\n\nmsg.url += `?type=Camera&attrs=names&timeproperty=modifiedAt&q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&timerel=before&timeAt=${msg.currentTime}&options=temporalValues`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 360,
+        "wires": [
+            [
+                "1afe891e02c63d64"
+            ]
+        ]
+    },
+    {
+        "id": "1afe891e02c63d64",
+        "type": "http request",
+        "z": "b8655dc5d91acba7",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1110,
+        "y": 360,
+        "wires": [
+            [
+                "a16c30b004569434"
+            ]
+        ]
+    },
+    {
+        "id": "a16c30b004569434",
+        "type": "debug",
+        "z": "b8655dc5d91acba7",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1270,
+        "y": 360,
+        "wires": []
     }
 ]
