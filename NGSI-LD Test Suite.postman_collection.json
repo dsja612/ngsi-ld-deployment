@@ -491,7 +491,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"t\": 30,\r\n    \"b\": 250\r\n}",
+							"raw": "{\r\n    \"temperature\": 30\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -662,13 +662,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities/urn:ngsi-ld:Device:EnvironmentalSensor001",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Device:EnvironmentalSensor001",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"api",
-								"orion",
+								"broker",
 								"ngsi-ld",
 								"v1",
 								"entities",
@@ -718,13 +718,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities/?type=Camera",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities/?type=Camera",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"api",
-								"orion",
+								"broker",
 								"ngsi-ld",
 								"v1",
 								"entities",
@@ -778,13 +778,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities/?type=Camera",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities/?type=Camera",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"api",
-								"orion",
+								"broker",
 								"ngsi-ld",
 								"v1",
 								"entities",
@@ -1050,13 +1050,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?type=Room",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?type=Room",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"api",
-								"orion",
+								"broker",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1093,13 +1093,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?type=Device",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?type=Device",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"api",
-								"orion",
+								"broker",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1136,13 +1136,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?type=Camera",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?type=Camera",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"api",
-								"orion",
+								"broker",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1179,13 +1179,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?type=Robot",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?type=Robot",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"api",
-								"orion",
+								"broker",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1222,13 +1222,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"api",
-								"orion",
+								"broker",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1265,13 +1265,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/orion/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room002%22",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room002%22",
 							"host": [
 								"{{gateway}}"
 							],
 							"path": [
 								"api",
-								"orion",
+								"broker",
 								"ngsi-ld",
 								"v1",
 								"entities"
@@ -1414,16 +1414,6 @@
 		{
 			"name": "Mintaka",
 			"item": [
-				{
-					"name": "Check that Mintaka is running",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{gateway}}/api/temporal/info",
-						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
-					},
-					"response": []
-				},
 				{
 					"name": "Get last 5 updates to EnvironmentalSensor001",
 					"protocolProfileBehavior": {
@@ -1606,13 +1596,13 @@
 		{
 			"key": "gateway",
 			"value": "http://34.87.161.144",
-			"type": "string",
-			"disabled": true
+			"type": "string"
 		},
 		{
 			"key": "gateway",
 			"value": "http://35.240.249.86",
-			"type": "string"
+			"type": "string",
+			"disabled": true
 		}
 	]
 }
