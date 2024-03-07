@@ -22,7 +22,7 @@ async def main():
 
     # populating address space with variables
     sensor = await server.nodes.objects.add_object(idx, "")
-    temperature = await sensor.add_variable(idx, "temperature", 0)
+    temperature = await sensor.add_variable(idx, "temperature", 0.0) # set var type to double
 
     # set variable to be writable by clients
     await temperature.set_writable()
