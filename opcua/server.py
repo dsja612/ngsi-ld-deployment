@@ -20,29 +20,19 @@ async def main():
     uri = "http://examples.freeopcua.github.io"
     idx = await server.register_namespace(uri)
 
-    # populating our address space
-    # create 
-    myobj = await server.nodes.objects.add_object(idx, "TemperatureSensor001")
-    myvar = await myobj.add_variable(idx, "temperature", 6.7)
+    # populating address space with variables
+    sensor = await server.nodes.objects.add_object(idx, "")
+    temperature = await sensor.add_variable(idx, "temperature", 0)
 
-    # Set MyVariable (now "temperature") to be writable by clients
-    await myvar.set_writable()
-
-    # await server.nodes.objects.add_method(
-    #     ua.NodeId("ServerMethod", idx),
-    #     ua.QualifiedName("ServerMethod", idx),
-    #     func,
-    #     [ua.VariantType.Int64],
-    #     [ua.VariantType.Int64],
-    # )
+    # set variable to be writable by clients
+    await temperature.set_writable()
     _logger.info("Starting server!")
 
     async with server:
         while True:
-            await asyncio.sleep(1)
-            new_val = await myvar.get_value() + 0.1
-            _logger.info("Set value of %s to %.1f", myvar, new_val)
-            await myvar.write_value(new_val)
+            await asyncio.sleep(2)
+            temp_val = await temperature.get_value()
+            _logger.info("Temperature is now %s", temp_val)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
