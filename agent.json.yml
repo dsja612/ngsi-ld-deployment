@@ -41,7 +41,7 @@ services:
           - "IOTA_MONGO_PORT=27017"
           - "IOTA_MONGO_DB=iotagent-json"
           - "IOTA_HTTP_PORT=7896"
-          - "IOTA_PROVIDER_URL=http://iot-agent:4041"
+          - "IOTA_PROVIDER_URL=${IOT_AGENT_URL}"
           - "IOTA_CB_NGSI_VERSION=LD"         # To work with NGSI-LD brokers
           - "IOTA_TIMESTAMP=true"
           - "IOTA_FALLBACK_TENANT=openiot"
