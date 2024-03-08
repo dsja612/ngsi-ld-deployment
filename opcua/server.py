@@ -1,39 +1,59 @@
 import asyncio
 import logging
-
 from asyncua import Server, ua
-# from asyncua.common.methods import uamethod
 
-# @uamethod
-# def func(parent, value):
-#     return value * 2
+# init_variables = [{
+#     # "temperature": {
+#     #     "value": 0,
+#     #     "unitSymbol": "°C",
+#     #     "unitCode": "CEL"
+#     # },
+#     "temperature": 15.0,
+#     "locatedIn": "urn:ngsi-ld:Room:Room001",
+#     "deviceType": "TemperatureSensor",
+#     },
+#     {
+#     "locatedIn": "urn:ngsi-ld:Room:Room001",
+#     "deviceType": "Buzzer",
+#     "command": "Off",
+#     "status": "Off"
+#     }
+# ]
+
+init_variables = {
+    # "temperature": {
+    #     "value": 0,
+    #     "unitSymbol": "°C",
+    #     "unitCode": "CEL"
+    # },
+    "temperature": 15.0,
+    "locatedIn": "urn:ngsi-ld:Room:Room001",
+    "deviceType": "TemperatureSensor",
+}
 
 async def main():
-    _logger = logging.getLogger(__name__)
+    logging.basicConfig(level=logging.INFO)
+    _logger = logging.getLogger('asyncua')
 
-    # setup our server
+    # Setup our server
     server = Server()
     await server.init()
     server.set_endpoint("opc.tcp://0.0.0.0:4840/freeopcua/server/")
-
-    # set up our own namespace, not really necessary but should as spec
     uri = "http://examples.freeopcua.github.io"
     idx = await server.register_namespace(uri)
 
-    # populating address space with variables
+    # Populating address space with variables
     sensor = await server.nodes.objects.add_object(idx, "")
-    temperature = await sensor.add_variable(idx, "temperature", 0.0) # set var type to double
+    for key, value in init_variables.items():
+        variable = await sensor.add_variable(idx, key, value)
+        await variable.set_writable()
 
-    # set variable to be writable by clients
-    await temperature.set_writable()
     _logger.info("Starting server!")
 
     async with server:
         while True:
             await asyncio.sleep(2)
-            temp_val = await temperature.get_value()
-            _logger.info("Temperature is now %s", temp_val)
+            # Future logic for updating and logging variable values
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.DEBUG)
-    asyncio.run(main(), debug=True)
+    asyncio.run(main())
