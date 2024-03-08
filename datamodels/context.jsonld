@@ -182,6 +182,10 @@
         "locatedIn": "Terms:locatedIn",
         "attachedTo": "Terms:attachedTo",
         "providedBy": "Terms:providedBy",
-        "unitSymbol": "https://smartdatamodels.org/unitSymbol"
+        "unitSymbol": "https://smartdatamodels.org/unitSymbol",
+        "x1": "Terms:x1",
+        "x2": "Terms:x2",
+        "y1": "Terms:y1",
+        "y2": "Terms:y2"
     }
 }
