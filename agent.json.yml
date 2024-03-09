@@ -21,7 +21,7 @@ services:
 
   #JSON IOT Agent that supports HTTP, MQTT and AMQP
   iot-agent:
-      image: quay.io/fiware/iotagent-json:latest
+      image: quay.io/fiware/iotagent-json:3.1.0-distroless
       hostname: iot-agent
       container_name: fiware-iot-agent
       depends_on:

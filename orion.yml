@@ -10,7 +10,7 @@ services:
 
   # Context Broker
   orion:
-    image: fiware/orion-ld:1.4.0
+    image: quay.io/fiware/orion-ld:1.5.1
     hostname: orion
     container_name: fiware-orion
     # sometimes the initial startup fails due to a weird timescale behaviour
