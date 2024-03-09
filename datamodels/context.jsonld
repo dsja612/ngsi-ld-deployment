@@ -1,6 +1,6 @@
 {
     "@context": {
-        "Terms": "https://raw.githubusercontent.com/dsja612/ngsi-ld-deployment/master/datamodels/terms.json",
+        "Terms": "https://raw.githubusercontent.com/dsja612/ngsi-ld-deployment/master/datamodels/terms.json#",
         "CommandMessage": "https://smartdatamodels.org/dataModel.AutonomousMobileRobot/CommandMessage",
         "CommandReturnMessage": "https://smartdatamodels.org/dataModel.AutonomousMobileRobot/CommandReturnMessage",
         "StateMessage": "https://smartdatamodels.org/dataModel.AutonomousMobileRobot/StateMessage",
