@@ -46,9 +46,12 @@ services:
           - "IOTA_TIMESTAMP=true"
           - "IOTA_FALLBACK_TENANT=openiot"
           - "IOTA_FALLBACK_PATH=/"
-          - "IOTA_MQTT_HOST=mosquitto"        # MQTT broker service
-          - "IOTA_MQTT_PORT=1883"             # MQTT service port
+          - "IOTA_MQTT_HOST=mosquitto"      # MQTT broker service
+          - "IOTA_MQTT_PORT=1883"           # MQTT service port
           - "IOTA_JSON_LD_CONTEXT=${CONTEXT_FILE}"
+          - "IOTA_TIMESTAMP=true"             # Supply timestamp information with each measurement
+          - "IOTA_AUTOCAST=true"              # Ensure number values are read as numbers not strings
+          - "IOTA_LOG_LEVEL=DEBUG"
 
   #############
   # Databases #
