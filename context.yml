@@ -8,7 +8,7 @@ services:
     hostname: context
     container_name: fiware-ld-context
     ports:
-        - "3004:80"
+        - "80:80"
     volumes:
         - data-models:/usr/local/apache2/htdocs/
         - type: bind
@@ -24,4 +24,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/data-models
+      device: ${PWD}/datamodels
