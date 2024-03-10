@@ -100,7 +100,6 @@ services:
           - "IOTA_MQTT_PORT=1883"             # MQTT service port
           - "IOTA_JSON_LD_CONTEXT=${CONTEXT_FILE}"
           - "IOTA_LOG_LEVEL=DEBUG" # The log level of the IoT Agent
-          - "IOTA_TIMESTAMP=true" # Supply timestamp information with each measurement
           - "IOTA_AUTOCAST=true" # Ensure Ultralight number values are read as numbers not strings
 
   #############
