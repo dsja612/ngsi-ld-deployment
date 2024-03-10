@@ -92,13 +92,16 @@ services:
           - "IOTA_MONGO_DB=iotagent-json"
           - "IOTA_HTTP_PORT=7896"
           - "IOTA_PROVIDER_URL=http://iot-agent:4041"
-          - "IOTA_CB_NGSI_VERSION=LD"         # To work with NGSI-LD brokers
+          - "IOTA_CB_NGSI_VERSION=ld"         # To work with NGSI-LD brokers
           - "IOTA_TIMESTAMP=true"
           - "IOTA_FALLBACK_TENANT=openiot"
           - "IOTA_FALLBACK_PATH=/"
           - "IOTA_MQTT_HOST=mosquitto"        # MQTT broker service
           - "IOTA_MQTT_PORT=1883"             # MQTT service port
           - "IOTA_JSON_LD_CONTEXT=${CONTEXT_FILE}"
+          - "IOTA_LOG_LEVEL=DEBUG" # The log level of the IoT Agent
+          - "IOTA_TIMESTAMP=true" # Supply timestamp information with each measurement
+          - "IOTA_AUTOCAST=true" # Ensure Ultralight number values are read as numbers not strings
 
   #############
   # Databases #
