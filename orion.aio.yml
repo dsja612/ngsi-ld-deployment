@@ -37,7 +37,7 @@ services:
       - timescale
     ports:
       - "1026:1026"
-    command: -logLevel DEBUG -forwarding  -experimental
+    command: -logLevel DEBUG -forwarding -experimental
     healthcheck:
       test: curl --fail -s http://orion:1026/version || exit 1
       interval: 10s
