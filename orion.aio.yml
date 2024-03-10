@@ -19,6 +19,7 @@ services:
 
   # Context Broker
   orion:
+    platform: linux/amd64
     image: quay.io/fiware/orion-ld:1.5.1
     hostname: orion
     container_name: fiware-orion
@@ -36,10 +37,10 @@ services:
       - timescale
     ports:
       - "1026:1026"
-    command: -logLevel DEBUG
+    command: -logLevel DEBUG -forwarding  -experimental
     healthcheck:
       test: curl --fail -s http://orion:1026/version || exit 1
-      interval: 5s
+      interval: 10s
 
   # Open-Source component for Temporal Representation of Entities (TROE)
   mintaka:
