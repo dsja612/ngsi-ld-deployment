@@ -55,6 +55,14 @@
         "env": []
     },
     {
+        "id": "fd8f66e409bb82a8",
+        "type": "tab",
+        "label": "Sending commands",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "c302ed04271e935c",
         "type": "tab",
         "label": "Subscriptions",
@@ -81,6 +89,37 @@
                 "type": "str"
             }
         ]
+    },
+    {
+        "id": "6aa2e30249f0aaed",
+        "type": "mqtt-broker",
+        "name": "GCP IOT Agent",
+        "broker": "35.198.213.246",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     },
     {
         "id": "f420f52b3e173249",
@@ -2537,6 +2576,419 @@
         "x": 160,
         "y": 400,
         "wires": []
+    },
+    {
+        "id": "dbc32f87dd1921a5",
+        "type": "function",
+        "z": "fd8f66e409bb82a8",
+        "name": "set environmental variables",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/iot/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "0bbcd2773d9c4acc"
+            ]
+        ]
+    },
+    {
+        "id": "9cd4bae658fe751f",
+        "type": "inject",
+        "z": "fd8f66e409bb82a8",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "dbc32f87dd1921a5"
+            ]
+        ]
+    },
+    {
+        "id": "db1632068f389d22",
+        "type": "comment",
+        "z": "fd8f66e409bb82a8",
+        "name": "Initialization of commands through IOT agent",
+        "info": "",
+        "x": 210,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "0bbcd2773d9c4acc",
+        "type": "function",
+        "z": "fd8f66e409bb82a8",
+        "name": "Execute command \"x1\"",
+        "func": "msg.method = \"PATCH\"\nmsg.entity = \"urn:ngsi-ld:Robot:Robot001\";\nmsg.attrs = \"x1\";\nmsg.payload = {\n\n        \"type\": \"Property\",\n        \"value\": 10\n\n}\n\nmsg.url += msg.entity + \"/attrs/\" + msg.attrs\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 100,
+        "wires": [
+            [
+                "4c82103ccbc2bd78"
+            ]
+        ]
+    },
+    {
+        "id": "2f78541b68a0cec8",
+        "type": "debug",
+        "z": "fd8f66e409bb82a8",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "4c82103ccbc2bd78",
+        "type": "http request",
+        "z": "fd8f66e409bb82a8",
+        "name": "POST request",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 840,
+        "y": 100,
+        "wires": [
+            [
+                "2f78541b68a0cec8"
+            ]
+        ]
+    },
+    {
+        "id": "8ed013e83fdb1742",
+        "type": "comment",
+        "z": "fd8f66e409bb82a8",
+        "name": "Listening to command sent",
+        "info": "",
+        "x": 150,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "75cb7c10efee1f70",
+        "type": "mqtt in",
+        "z": "fd8f66e409bb82a8",
+        "name": "",
+        "topic": "/1234/Robot001/cmd",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6aa2e30249f0aaed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "e8ee5190eb4199d9"
+            ]
+        ]
+    },
+    {
+        "id": "e8ee5190eb4199d9",
+        "type": "debug",
+        "z": "fd8f66e409bb82a8",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "aef20d160c7db4c3",
+        "type": "comment",
+        "z": "fd8f66e409bb82a8",
+        "name": "Sending confirmation of command",
+        "info": "",
+        "x": 180,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "553cb3d23575ad41",
+        "type": "mqtt out",
+        "z": "fd8f66e409bb82a8",
+        "name": "",
+        "topic": "/1234/Robot001/cmdexe",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "6aa2e30249f0aaed",
+        "x": 590,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "e8e64b5d191603da",
+        "type": "inject",
+        "z": "fd8f66e409bb82a8",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 320,
+        "wires": [
+            [
+                "ae244983ef37cca5"
+            ]
+        ]
+    },
+    {
+        "id": "ae244983ef37cca5",
+        "type": "function",
+        "z": "fd8f66e409bb82a8",
+        "name": "Execute command \"x1\"",
+        "func": "\nmsg.payload = {\n\n        \"x1\": \"OK\"\n\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 320,
+        "wires": [
+            [
+                "553cb3d23575ad41"
+            ]
+        ]
+    },
+    {
+        "id": "3c41a340be53fc8f",
+        "type": "comment",
+        "z": "fd8f66e409bb82a8",
+        "name": "Listen to confirmation of command",
+        "info": "",
+        "x": 180,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "798eaf5e5372dc04",
+        "type": "mqtt in",
+        "z": "fd8f66e409bb82a8",
+        "name": "",
+        "topic": "/1234/Robot001/cmdexe",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "6aa2e30249f0aaed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 420,
+        "wires": [
+            [
+                "9f63f875b73235a8"
+            ]
+        ]
+    },
+    {
+        "id": "9f63f875b73235a8",
+        "type": "debug",
+        "z": "fd8f66e409bb82a8",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "be8202cbb02eeb90",
+        "type": "function",
+        "z": "fd8f66e409bb82a8",
+        "name": "set environmental variables",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 600,
+        "wires": [
+            [
+                "72ba42ecd93af6a2"
+            ]
+        ]
+    },
+    {
+        "id": "5d251edada30ec20",
+        "type": "inject",
+        "z": "fd8f66e409bb82a8",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 600,
+        "wires": [
+            [
+                "be8202cbb02eeb90"
+            ]
+        ]
+    },
+    {
+        "id": "f3d5c073a2c51c68",
+        "type": "comment",
+        "z": "fd8f66e409bb82a8",
+        "name": "Send commands through context broker",
+        "info": "",
+        "x": 200,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "72ba42ecd93af6a2",
+        "type": "function",
+        "z": "fd8f66e409bb82a8",
+        "name": "Execute command \"x1\"",
+        "func": "msg.method = \"PATCH\"\nmsg.entity = \"urn:ngsi-ld:Robot:Robot001\";\nmsg.attrs = \"x1\";\nmsg.payload = {\n\n        \"type\": \"Property\",\n        \"value\": 10\n\n}\n\nmsg.url += msg.entity + \"/attrs/\" + msg.attrs\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 600,
+        "wires": [
+            [
+                "ec08e56ac3c37e24"
+            ]
+        ]
+    },
+    {
+        "id": "b92843a27c56b1e9",
+        "type": "debug",
+        "z": "fd8f66e409bb82a8",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "ec08e56ac3c37e24",
+        "type": "http request",
+        "z": "fd8f66e409bb82a8",
+        "name": "POST request",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 840,
+        "y": 600,
+        "wires": [
+            [
+                "b92843a27c56b1e9"
+            ]
+        ]
     },
     {
         "id": "dee2034360da5607",
