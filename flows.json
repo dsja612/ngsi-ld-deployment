@@ -2991,6 +2991,126 @@
         ]
     },
     {
+        "id": "c55049343bf55d54",
+        "type": "function",
+        "z": "fd8f66e409bb82a8",
+        "name": "set environmental variables",
+        "func": "var env_variables = global.get(\"envVariables\");\nmsg.gateway = env_variables.get(\"gateway\");\nmsg.context_ld = env_variables.get(\"context-ld\");\n\nmsg.headers = {\n    \"fiware-service\": \"openiot\",\n    \"fiware-servicepath\": \"/\",\n    \"Link\": `<${msg.context_ld}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"`\n};\n\nmsg.url = `${msg.gateway}/api/broker/ngsi-ld/v1/entities/`\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 780,
+        "wires": [
+            [
+                "417a9646f3a463e8"
+            ]
+        ]
+    },
+    {
+        "id": "bc85cd8f153199d7",
+        "type": "inject",
+        "z": "fd8f66e409bb82a8",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 780,
+        "wires": [
+            [
+                "c55049343bf55d54"
+            ]
+        ]
+    },
+    {
+        "id": "417a9646f3a463e8",
+        "type": "function",
+        "z": "fd8f66e409bb82a8",
+        "name": "Find all entities of type Robot",
+        "func": "msg.url += \"?type=Robot\";\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 780,
+        "wires": [
+            [
+                "0fac6864b66968bb"
+            ]
+        ]
+    },
+    {
+        "id": "0fac6864b66968bb",
+        "type": "http request",
+        "z": "fd8f66e409bb82a8",
+        "name": "GET request",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 830,
+        "y": 780,
+        "wires": [
+            [
+                "406201eec9189dbd"
+            ]
+        ]
+    },
+    {
+        "id": "406201eec9189dbd",
+        "type": "debug",
+        "z": "fd8f66e409bb82a8",
+        "name": "Print output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 990,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "433f730deafacfbb",
+        "type": "comment",
+        "z": "fd8f66e409bb82a8",
+        "name": "View updates",
+        "info": "",
+        "x": 110,
+        "y": 740,
+        "wires": []
+    },
+    {
         "id": "dee2034360da5607",
         "type": "function",
         "z": "c302ed04271e935c",

@@ -1423,7 +1423,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n        \"type\": \"Property\",\r\n        \"value\": \" \"\r\n\r\n}",
+							"raw": "{\r\n\r\n        \"type\": \"Property\",\r\n        \"value\": 10\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1570,7 +1570,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Do check out the nodered flow equivalent of this section if possible, as this section would require you to send MQTT messages which isn't doable in POSTman. If not:\n\n1. Install mosquitto_pub on your PC\n    \n2. After sending a command, execute this line:\n    \n\nmosquitto_pub -t /1234/Robot001/cmdexe -h 35.198.213.246 -p 1883 -m '{\"x1\": \"OK\"}'\n\nwhere x1 is the command you executed, and \"OK\" is the command execution status to pass to the broker."
 		},
 		{
 			"name": "Subscriptions",
@@ -1849,72 +1850,6 @@
 								{
 									"key": "attrs",
 									"value": "temperature"
-								}
-							]
-						},
-						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
-					},
-					"response": []
-				},
-				{
-					"name": "Get paginated temperature updates",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Link",
-								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
-								"type": "text"
-							},
-							{
-								"key": "NGSILD-Tenant",
-								"value": "openiot",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{gateway}}/api/temporal/entities/?type=Device&attrs=temperature&timeproperty=modifiedAt&q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&timerel=before&timeAt=2024-03-10T09:36:30.184Z&options=temporalValues&pageSize=3",
-							"host": [
-								"{{gateway}}"
-							],
-							"path": [
-								"api",
-								"temporal",
-								"entities",
-								""
-							],
-							"query": [
-								{
-									"key": "type",
-									"value": "Device"
-								},
-								{
-									"key": "attrs",
-									"value": "temperature"
-								},
-								{
-									"key": "timeproperty",
-									"value": "modifiedAt"
-								},
-								{
-									"key": "q",
-									"value": "locatedIn==%22urn:ngsi-ld:Room:Room001%22"
-								},
-								{
-									"key": "timerel",
-									"value": "before"
-								},
-								{
-									"key": "timeAt",
-									"value": "2024-03-10T09:36:30.184Z"
-								},
-								{
-									"key": "options",
-									"value": "temporalValues"
-								},
-								{
-									"key": "pageSize",
-									"value": "3"
 								}
 							]
 						},
