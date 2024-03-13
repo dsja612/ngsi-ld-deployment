@@ -235,7 +235,7 @@
 			"description": "To start off, we first create a Room entity. In this example, a Room entity is an enclosed space that sensors, robots or cameras can be located in."
 		},
 		{
-			"name": "Provisioning devices to IOT Agent",
+			"name": "Provisioning devices to JSON IOT Agent",
 			"item": [
 				{
 					"name": "(1) Check if the IOT Agent is running",
@@ -264,7 +264,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"EnvironmentalSensor001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Device:EnvironmentalSensor001\",\r\n      \"entity_type\": \"Device\",\r\n      \"attributes\": [\r\n        {\r\n          \"name\": \"temperature\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"CEL\"\r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"°C\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"humidity\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P1\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"%RH\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"bearing\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"D76\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Gs\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"pressure\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P82\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"hPA\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"gyroscope\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"accelerometer\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\r\n        },\r\n        {\r\n          \"name\": \"attachedTo\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Camera:Camera001\"\r\n        },\r\n        {\r\n          \"name\": \"deviceType\",\r\n          \"type\": \"Property\",\r\n          \"value\": \"EnvironmentalSensor\"\r\n        }\r\n      ],\r\n      \"protocol\": \"JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
+							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"EnvironmentalSensor001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Device:EnvironmentalSensor001\",\r\n      \"entity_type\": \"Device\",\r\n      \"attributes\": [\r\n        {\r\n          \"name\": \"temperature\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"CEL\"\r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"°C\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"humidity\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P1\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"%RH\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"bearing\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"D76\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"Gs\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"pressure\",\r\n          \"type\": \"Property\",\r\n          \"metadata\": {\r\n              \"unitCode\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"P82\" \r\n              },\r\n              \"unitSymbol\": {\r\n                \"type\": \"Text\",\r\n                \"value\": \"hPA\"\r\n              }\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"gyroscope\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"accelerometer\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room001\",\r\n          \"link\": {\r\n            \"attributes\": [\"temperature\"],\r\n            \"name\": \"providedBy\",\r\n            \"type\": \"Room\"\r\n          }\r\n        },\r\n        {\r\n          \"name\": \"attachedTo\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Camera:Camera001\"\r\n        },\r\n        {\r\n          \"name\": \"deviceType\",\r\n          \"type\": \"Property\",\r\n          \"value\": \"EnvironmentalSensor\"\r\n        }\r\n      ],\r\n      \"protocol\": \"JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -322,7 +322,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"Robot001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\r\n      \"entity_type\": \"Robot\",\r\n      \"attributes\": [\r\n        {\r\n          \"name\": \"x\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"y\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"command\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"status\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"robotName\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Robot001\"\r\n        },\r\n        {\r\n          \"name\": \"robotType\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"PatrolRobot\"\r\n        },\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room002\"\r\n        }\r\n      ],\r\n      \"commands\": [ \r\n        {\r\n          \"name\": \"x1\",\r\n          \"type\": \"command\"\r\n        },\r\n        {\r\n          \"name\": \"x2\",\r\n          \"type\": \"command\"\r\n        },\r\n        {\r\n          \"name\": \"y1\",\r\n          \"type\": \"command\"\r\n        },\r\n        {\r\n          \"name\": \"y2\",\r\n          \"type\": \"command\"\r\n        }\r\n       ],\r\n      \"protocol\": \"PDI-IoTA-JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
+							"raw": "{\r\n  \"devices\": [\r\n    {\r\n      \"device_id\": \"Robot001\",\r\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\r\n      \"entity_type\": \"Robot\",\r\n      \"attributes\": [\r\n        {\r\n          \"name\": \"x\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"y\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"command\",\r\n          \"type\": \"Property\"\r\n        },\r\n        {\r\n          \"name\": \"status\",\r\n          \"type\": \"Property\"\r\n        }\r\n      ],\r\n      \"static_attributes\": [\r\n        {\r\n          \"name\": \"robotName\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"Robot001\"\r\n        },\r\n        {\r\n          \"name\": \"robotType\",\r\n          \"type\": \"Text\",\r\n          \"value\": \"PatrolRobot\"\r\n        },\r\n        {\r\n          \"name\": \"locatedIn\",\r\n          \"type\": \"Relationship\",\r\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\r\n        }\r\n      ],\r\n      \"commands\": [ \r\n        {\r\n          \"name\": \"x1\",\r\n          \"type\": \"command\"\r\n        },\r\n        {\r\n          \"name\": \"x2\",\r\n          \"type\": \"command\"\r\n        },\r\n        {\r\n          \"name\": \"y1\",\r\n          \"type\": \"command\"\r\n        },\r\n        {\r\n          \"name\": \"y2\",\r\n          \"type\": \"command\"\r\n        },\r\n        {\r\n          \"name\": \"names\",\r\n          \"type\": \"command\"\r\n        }\r\n       ],\r\n      \"protocol\": \"PDI-IoTA-JSON\",\r\n      \"transport\": \"MQTT\",\r\n      \"timezone\": \"Asia/Kuala_Lumpur\"\r\n    }\r\n  ]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -547,7 +547,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"names\": [\r\n        \"Dylan\",\r\n        \"Youwei\",\r\n        \"Xinwei\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"names\": [\r\n        \"Dylan\",\r\n        \"Xinwei\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -581,62 +581,6 @@
 				},
 				{
 					"name": "(4) Updating Robot through HTTP",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "fiware-service",
-								"value": "openiot",
-								"type": "text"
-							},
-							{
-								"key": "fiware-servicepath",
-								"value": "/",
-								"type": "text"
-							},
-							{
-								"key": "link",
-								"value": "<http://localhost:1026/ngsi-ld/v1/jsonldContexts/b813cc1a-ac92-11ee-8358-0242ac120004>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"x\": 10,\r\n    \"y\": 15\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{gateway}}/api/iot/update/?i=Robot001&k=1234",
-							"host": [
-								"{{gateway}}"
-							],
-							"path": [
-								"api",
-								"iot",
-								"update",
-								""
-							],
-							"query": [
-								{
-									"key": "i",
-									"value": "Robot001"
-								},
-								{
-									"key": "k",
-									"value": "1234"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "(4) Updating Robot through HTTP Copy",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1369,7 +1313,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&attrs=temperature",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&attrs=temperature&type=Device",
 							"host": [
 								"{{gateway}}"
 							],
@@ -1388,6 +1332,10 @@
 								{
 									"key": "attrs",
 									"value": "temperature"
+								},
+								{
+									"key": "type",
+									"value": "Device"
 								}
 							]
 						}
@@ -1645,6 +1593,45 @@
 					"response": []
 				},
 				{
+					"name": "Subscribe to names being spotted by camera",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/ld+json",
+								"type": "text"
+							},
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"description\": \"Subscribe to names being spotted by camera\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Camera\"}],\r\n  \"watchedAttributes\": [\"names\"],\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"attributes\": [\"names\", \"locatedIn\"],\r\n    \"endpoint\": {\r\n      \"uri\": \"https://asia-southeast1-composite-silo-413107.cloudfunctions.net/forward_names\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": \"{{context-ld}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions"
+					},
+					"response": []
+				},
+				{
 					"name": "Get all subscriptions",
 					"request": {
 						"method": "GET",
@@ -1690,7 +1677,7 @@
 								"type": "text"
 							}
 						],
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions/urn:ngsi-ld:Subscription:c26c5af0-d15f-11ee-99f5-0242ac160005"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions/urn:ngsi-ld:subscription:33fdec7a-e04b-11ee-b052-0242ac140007"
 					},
 					"response": []
 				}
@@ -1874,7 +1861,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/temporal/entities/?type=Camera&attrs=names&timeproperty=modifiedAt&q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&timerel=before&timeAt=2024-03-10T09:36:30.184Z&options=temporalValues",
+							"raw": "{{gateway}}/api/temporal/entities/?type=Camera&attrs=names&timeproperty=modifiedAt&q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&timerel=before&timeAt=2024-03-13T09:36:30.184Z&options=temporalValues",
 							"host": [
 								"{{gateway}}"
 							],
@@ -1907,7 +1894,7 @@
 								},
 								{
 									"key": "timeAt",
-									"value": "2024-03-10T09:36:30.184Z"
+									"value": "2024-03-13T09:36:30.184Z"
 								},
 								{
 									"key": "options",
@@ -1955,7 +1942,7 @@
 		},
 		{
 			"key": "gateway",
-			"value": "http://35.240.249.86",
+			"value": "http://localhost:80",
 			"type": "string",
 			"disabled": true
 		}
