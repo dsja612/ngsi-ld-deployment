@@ -240,7 +240,7 @@
 					"response": []
 				}
 			],
-			"description": "To start off, we first create a Room entity. In this example, a Room entity is an enclosed space that sensors, robots or cameras can be located in."
+			"description": "To start off, we first create a Room entity. In this example, a Room entity is an enclosed space that sensors, robots or cameras can be located in.\n\nEach entity has a unique ID. Hence, its not possible to create two entities with the same ID, even with different properties and etc."
 		},
 		{
 			"name": "Provisioning devices to JSON IOT Agent",
@@ -1019,9 +1019,15 @@
 								{
 									"key": "type",
 									"value": "Room"
+								},
+								{
+									"key": "options",
+									"value": "keyValues",
+									"disabled": true
 								}
 							]
-						}
+						},
+						"description": "Gets all entities of type Room from the context broker. Try executing the query with options enabled to see how the response is compressed."
 					},
 					"response": []
 				},
@@ -1064,7 +1070,8 @@
 									"value": "Device"
 								}
 							]
-						}
+						},
+						"description": "Gets all entities of type Device from the context broker."
 					},
 					"response": []
 				},
@@ -1107,7 +1114,8 @@
 									"value": "Camera"
 								}
 							]
-						}
+						},
+						"description": "Gets all entities of type Camera from the context broker."
 					},
 					"response": []
 				},
@@ -1150,7 +1158,8 @@
 									"value": "Robot"
 								}
 							]
-						}
+						},
+						"description": "Gets all entities of type Robot from the context broker."
 					},
 					"response": []
 				},
@@ -1193,7 +1202,8 @@
 									"value": "locatedIn==%22urn:ngsi-ld:Room:Room001%22"
 								}
 							]
-						}
+						},
+						"description": "Here, the q parameter is used to find all entities that are located in room 1."
 					},
 					"response": []
 				},
@@ -1236,7 +1246,8 @@
 									"value": "locatedIn==%22urn:ngsi-ld:Room:Room002%22"
 								}
 							]
-						}
+						},
+						"description": "Here, the q parameter is used to find all entities that are located in room 2."
 					},
 					"response": []
 				},
@@ -1334,12 +1345,12 @@
 								}
 							]
 						},
-						"description": "This request gets only 1 entity (Room001)"
+						"description": "This request gets only 1 entity (Room001). It also uses the concise option to get a more concise response."
 					},
 					"response": []
 				}
 			],
-			"description": "The requests in this folder showcases multiple ways to execute queries from a context broker. There are two main ways to query a context broker:\n\n1. By entity ID: `{broker}/ngsi-ld/v1/entities/{entity id}`\n2. Using query parameters: `{broker}/ngsi-ld/v1/entities/{query parameters}`\n    \n\nThe query can be further customised using query parameters:\n\n- `attrs` : Specifies the attributes to be included in the response. Will not return entities that doesn't contain this attribute.\n- `options` : Specifies options for the request. Options include:\n    - `sysAttrs` : Includes system attributes `createdAt` and `modifiedAt`\n    - `keyValues` : Returns the payload in a `key:value` pair format, removing irrelevant properties-of-properties (i.e., modifiedAt) from `Property` or `Relationship` attributes\n    - `concise` : Similar to `keyValues`, but also includes properties-of-properties.\n- `q` : Perform a filter on entities using operators (i.e., `<`, `>`, `==`)\n- `id` : A list of entity IDs\n    \n\nThere are a few more not covered in this documentation."
+			"description": "The requests in this folder showcases multiple ways to execute queries from a context broker. There are two main ways to query a context broker:\n\n1. By entity ID: `{broker}/ngsi-ld/v1/entities/{entity id}`\n2. Using query parameters: `{broker}/ngsi-ld/v1/entities/{query parameters}`\n    \n\nThe query can be further customised using query parameters:\n\n- `attrs` : Specifies the attributes to be included in the response. Will not return entities that doesn't contain this attribute.\n- `options` : Specifies options for the request. Options include:\n    - `sysAttrs` : Includes system attributes `createdAt` and `modifiedAt`\n    - `keyValues` : Returns the payload in a `key:value` pair format, removing irrelevant properties-of-properties (i.e., modifiedAt) from `Property` or `Relationship` attributes\n    - `concise` : Similar to `keyValues`, but also includes properties-of-properties. Ironically, it is less concise than keyValues\n- `q` : Perform a filter on entities using operators (i.e., `<`, `>`, `==`)\n- `id` : A list of entity IDs\n    \n\nThere are a few more not covered in this documentation."
 		},
 		{
 			"name": "Send commands to Robot",
@@ -1550,7 +1561,7 @@
 					"response": []
 				}
 			],
-			"description": "Do check out the nodered flow equivalent of this section if possible, as this section would require you to send MQTT messages which isn't doable in POSTman. If not:\n\n1. Install mosquitto_pub on your PC\n    \n2. After sending a command, execute this line:\n    \n\nmosquitto_pub -t /1234/Robot001/cmdexe -h 35.198.213.246 -p 1883 -m '{\"x1\": \"OK\"}'\n\nwhere x1 is the command you executed, and \"OK\" is the command execution status to pass to the broker."
+			"description": "Do check out the nodered flow equivalent of this section if possible, as this section would require you to send MQTT messages which isn't doable in POSTman. If not:\n\n1. Install mosquitto_pub on your PC\n2. After sending a command, execute this line:\n    \n\nmosquitto_pub -t /1234/Robot001/cmdexe -h 35.198.213.246 -p 1883 -m '{\"x1\": \"OK\"}'\n\nwhere x1 is the command you executed, and \"OK\" is the command execution status to pass to the broker."
 		},
 		{
 			"name": "Subscriptions",
@@ -1580,7 +1591,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions",
+						"description": "This request creates a subscription that subscribes to changes in temperature from all entities of type Device. Essentially, any time a Device's temperature is updated, a POST request would be sent to the endpoint."
 					},
 					"response": []
 				},
@@ -1619,7 +1631,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions",
+						"description": "This query is similar to the previous one, but it uses the `q` parameter to add two conditions:\n\n1. The entity's temperature must be >35\n2. The entity must be located in `urn:ngsi-ld:Room:Room001`\n    \n\nThe `q` parameter supports equality and comparison operators (`>`, `<`, `=` )\n\nThe endpoint sends a `POST` request to a google cloud URL, which activates a serverless function that sends a message to this telegram channel ([https://t.me/ngsildsmartupdates](https://t.me/ngsildsmartupdates))"
 					},
 					"response": []
 				},
@@ -1658,7 +1671,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions",
+						"description": "This subscription sends a notification each time the `names` property is updated. It then sends the `names` and `locatedIn` properties to a google cloud URL, which invokes a command to all Robots that are located in the same room as the camera."
 					},
 					"response": []
 				},
@@ -1683,7 +1697,8 @@
 								"type": "text"
 							}
 						],
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions",
+						"description": "Get all subscriptions that are in the context broker."
 					},
 					"response": []
 				},
@@ -1708,14 +1723,16 @@
 								"type": "text"
 							}
 						],
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions/urn:ngsi-ld:subscription:33fdec7a-e04b-11ee-b052-0242ac140007"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions/urn:ngsi-ld:subscription:33fdec7a-e04b-11ee-b052-0242ac140007",
+						"description": "Delete a subscription in the context broker using the subscription's ID."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Subscriptions provide a way for users to subscribe to updates to context data in the context broker. Once the condition for a subscription is met, the context broker would send requested data to the given endpoint in the subscription through a POST request.\n\nNOTE: The `http` prefix is mandatory for endpoints supplied to the subscription."
 		},
 		{
-			"name": "Mintaka",
+			"name": "Temporal API",
 			"item": [
 				{
 					"name": "Get last 5 updates to EnvironmentalSensor001",
@@ -1759,77 +1776,7 @@
 								}
 							]
 						},
-						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
-					},
-					"response": []
-				},
-				{
-					"name": "Get last 5 updates to EnvironmentalSensor001 Copy",
-					"protocolProfileBehavior": {
-						"disabledSystemHeaders": {}
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Link",
-								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
-								"type": "text"
-							},
-							{
-								"key": "NGSILD-Tenant",
-								"value": "openiot",
-								"type": "text"
-							},
-							{
-								"key": "Origin",
-								"value": "http://postman.com/",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{gateway}}/api/temporal/entities?lastN=5&q=mediaURL==%22*/snapshots/*%22&attrs=mediaURL&options=temporalValues&type=Camera&timerel=before&timeAt=2024-03-10T09:36:30.184Z",
-							"host": [
-								"{{gateway}}"
-							],
-							"path": [
-								"api",
-								"temporal",
-								"entities"
-							],
-							"query": [
-								{
-									"key": "lastN",
-									"value": "5"
-								},
-								{
-									"key": "q",
-									"value": "mediaURL==%22*/snapshots/*%22"
-								},
-								{
-									"key": "attrs",
-									"value": "mediaURL"
-								},
-								{
-									"key": "options",
-									"value": "temporalValues"
-								},
-								{
-									"key": "type",
-									"value": "Camera"
-								},
-								{
-									"key": "timerel",
-									"value": "before"
-								},
-								{
-									"key": "timeAt",
-									"value": "2024-03-10T09:36:30.184Z"
-								}
-							]
-						},
-						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
+						"description": "This request returns the last 5 updates to each attribute of EnvironmentalSensor001. As lastN is provided, we do not require a `timerel` parameter.\n\nNote that the payload for this request is quite large! Using extra parameters for the temporal API to reduce the size of data transfer is highly encouraged."
 					},
 					"response": []
 				},
@@ -1850,7 +1797,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5&attrs=temperature",
+							"raw": "{{gateway}}/api/temporal/entities/urn:ngsi-ld:Device:EnvironmentalSensor001?lastN=5&attrs=temperature&options=temporalValues",
 							"host": [
 								"{{gateway}}"
 							],
@@ -1868,15 +1815,32 @@
 								{
 									"key": "attrs",
 									"value": "temperature"
+								},
+								{
+									"key": "options",
+									"value": "temporalValues"
 								}
 							]
 						},
-						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
+						"description": "This request returns the last 5 updates to the `temperature` attribute of EnvironmentalSensor001. As lastN is provided, we do not require a `timerel` parameter."
 					},
 					"response": []
 				},
 				{
-					"name": "Get names of persons spotted in Room001",
+					"name": "Get names of persons previously spotted in Room001",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var moment = require('moment');\r",
+									"\r",
+									"pm.environment.set('currentDateTime', moment().toISOString());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1892,7 +1856,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/temporal/entities/?type=Camera&attrs=names&timeproperty=modifiedAt&q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&timerel=before&timeAt=2024-03-13T09:36:30.184Z&options=temporalValues",
+							"raw": "{{gateway}}/api/temporal/entities/?type=Camera&attrs=names&q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&timerel=before&timeAt={{currentDateTime}}&options=count&id=urn:ngsi-ld:Camera:Camera001",
 							"host": [
 								"{{gateway}}"
 							],
@@ -1912,10 +1876,6 @@
 									"value": "names"
 								},
 								{
-									"key": "timeproperty",
-									"value": "modifiedAt"
-								},
-								{
 									"key": "q",
 									"value": "locatedIn==%22urn:ngsi-ld:Room:Room001%22"
 								},
@@ -1925,19 +1885,24 @@
 								},
 								{
 									"key": "timeAt",
-									"value": "2024-03-13T09:36:30.184Z"
+									"value": "{{currentDateTime}}"
 								},
 								{
 									"key": "options",
-									"value": "temporalValues"
+									"value": "count"
+								},
+								{
+									"key": "id",
+									"value": "urn:ngsi-ld:Camera:Camera001"
 								}
 							]
 						},
-						"description": "Once Mintaka is running, you can check the status by making an HTTP request to the `info` endpoint on the exposed port.  \nSince the configuration includes `ENDPOINTS_INFO_ENABLED=true` and `ENDPOINTS_INFO_SENSITIVE=false` the endpoint should return a response"
+						"description": "This query gets all names spotted by cameras in Room001. It does so by finding all updates that are before the current date and time (generated using Postman's pre-request script function.\n\nThe response header would also return a count of 1 (as there is only 1 camera entity in Room001)."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "The context broker API usually only returns the current state of the entities. Hence, all context brokers would have a temporal API (be it as an extra component or built-in) to query for historical data.\n\n## Parameters\n\n### Time Parameters\n\nAll temporal queries requires a time parameter. There are two main types of time parameters:\n\n1. lastN : returns the last N updates\n2. timerel : `before` or `after` a certain timestamp (in ISO 8601 format. I.e, `2024-03-15T07:55:27.390Z`). The timestamp is provided using `timeAt` .\n    \n\n### Other Parameters\n\n- `attrs` : Specifies the attributes to be included in the response. Will not return entities that doesn't contain this attribute.\n- `options` : Specifies options for the request. Options include:\n    - `sysAttrs` : Includes system attributes `createdAt` and `modifiedAt`\n    - `temporalValues`: Each attribute is reduced to a series of tuples - one value and one timestamp for each entry.\n    - `count` : Returns the number of entities contained in the response payload through the headers.\n- `q` : Perform a filter on entities using operators (i.e., `<`, `>`, `==`)\n- `id` : A list of entity IDs that should be included in the query."
 		}
 	],
 	"event": [
