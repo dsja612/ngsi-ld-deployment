@@ -12,7 +12,7 @@ services:
   proxy:
     build:
       context: .
-      dockerfile: ./nginx/Dockerfile.scorpio
+      dockerfile: ./nginx/Dockerfile.scorpio.aio
     restart: always
     ports:
       - "80:80"
