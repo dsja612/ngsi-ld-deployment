@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "f438b3ee-4c75-455e-90ef-980e17fd5fbd",
 		"name": "NGSI-LD Test Suite",
-		"description": "Sample operations to help understand NGSI-LD context brokers. Based on the Orion-LD Context Broker",
+		"description": "Sample operations to help understand the NGSI-LD API.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "29655974"
 	},
@@ -24,7 +24,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/jsonldContexts"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/jsonldContexts",
+						"description": "This request represents one of the ways to add a context file to the context broker. After adding it, the broker returns the link to the context file in the header.\n\nNote that the link might be broken depending on the deployment method. This example should return a link similar to this:\n\n> http://orion:1026/ngsi-ld/v1/jsonldContexts/c92fea6c-e1dd-11ee-9208-0242ac1a0005 \n  \n\nChange \"orion:1026\" to \"{{gateway}}/api/broker\" and you should be able to access the context file, hosted on Orion"
 					},
 					"response": []
 				},
@@ -42,7 +43,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/jsonldContexts"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/jsonldContexts",
+						"description": "This request represents another way to add context files to the server. In this example, we use an existing context file (in .jsonld) instead of providing a JSON payload with @context."
 					},
 					"response": []
 				},
@@ -57,7 +59,8 @@
 								"type": "text"
 							}
 						],
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/jsonldContexts"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/jsonldContexts",
+						"description": "Retrieve links to all context files in the context broker."
 					},
 					"response": []
 				},
@@ -66,12 +69,13 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/jsonldContexts/8bfe9ab6-c569-11ee-b590-0242ac1b0007"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/jsonldContexts/8bfe9ab6-c569-11ee-b590-0242ac1b0007",
+						"description": "Delete a particular context file from the context broker."
 					},
 					"response": []
 				}
 			],
-			"description": "To start utilizing the NGSI-LD API, we first have to upload our own context file. These context files help us to define shared vocabulary in our data model. Hence, we map terms we use in entity creation to their actual meanings in an ontology.\n\nThis ensures that when data is exchanged between different systems, the meaning of these terms is understood consistently by all parties."
+			"description": "To better utilize the NGSI-LD API, we first have to upload our own context file. These context files help us to define shared vocabulary in our data model. Hence, we map terms we use in entity creation to their actual meanings in an ontology.\n\nThis ensures that when data is exchanged between different systems, the meaning of these terms is understood consistently by all parties.\n\nNOTE: We are using our own context server hosted at [http://34.126.76.13](http://34.126.76.13) for the rest of the tutorial."
 		},
 		{
 			"name": "Creating a Room entity",
@@ -111,7 +115,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/",
+						"description": "This request adds a Room entity using a payload in the normalized-json format. This is the most explicit way of creating an entity, through explicitly stating the type of each attribute."
 					},
 					"response": []
 				},
@@ -148,7 +153,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/",
+						"description": "This request adds a Room entity using a payload in the key-value format.\n\nNote that all attributes of an entity will default to being of type \"Property\" unless explicitly stated."
 					},
 					"response": []
 				},
@@ -197,7 +203,8 @@
 									"value": "Room"
 								}
 							]
-						}
+						},
+						"description": "View the created entities (which are of type Room)"
 					},
 					"response": []
 				},
@@ -227,7 +234,8 @@
 								"type": "text"
 							}
 						],
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Room:Room001"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Room:Room001",
+						"description": "Delete a created entity by specifying the id"
 					},
 					"response": []
 				}
@@ -271,7 +279,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/iot/provision/devices"
+						"url": "{{gateway}}/api/iot/provision/devices",
+						"description": "This request provisions an environmental sensor that records multiple measurements. It not only updates the \"urn:ngsi-ld:Device:EnvironmentalSensor001\" entity, but also the \"urn:ngsi-ld:Room:Room001\" entity due to this part of the payload under \"static_attributes\":\n\n``` json\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\",\n          \"link\": {\n            \"attributes\": [\"temperature\"],\n            \"name\": \"providedBy\",\n            \"type\": \"Room\"\n          }\n        },\n\n ```\n\nThis essentially tells the IOT agent to also upsert just the \"temperature\" attribute to the parent entity (urn:ngsi-ld:Room:Room001). The temperature attribute in the parent entity will also have a \"providedBy\" relationship pointing to the sensor, hence establishing a two-way relationship."
 					},
 					"response": []
 				},
@@ -300,7 +309,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/iot/provision/devices"
+						"url": "{{gateway}}/api/iot/provision/devices",
+						"description": "This request provisions a camera device."
 					},
 					"response": []
 				},
@@ -329,7 +339,8 @@
 								}
 							}
 						},
-						"url": "{{gateway}}/api/iot/provision/devices"
+						"url": "{{gateway}}/api/iot/provision/devices",
+						"description": "This request provisions a robot that can take receive commands."
 					},
 					"response": []
 				},
@@ -430,7 +441,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "Adapted from: [https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html)\n\nFor this collection, we are using the JSON IoT agent that supports HTTP, AMQP, and MQTT. Our devices are using MQTT to communicate with IOT agent, which converts measures from devices to NGSI-LD compliant format.\n\nIf our device is using HTTP to communicate, we need to:\n\n(1) provide an additional \"endpoint\" attribute with a link to send a POST request to\n\n(2) change \"transport\" from \"MQTT\" to \"HTTP\"\n\nTo start sending measures from sensors/devices to IOT agents, we first need to provision devices to the IOT agent that we set up. Once the device is provisioned, the IOT agent can start receving measurements from the devices. Each time a measurement is received, the IOT agent will upsert (update if already exists, else insert) the entity to the context broker.\n\n## Example\n\nThe syntax for provisioning devices to the JSON IOT Agent is different from the entity creation syntax for NGSI-LD context brokers. We will use the Robot provisioning payload as an example here:\n\n``` json\n{\n  \"devices\": [\n    {\n      \"device_id\": \"Robot001\",\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\n      \"entity_type\": \"Robot\",\n      \"attributes\": [\n        {\n          \"name\": \"x\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"y\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"command\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"status\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"robotName\",\n          \"type\": \"Text\",\n          \"value\": \"Robot001\"\n        },\n        {\n          \"name\": \"robotType\",\n          \"type\": \"Text\",\n          \"value\": \"PatrolRobot\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        }\n      ],\n      \"commands\": [ \n        {\n          \"name\": \"x1\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"x2\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"y1\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"y2\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"names\",\n          \"type\": \"command\"\n        }\n       ],\n      \"protocol\": \"PDI-IoTA-JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n ```\n\n\"device_id\": The name of the device registered in the IOT agent\n\n\"entity_name\": The entity that this devices updates in the context broker.\n\n\"entity_type\": The entity type that this devices updates in the context broker.\n\n\"attributes\": The measures that the device would send to the IOT Agent.\n\n\"static_attributes\": The attributes of the device. These are usually attributes of the device that doesn't change regularly, or is not a measure sent by the device.\n\n\"commands\": These are downlink attributes to be sent to the devices from the IOT agent or the context broker."
 		},
 		{
 			"name": "Updating values to IOT agents using POST requests",
@@ -463,7 +475,7 @@
 							"raw": "{\n    \"static_attributes\": [\n    {\n        \"name\": \"cameraName\",\n        \"type\": \"Text\",\n        \"value\": \"Camera001\"\n    },\n    {\n        \"name\": \"cameraOrientation\",\n        \"type\": \"Text\",\n        \"value\": \"Wall-mounted\"\n    },\n    {\n        \"name\": \"cameraType\",\n        \"type\": \"Text\",\n        \"value\": \"Fixed\"\n    },\n    {\n        \"name\": \"cameraUsage\",\n        \"type\": \"Text\",\n        \"value\": \"Human Traffic Monitoring\"\n    },\n    {\n        \"name\": \"locatedIn\",\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Room:Room001\"\n    },\n    {\n        \"name\": \"attachedTo\",\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Robot:Robot001\"\n    }\n    ]\n}\n"
 						},
 						"url": "{{gateway}}/api/iot/provision/devices/Camera001",
-						"description": "Before we wire-up the context broker, we can test that a command can be send to a device by making a PATCH request\ndirectly to the IoT Agent's North Port using the `/ngsi-ld/v1/entities/` endpoint. It is this endpoint that will\neventually be invoked by the context broker once we have connected it up. To test the configuration you can run the\ncommand directly as shown:\n\nIf you are viewing the device monitor page, you can also see the state of the water sprinkler change.\n\n![](https://fiware.github.io/tutorials.IoT-Agent/img/water-on.gif)\n"
+						"description": "This request is an example of patching Camera001's static attributes."
 					},
 					"response": []
 				},
@@ -519,7 +531,8 @@
 									"value": "1234"
 								}
 							]
-						}
+						},
+						"description": "This request sends a temperature update to the IOT agent for the EnvironmentalSensor001 device, allowing the IOT agent to send the update to the context broker.\n\nFor this endpoint, we require 2 query parameters:\n\ni: The device ID.\n\nk: The device's API key, which has \"1234\" as the default value. This can be changed in the device provisioning portion."
 					},
 					"response": []
 				},
@@ -575,7 +588,8 @@
 									"value": "1234"
 								}
 							]
-						}
+						},
+						"description": "This request sends an array of names to the IOT agent for the Camera001 device, allowing the IOT agent to send the update to the context broker."
 					},
 					"response": []
 				},
@@ -631,7 +645,8 @@
 									"value": "1234"
 								}
 							]
-						}
+						},
+						"description": "This request sends multiple measures to the IOT agent for the Robot001 device, allowing the IOT agent to send the update to the context broker."
 					},
 					"response": []
 				},
@@ -661,27 +676,8 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Device:EnvironmentalSensor001",
-							"host": [
-								"{{gateway}}"
-							],
-							"path": [
-								"api",
-								"broker",
-								"ngsi-ld",
-								"v1",
-								"entities",
-								"urn:ngsi-ld:Device:EnvironmentalSensor001"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "",
-									"disabled": true
-								}
-							]
-						}
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Device:EnvironmentalSensor001",
+						"description": "View updates to the related entity in the context broker."
 					},
 					"response": []
 				},
@@ -717,31 +713,8 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities/?type=Camera",
-							"host": [
-								"{{gateway}}"
-							],
-							"path": [
-								"api",
-								"broker",
-								"ngsi-ld",
-								"v1",
-								"entities",
-								""
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "type",
-									"value": "Camera"
-								}
-							]
-						}
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Camera:Camera001",
+						"description": "View updates to the related entity in the context broker."
 					},
 					"response": []
 				},
@@ -777,35 +750,13 @@
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities/?type=Camera",
-							"host": [
-								"{{gateway}}"
-							],
-							"path": [
-								"api",
-								"broker",
-								"ngsi-ld",
-								"v1",
-								"entities",
-								""
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "",
-									"disabled": true
-								},
-								{
-									"key": "type",
-									"value": "Camera"
-								}
-							]
-						}
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Robot:Robot001/",
+						"description": "View updates to the related entity in the context broker."
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "The endpoints in this folder are related to updating/sending measurements of values from the sensor to the IOT agent.\n\nEven though our devices are using MQTT for transport, we can still invoke the HTTP endpoint of the IOT agent meant for receiving measurements from IOT devices."
 		},
 		{
 			"name": "Deleting Entities",
@@ -900,7 +851,8 @@
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Sample HTTP requests for deleting entities in the IOT agent"
 				},
 				{
 					"name": "Context Broker",
@@ -1021,9 +973,11 @@
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Sample HTTP requests for deleting entities in the Context Broker"
 				}
-			]
+			],
+			"description": "Sample HTTP requests for deleting entities"
 		},
 		{
 			"name": "Querying Context Broker",
@@ -1237,11 +1191,6 @@
 								{
 									"key": "q",
 									"value": "locatedIn==%22urn:ngsi-ld:Room:Room001%22"
-								},
-								{
-									"key": "attrs",
-									"value": "temperature",
-									"disabled": true
 								}
 							]
 						}
@@ -1292,7 +1241,7 @@
 					"response": []
 				},
 				{
-					"name": "Find temperature from devices in room 1",
+					"name": "Find temperature from entities located in room 1",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -1313,7 +1262,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&attrs=temperature&type=Device",
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities?q=locatedIn==%22urn:ngsi-ld:Room:Room001%22&attrs=temperature",
 							"host": [
 								"{{gateway}}"
 							],
@@ -1335,14 +1284,62 @@
 								},
 								{
 									"key": "type",
-									"value": "Device"
+									"value": "Device",
+									"disabled": true
 								}
 							]
-						}
+						},
+						"description": "This request gets all entities located in room 1 that have the \"temperature\" property. Even though there are also robots and cameras in room 1, those entities are not included as they lack the \"temperature\" property."
+					},
+					"response": []
+				},
+				{
+					"name": "Query Room001 only",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Room:Room001?options=concise",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"api",
+								"broker",
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:Room:Room001"
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "concise"
+								}
+							]
+						},
+						"description": "This request gets only 1 entity (Room001)"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "The requests in this folder showcases multiple ways to execute queries from a context broker. There are two main ways to query a context broker:\n\n1. By entity ID: `{broker}/ngsi-ld/v1/entities/{entity id}`\n2. Using query parameters: `{broker}/ngsi-ld/v1/entities/{query parameters}`\n    \n\nThe query can be further customised using query parameters:\n\n- `attrs` : Specifies the attributes to be included in the response. Will not return entities that doesn't contain this attribute.\n- `options` : Specifies options for the request. Options include:\n    - `sysAttrs` : Includes system attributes `createdAt` and `modifiedAt`\n    - `keyValues` : Returns the payload in a `key:value` pair format, removing irrelevant properties-of-properties (i.e., modifiedAt) from `Property` or `Relationship` attributes\n    - `concise` : Similar to `keyValues`, but also includes properties-of-properties.\n- `q` : Perform a filter on entities using operators (i.e., `<`, `>`, `==`)\n- `id` : A list of entity IDs\n    \n\nThere are a few more not covered in this documentation."
 		},
 		{
 			"name": "Send commands to Robot",
@@ -1517,6 +1514,40 @@
 						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Robot:Robot001/attrs/y2"
 					},
 					"response": []
+				},
+				{
+					"name": "Send command from broker (names)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot",
+								"type": "text"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/",
+								"type": "text"
+							},
+							{
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n        \"type\": \"Property\",\r\n        \"value\": [\"Dylan\"]\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/entities/urn:ngsi-ld:Robot:Robot001/attrs/names"
+					},
+					"response": []
 				}
 			],
 			"description": "Do check out the nodered flow equivalent of this section if possible, as this section would require you to send MQTT messages which isn't doable in POSTman. If not:\n\n1. Install mosquitto_pub on your PC\n    \n2. After sending a command, execute this line:\n    \n\nmosquitto_pub -t /1234/Robot001/cmdexe -h 35.198.213.246 -p 1883 -m '{\"x1\": \"OK\"}'\n\nwhere x1 is the command you executed, and \"OK\" is the command execution status to pass to the broker."
@@ -1581,7 +1612,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"description\": \"Subscribe to temperature falling below 15\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"q\": \"temperature<15;locatedIn==%22urn:ngsi-ld:Room:Room001%22\",\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"attributes\": [\"temperature\"],\r\n    \"endpoint\": {\r\n      \"uri\": \"https://asia-southeast1-composite-silo-413107.cloudfunctions.net/temperature_update\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": \"{{context-ld}}\"\r\n}\r\n",
+							"raw": "{\r\n  \"description\": \"Subscribe to temperature going above 35\",\r\n  \"type\": \"Subscription\",\r\n  \"entities\": [{\"type\": \"Device\"}],\r\n  \"watchedAttributes\": [\"temperature\"],\r\n  \"q\": \"temperature>35;locatedIn==%22urn:ngsi-ld:Room:Room001%22\",\r\n  \"notification\": {\r\n    \"format\": \"keyValues\",\r\n    \"attributes\": [\"temperature\"],\r\n    \"endpoint\": {\r\n      \"uri\": \"https://asia-southeast1-composite-silo-413107.cloudfunctions.net/temperature_update\",\r\n      \"accept\": \"application/json\"\r\n    }\r\n  },\r\n  \"@context\": \"{{context-ld}}\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
