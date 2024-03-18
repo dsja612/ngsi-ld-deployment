@@ -2,6 +2,12 @@ version: "3.5"
 
 volumes:
     mongodb: ~
+    data-models:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: datamodels
 
 services:
   ################
@@ -16,6 +22,23 @@ services:
     restart: always
     ports:
       - "80:80"
+  # @context file is served from here
+  ld-context:
+      labels:
+        org.fiware: 'tutorial'
+      image: httpd:alpine
+      hostname: context
+      container_name: fiware-ld-context
+      ports:
+          - "3004:80"
+      volumes:
+          - data-models:/usr/local/apache2/htdocs/
+          - type: bind
+            source: conf/mime.types
+            target: /usr/local/apache2/conf/mime.types
+            read_only: true
+      healthcheck:
+        test: (wget --server-response --spider --quiet  http://ld-context/ngsi-context.jsonld 2>&1 | awk 'NR==1{print $$2}'|  grep -q -e "200") || exit 1
 
   # Context Broker
   orion:
@@ -77,6 +100,7 @@ services:
       depends_on:
           - mongodb
           - mosquitto
+          - ld-context
       expose:
           - "4041"
           - "7896"
@@ -99,9 +123,9 @@ services:
           - "IOTA_FALLBACK_PATH=/"
           - "IOTA_MQTT_HOST=mosquitto"        # MQTT broker service
           - "IOTA_MQTT_PORT=1883"             # MQTT service port
-          - "IOTA_JSON_LD_CONTEXT=${CONTEXT_FILE}"
+          - "IOTA_JSON_LD_CONTEXT=http://ld-context:80/context.jsonld"
           - "IOTA_LOG_LEVEL=DEBUG" # The log level of the IoT Agent
-          - "IOTA_AUTOCAST=true" # Ensure Ultralight number values are read as numbers not strings
+          - "IOTA_AUTOCAST=true" # Ensure number values are read as numbers not strings
 
   #############
   # Databases #
