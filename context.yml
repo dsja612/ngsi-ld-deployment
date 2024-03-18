@@ -12,7 +12,7 @@ services:
     volumes:
         - data-models:/usr/local/apache2/htdocs/
         - type: bind
-          source: ${PWD}/conf/mime.types
+          source: conf/mime.types
           target: /usr/local/apache2/conf/mime.types
           read_only: true
     healthcheck:
@@ -24,4 +24,4 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${PWD}/datamodels
+      device: datamodels
