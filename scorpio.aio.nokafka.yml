@@ -18,7 +18,7 @@ services:
   proxy:
     build:
       context: .
-      dockerfile: ./nginx/Dockerfile.orion.aio
+      dockerfile: ./nginx/Dockerfile.scorpio.aio
     restart: always
     ports:
       - "80:80"
