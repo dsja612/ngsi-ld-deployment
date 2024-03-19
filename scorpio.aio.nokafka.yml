@@ -43,9 +43,10 @@ services:
 
   # Context Broker
   scorpio:
+    hostname: scorpio
     image: scorpiobroker/all-in-one-runner:java-latest
     ports:
-      - "1026:9090"
+      - "9090:9090"
     environment:
       DBHOST: postgres
     depends_on:

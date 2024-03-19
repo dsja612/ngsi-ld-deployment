@@ -45,8 +45,9 @@ services:
   # Context Broker
   scorpio:
     image: scorpiobroker/all-in-one-runner:java-kafka-latest
+    hostname: scorpio
     ports:
-      - "1026:9090"
+      - "9090:9090"
     environment:
       DBHOST: postgres
       BUSHOST: kafka
