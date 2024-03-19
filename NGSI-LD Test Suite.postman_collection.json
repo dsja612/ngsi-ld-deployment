@@ -75,7 +75,7 @@
 					"response": []
 				}
 			],
-			"description": "To better utilize the NGSI-LD API, we first have to upload our own context file. These context files help us to define shared vocabulary in our data model. Hence, we map terms we use in entity creation to their actual meanings in an ontology.\n\nThis ensures that when data is exchanged between different systems, the meaning of these terms is understood consistently by all parties.\n\nNOTE: We are using our own context server hosted at [http://34.126.76.13](http://34.126.76.13) for the rest of the tutorial."
+			"description": "To better utilize the NGSI-LD API, we first have to upload our own context file. These context files help us to define shared vocabulary in our data model. Hence, we map terms we use in entity creation to their actual meanings in an ontology.\n\nThis ensures that when data is exchanged between different systems, the meaning of these terms is understood consistently by all parties.\n\nNOTE: We are using our own context server hosted at [http://34.126.76.13](http://34.126.76.13) for the rest of the tutorial.\n\n### Adapted from:\n\n[https://ngsi-ld-tutorials.readthedocs.io/en/latest/working-with-@context.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/working-with-%40context.html)"
 		},
 		{
 			"name": "Creating a Room entity",
@@ -240,7 +240,7 @@
 					"response": []
 				}
 			],
-			"description": "To start off, we first create a Room entity. In this example, a Room entity is an enclosed space that sensors, robots or cameras can be located in.\n\nEach entity has a unique ID. Hence, its not possible to create two entities with the same ID, even with different properties and etc."
+			"description": "To start off, we first create a Room entity. In this example, a Room entity is an enclosed space that sensors, robots or cameras can be located in.\n\nEach entity has a unique ID. Hence, its not possible to create two entities with the same ID, even with different properties and etc.\n\n### Adapted from:\n\n1. [https://ngsi-ld-tutorials.readthedocs.io/en/latest/ngsi-ld-operations.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/ngsi-ld-operations.html)\n2. [https://ngsi-ld-tutorials.readthedocs.io/en/latest/concise.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/concise.html)"
 		},
 		{
 			"name": "Provisioning devices to JSON IOT Agent",
@@ -442,7 +442,7 @@
 					"response": []
 				}
 			],
-			"description": "Adapted from: [https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html)\n\nFor this collection, we are using the JSON IoT agent that supports HTTP, AMQP, and MQTT. Our devices are using MQTT to communicate with IOT agent, which converts measures from devices to NGSI-LD compliant format.\n\nIf our device is using HTTP to communicate, we need to:\n\n(1) provide an additional \"endpoint\" attribute with a link to send a POST request to\n\n(2) change \"transport\" from \"MQTT\" to \"HTTP\"\n\nTo start sending measures from sensors/devices to IOT agents, we first need to provision devices to the IOT agent that we set up. Once the device is provisioned, the IOT agent can start receving measurements from the devices. Each time a measurement is received, the IOT agent will upsert (update if already exists, else insert) the entity to the context broker.\n\n## Example\n\nThe syntax for provisioning devices to the JSON IOT Agent is different from the entity creation syntax for NGSI-LD context brokers. We will use the Robot provisioning payload as an example here:\n\n``` json\n{\n  \"devices\": [\n    {\n      \"device_id\": \"Robot001\",\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\n      \"entity_type\": \"Robot\",\n      \"attributes\": [\n        {\n          \"name\": \"x\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"y\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"command\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"status\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"robotName\",\n          \"type\": \"Text\",\n          \"value\": \"Robot001\"\n        },\n        {\n          \"name\": \"robotType\",\n          \"type\": \"Text\",\n          \"value\": \"PatrolRobot\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        }\n      ],\n      \"commands\": [ \n        {\n          \"name\": \"x1\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"x2\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"y1\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"y2\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"names\",\n          \"type\": \"command\"\n        }\n       ],\n      \"protocol\": \"PDI-IoTA-JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n ```\n\n\"device_id\": The name of the device registered in the IOT agent\n\n\"entity_name\": The entity that this devices updates in the context broker.\n\n\"entity_type\": The entity type that this devices updates in the context broker.\n\n\"attributes\": The measures that the device would send to the IOT Agent.\n\n\"static_attributes\": The attributes of the device. These are usually attributes of the device that doesn't change regularly, or is not a measure sent by the device.\n\n\"commands\": These are downlink attributes to be sent to the devices from the IOT agent or the context broker."
+			"description": "For this collection, we are using the JSON IoT agent that supports HTTP, AMQP, and MQTT. Our devices are using MQTT to communicate with IOT agent, which converts measures from devices to NGSI-LD compliant format.\n\nIf our device is using HTTP to communicate, we need to:\n\n(1) provide an additional \"endpoint\" attribute with a link to send a POST request to\n\n(2) change \"transport\" from \"MQTT\" to \"HTTP\"\n\nTo start sending measures from sensors/devices to IOT agents, we first need to provision devices to the IOT agent that we set up. Once the device is provisioned, the IOT agent can start receving measurements from the devices. Each time a measurement is received, the IOT agent will upsert (update if already exists, else insert) the entity to the context broker.\n\n## Example\n\nThe syntax for provisioning devices to the JSON IOT Agent is different from the entity creation syntax for NGSI-LD context brokers. We will use the Robot provisioning payload as an example here:\n\n``` json\n{\n  \"devices\": [\n    {\n      \"device_id\": \"Robot001\",\n      \"entity_name\": \"urn:ngsi-ld:Robot:Robot001\",\n      \"entity_type\": \"Robot\",\n      \"attributes\": [\n        {\n          \"name\": \"x\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"y\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"command\",\n          \"type\": \"Property\"\n        },\n        {\n          \"name\": \"status\",\n          \"type\": \"Property\"\n        }\n      ],\n      \"static_attributes\": [\n        {\n          \"name\": \"robotName\",\n          \"type\": \"Text\",\n          \"value\": \"Robot001\"\n        },\n        {\n          \"name\": \"robotType\",\n          \"type\": \"Text\",\n          \"value\": \"PatrolRobot\"\n        },\n        {\n          \"name\": \"locatedIn\",\n          \"type\": \"Relationship\",\n          \"value\": \"urn:ngsi-ld:Room:Room001\"\n        }\n      ],\n      \"commands\": [ \n        {\n          \"name\": \"x1\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"x2\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"y1\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"y2\",\n          \"type\": \"command\"\n        },\n        {\n          \"name\": \"names\",\n          \"type\": \"command\"\n        }\n       ],\n      \"protocol\": \"PDI-IoTA-JSON\",\n      \"transport\": \"MQTT\",\n      \"timezone\": \"Asia/Kuala_Lumpur\"\n    }\n  ]\n}\n\n ```\n\n\"device_id\": The name of the device registered in the IOT agent\n\n\"entity_name\": The entity that this devices updates in the context broker.\n\n\"entity_type\": The entity type that this devices updates in the context broker.\n\n\"attributes\": The measures that the device would send to the IOT Agent.\n\n\"static_attributes\": The attributes of the device. These are usually attributes of the device that doesn't change regularly, or is not a measure sent by the device.\n\n\"commands\": These are downlink attributes to be sent to the devices from the IOT agent or the context broker.\n\n### Adapted from:\n\n1. [https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html)\n2. [https://fiware-iotagent-json.readthedocs.io/en/latest/usermanual.html](https://fiware-iotagent-json.readthedocs.io/en/latest/usermanual.html)"
 		},
 		{
 			"name": "Updating values to IOT agents using POST requests",
@@ -756,7 +756,7 @@
 					"response": []
 				}
 			],
-			"description": "The endpoints in this folder are related to updating/sending measurements of values from the sensor to the IOT agent.\n\nEven though our devices are using MQTT for transport, we can still invoke the HTTP endpoint of the IOT agent meant for receiving measurements from IOT devices."
+			"description": "The endpoints in this folder are related to updating/sending measurements of values from the sensor to the IOT agent.\n\nEven though our devices are using MQTT for transport, we can still invoke the HTTP endpoint of the IOT agent meant for receiving measurements from IOT devices.\n\n### Adapted from:\n\n1. [https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html)\n2. [https://fiware-iotagent-json.readthedocs.io/en/latest/usermanual.html](https://fiware-iotagent-json.readthedocs.io/en/latest/usermanual.html)"
 		},
 		{
 			"name": "Deleting Entities",
@@ -977,7 +977,7 @@
 					"description": "Sample HTTP requests for deleting entities in the Context Broker"
 				}
 			],
-			"description": "Sample HTTP requests for deleting entities"
+			"description": "Sample HTTP requests for deleting entities.\n\n### Adapted from:\n\n1. [https://ngsi-ld-tutorials.readthedocs.io/en/latest/ngsi-ld-operations.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/ngsi-ld-operations.html)"
 		},
 		{
 			"name": "Querying Context Broker",
@@ -1350,15 +1350,15 @@
 					"response": []
 				}
 			],
-			"description": "The requests in this folder showcases multiple ways to execute queries from a context broker. There are two main ways to query a context broker:\n\n1. By entity ID: `{broker}/ngsi-ld/v1/entities/{entity id}`\n2. Using query parameters: `{broker}/ngsi-ld/v1/entities/{query parameters}`\n    \n\nThe query can be further customised using query parameters:\n\n- `attrs` : Specifies the attributes to be included in the response. Will not return entities that doesn't contain this attribute.\n- `options` : Specifies options for the request. Options include:\n    - `sysAttrs` : Includes system attributes `createdAt` and `modifiedAt`\n    - `keyValues` : Returns the payload in a `key:value` pair format, removing irrelevant properties-of-properties (i.e., modifiedAt) from `Property` or `Relationship` attributes\n    - `concise` : Similar to `keyValues`, but also includes properties-of-properties. Ironically, it is less concise than keyValues\n- `q` : Perform a filter on entities using operators (i.e., `<`, `>`, `==`)\n- `id` : A list of entity IDs\n    \n\nThere are a few more not covered in this documentation."
+			"description": "The requests in this folder showcases multiple ways to execute queries from a context broker. There are two main ways to query a context broker:\n\n1. By entity ID: `{broker}/ngsi-ld/v1/entities/{entity id}`\n2. Using query parameters: `{broker}/ngsi-ld/v1/entities/{query parameters}`\n    \n\nThe query can be further customised using query parameters:\n\n- `attrs` : Specifies the attributes to be included in the response. Will not return entities that doesn't contain this attribute.\n- `options` : Specifies options for the request. Options include:\n    - `sysAttrs` : Includes system attributes `createdAt` and `modifiedAt`\n    - `keyValues` : Returns the payload in a `key:value` pair format, removing irrelevant properties-of-properties (i.e., modifiedAt) from `Property` or `Relationship` attributes\n    - `concise` : Similar to `keyValues`, but also includes properties-of-properties. Ironically, it is less concise than keyValues\n- `q` : Perform a filter on entities using operators (i.e., `<`, `>`, `==`)\n- `id` : A list of entity IDs\n    \n\n### Adapted from:\n\n1. [https://ngsi-ld-tutorials.readthedocs.io/en/latest/ngsi-ld-operations.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/ngsi-ld-operations.html)\n2. [https://ngsi-ld-tutorials.readthedocs.io/en/latest/concise.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/concise.html)"
 		},
 		{
 			"name": "Send commands to Robot",
 			"item": [
 				{
-					"name": "Initialize commands for Robot (Must do it once to test)",
+					"name": "Check Context Source Registration",
 					"request": {
-						"method": "PATCH",
+						"method": "GET",
 						"header": [
 							{
 								"key": "fiware-service",
@@ -1371,22 +1371,12 @@
 								"type": "text"
 							},
 							{
-								"key": "link",
-								"value": "<http://localhost:1026/ngsi-ld/v1/jsonldContexts/b813cc1a-ac92-11ee-8358-0242ac120004>;rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
-								"type": "text",
-								"disabled": true
+								"key": "Link",
+								"value": "<{{context-ld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\r\n        \"type\": \"Property\",\r\n        \"value\": 10\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{gateway}}/api/iot/ngsi-ld/v1/entities/urn:ngsi-ld:Robot:Robot001/attrs/x1"
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/csourceRegistrations/"
 					},
 					"response": []
 				},
@@ -1561,7 +1551,7 @@
 					"response": []
 				}
 			],
-			"description": "Do check out the nodered flow equivalent of this section if possible, as this section would require you to send MQTT messages which isn't doable in POSTman. If not:\n\n1. Install mosquitto_pub on your PC\n2. After sending a command, execute this line:\n    \n\nmosquitto_pub -t /1234/Robot001/cmdexe -h 35.198.213.246 -p 1883 -m '{\"x1\": \"OK\"}'\n\nwhere x1 is the command you executed, and \"OK\" is the command execution status to pass to the broker."
+			"description": "Do check out the nodered flow equivalent of this section if possible, as this section would require you to send MQTT messages which isn't doable in POSTman. If not:\n\n1. Install mosquitto_pub on your PC\n2. After sending a command, execute this line:\n    \n\nmosquitto_pub -t /1234/Robot001/cmdexe -h 35.198.213.246 -p 1883 -m '{\"x1\": \"OK\"}'\n\nwhere x1 is the command you executed, and \"OK\" is the command execution status to pass to the broker.\n\n### Adapted from:\n\n1. [https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/iot-agent-json.html)\n2. [https://fiware-iotagent-json.readthedocs.io/en/latest/usermanual.html](https://fiware-iotagent-json.readthedocs.io/en/latest/usermanual.html)"
 		},
 		{
 			"name": "Subscriptions",
@@ -1729,7 +1719,7 @@
 					"response": []
 				}
 			],
-			"description": "Subscriptions provide a way for users to subscribe to updates to context data in the context broker. Once the condition for a subscription is met, the context broker would send requested data to the given endpoint in the subscription through a POST request.\n\nNOTE: The `http` prefix is mandatory for endpoints supplied to the subscription."
+			"description": "Subscriptions provide a way for users to subscribe to updates to context data in the context broker. Once the condition for a subscription is met, the context broker would send requested data to the given endpoint in the subscription through a POST request.\n\nNOTE: The `http` prefix is mandatory for endpoints supplied to the subscription.\n\n### Adapted from:\n\n[https://ngsi-ld-tutorials.readthedocs.io/en/latest/subscriptions.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/subscriptions.html)"
 		},
 		{
 			"name": "Temporal API",
@@ -1902,7 +1892,7 @@
 					"response": []
 				}
 			],
-			"description": "The context broker API usually only returns the current state of the entities. Hence, all context brokers would have a temporal API (be it as an extra component or built-in) to query for historical data.\n\n## Parameters\n\n### Time Parameters\n\nAll temporal queries requires a time parameter. There are two main types of time parameters:\n\n1. lastN : returns the last N updates\n2. timerel : `before` or `after` a certain timestamp (in ISO 8601 format. I.e, `2024-03-15T07:55:27.390Z`). The timestamp is provided using `timeAt` .\n    \n\n### Other Parameters\n\n- `attrs` : Specifies the attributes to be included in the response. Will not return entities that doesn't contain this attribute.\n- `options` : Specifies options for the request. Options include:\n    - `sysAttrs` : Includes system attributes `createdAt` and `modifiedAt`\n    - `temporalValues`: Each attribute is reduced to a series of tuples - one value and one timestamp for each entry.\n    - `count` : Returns the number of entities contained in the response payload through the headers.\n- `q` : Perform a filter on entities using operators (i.e., `<`, `>`, `==`)\n- `id` : A list of entity IDs that should be included in the query."
+			"description": "The context broker API usually only returns the current state of the entities. Hence, all context brokers would have a temporal API (be it as an extra component or built-in) to query for historical data.\n\n## Parameters\n\n### Time Parameters\n\nAll temporal queries requires a time parameter. There are two main types of time parameters:\n\n1. lastN : returns the last N updates\n2. timerel : `before` or `after` a certain timestamp (in ISO 8601 format. I.e, `2024-03-15T07:55:27.390Z`). The timestamp is provided using `timeAt` .\n    \n\n### Other Parameters\n\n- `attrs` : Specifies the attributes to be included in the response. Will not return entities that doesn't contain this attribute.\n- `options` : Specifies options for the request. Options include:\n    - `sysAttrs` : Includes system attributes `createdAt` and `modifiedAt`\n    - `temporalValues`: Each attribute is reduced to a series of tuples - one value and one timestamp for each entry.\n    - `count` : Returns the number of entities contained in the response payload through the headers.\n- `q` : Perform a filter on entities using operators (i.e., `<`, `>`, `==`)\n- `id` : A list of entity IDs that should be included in the query.\n    \n\n### Adapted From:\n\n[https://ngsi-ld-tutorials.readthedocs.io/en/latest/short-term-history.html](https://ngsi-ld-tutorials.readthedocs.io/en/latest/short-term-history.html)"
 		}
 	],
 	"event": [
@@ -1938,7 +1928,19 @@
 		},
 		{
 			"key": "gateway",
-			"value": "http://localhost:80",
+			"value": "http://localhost",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "gateway",
+			"value": "http://34.126.156.165",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "context-ld",
+			"value": "http://34.126.156.165:3004/context.jsonld",
 			"type": "string",
 			"disabled": true
 		}
