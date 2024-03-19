@@ -2,6 +2,12 @@ version: "3.5"
 
 volumes:
     mongodb: ~
+    data-models:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: datamodels
 
 services:
   ################
