@@ -146,7 +146,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": \"urn:ngsi-ld:Room:Room002\",\r\n  \"type\": \"Room\",\r\n  \"roomName\": \"SNDGO Storeroom\",\r\n  \"location\": {\r\n    \"type\": \"Point\",\r\n    \"coordinates\": [103.85013613903543, 1.2913310392625017]\r\n  },\r\n  \"length\": {\r\n    \"value\": 20,\r\n    \"unitCode\": \"MTR\",\r\n    \"unitSymbol\": \"m\"\r\n  },\r\n  \"width\": {\r\n    \"value\": 20,\r\n    \"unitCode\": \"MTR\",\r\n    \"unitSymbol\": \"m\"\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"id\": \"urn:ngsi-ld:Room:Room002\",\r\n  \"type\": \"Room\",\r\n  \"roomName\": \"SNDGO Storeroom\",\r\n  \"location\": {\r\n    \"type\": \"Point\",\r\n    \"coordinates\": [103.85013613903543, 1.2913310392625017]\r\n  },\r\n  \"length\": {\r\n    \"value\": 20,\r\n    \"unitCode\": \"MTR\",\r\n    \"unitSymbol\": {\r\n        \"type\": \"Property\",\r\n        \"value\": \"m\"\r\n    }\r\n  },\r\n  \"width\": {\r\n    \"value\": 20,\r\n    \"unitCode\": \"MTR\",\r\n    \"unitSymbol\": {\r\n        \"type\": \"Property\",\r\n        \"value\": \"m\"\r\n    }\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -560,7 +560,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"names\": [\r\n        \"Dylan\",\r\n        \"Xinwei\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"names\": [\r\n        \"Dylan\",\r\n        \"Youwei\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1687,7 +1687,7 @@
 								"type": "text"
 							}
 						],
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions",
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions/",
 						"description": "Get all subscriptions that are in the context broker."
 					},
 					"response": []
@@ -1713,7 +1713,7 @@
 								"type": "text"
 							}
 						],
-						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions/urn:ngsi-ld:subscription:33fdec7a-e04b-11ee-b052-0242ac140007",
+						"url": "{{gateway}}/api/broker/ngsi-ld/v1/subscriptions/urn:ngsi-ld:subscription:1396a2b2-e04e-11ee-966b-0242ac1a0005",
 						"description": "Delete a subscription in the context broker using the subscription's ID."
 					},
 					"response": []
@@ -1934,13 +1934,7 @@
 		},
 		{
 			"key": "gateway",
-			"value": "http://34.126.156.165",
-			"type": "string",
-			"disabled": true
-		},
-		{
-			"key": "context-ld",
-			"value": "http://34.126.156.165:3004/context.jsonld",
+			"value": "http://34.143.209.7",
 			"type": "string",
 			"disabled": true
 		}
