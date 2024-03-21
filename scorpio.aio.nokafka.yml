@@ -80,7 +80,7 @@ services:
           - "7896:7896"
       environment:
           - "IOTA_CB_HOST=scorpio" # Locally hosted broker
-          - "IOTA_CB_PORT=1026"
+          - "IOTA_CB_PORT=9090"
           - "IOTA_NORTH_PORT=4041"
           - "IOTA_REGISTRY_TYPE=mongodb"
           - "IOTA_MONGO_HOST=mongodb"
