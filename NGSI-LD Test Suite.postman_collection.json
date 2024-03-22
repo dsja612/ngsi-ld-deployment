@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f438b3ee-4c75-455e-90ef-980e17fd5fbd",
+		"_postman_id": "c3ee9438-1eb3-4d4d-913f-d2e53968b993",
 		"name": "NGSI-LD Test Suite",
 		"description": "Sample operations to help understand the NGSI-LD API.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
@@ -96,7 +96,7 @@
 								"type": "text"
 							},
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -129,7 +129,7 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -169,7 +169,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -224,7 +224,7 @@
 								"type": "text"
 							},
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -661,7 +661,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -698,7 +698,7 @@
 								"disabled": true
 							},
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -735,7 +735,7 @@
 								"disabled": true
 							},
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -863,7 +863,7 @@
 								"method": "DELETE",
 								"header": [
 									{
-										"key": "fiware-service",
+										"key": "NGSILD-Tenant",
 										"value": "openiot",
 										"type": "text"
 									},
@@ -892,7 +892,7 @@
 								"method": "DELETE",
 								"header": [
 									{
-										"key": "fiware-service",
+										"key": "NGSILD-Tenant",
 										"value": "openiot",
 										"type": "text"
 									},
@@ -921,7 +921,7 @@
 								"method": "DELETE",
 								"header": [
 									{
-										"key": "fiware-service",
+										"key": "NGSILD-Tenant",
 										"value": "openiot",
 										"type": "text"
 									},
@@ -950,7 +950,7 @@
 								"method": "DELETE",
 								"header": [
 									{
-										"key": "fiware-service",
+										"key": "NGSILD-Tenant",
 										"value": "openiot",
 										"type": "text"
 									},
@@ -988,7 +988,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1037,7 +1037,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1081,7 +1081,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1125,7 +1125,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1169,7 +1169,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1213,7 +1213,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1257,7 +1257,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1310,7 +1310,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1361,7 +1361,7 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1386,7 +1386,7 @@
 						"method": "PATCH",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1420,7 +1420,7 @@
 						"method": "PATCH",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1454,7 +1454,7 @@
 						"method": "PATCH",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1488,7 +1488,7 @@
 						"method": "PATCH",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1522,7 +1522,7 @@
 						"method": "PATCH",
 						"header": [
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1602,7 +1602,7 @@
 								"type": "text"
 							},
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1642,7 +1642,7 @@
 								"type": "text"
 							},
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1677,7 +1677,7 @@
 								"type": "text"
 							},
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
@@ -1703,7 +1703,7 @@
 								"type": "text"
 							},
 							{
-								"key": "fiware-service",
+								"key": "NGSILD-Tenant",
 								"value": "openiot",
 								"type": "text"
 							},
